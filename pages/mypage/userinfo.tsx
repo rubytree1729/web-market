@@ -27,7 +27,7 @@ export default function UserInfo() {
                             {/* <div>
                                 <PasswordChange></PasswordChange>
                             </div> */}
-                            <Link href="/mypage/PasswordChange">
+                            <Link href="/mypage/PasswordChange" passHref>
                                 <button>비밀번호 변경</button>
                             </Link>
                         </td>
@@ -50,7 +50,7 @@ export default function UserInfo() {
                     <tr>
                         <th>주소</th>
                         <td>
-                            <Link href="/mypage/AddressChange">
+                            <Link href="/mypage/AddressChange" passHref>
                                 <button>주소 변경</button>
                             </Link>
                         </td>

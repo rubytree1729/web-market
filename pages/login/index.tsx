@@ -82,7 +82,7 @@ const Home: NextPage = (props) => {
                 <button onClick={login}>로그인</button>
               </div>
               <div className={loginStyle.signup_btn}>
-                <Link href="/signup">
+                <Link href="/signup" passHref>
                   <span>회원가입</span>
                 </Link>
               </div>

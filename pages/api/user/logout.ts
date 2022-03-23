@@ -1,11 +1,11 @@
 
 import { Ok } from "../../../utils/server/commonError";
 import { NextApiRequest, NextApiResponse } from "next";
-import { logHandler } from "../../../utils/server/commonHandler";
+import { userHandler } from "../../../utils/server/commonHandler";
 import LoginToken from "../../../models/LoginToken";
 import { verifyJWT } from "../../../utils/encrypt";
 
-const handler = logHandler()
+const handler = userHandler()
     .get(
         async (req: NextApiRequest, res: NextApiResponse) => {
             const cookies = [`access_token=;Max-Age=-1;Path=/;HttpOnly;Secure;SameSite=Strict`,

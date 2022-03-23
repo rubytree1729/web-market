@@ -7,9 +7,9 @@ interface userinfo {
     name: string,
     email: string,
     phonenumber: string,
-    fulladdress: fulladdress,
-    gender: string,
-    role: string
+    address: string,
+    role: string,
+    registerAt: string
 }
 
 const handler = adminHandler()
@@ -19,8 +19,9 @@ const handler = adminHandler()
             // result = await Product.aggregate([{ "$match": { id: parseInt(id as string) } }, { "$sample": { "size": maxResults } }])
             const result: user[] = await User.find()
             const pre_result: any[] = []
-            result.forEach(({ id, name, email, phonenumber, fulladdress, gender, role }) => {
-                const value: userinfo = { id, name, email, phonenumber, fulladdress, gender, role }
+            result.forEach(({ id, name, email, phonenumber, fulladdress: { address }, role, registerAt }) => {
+                const registerString = registerAt.toLocaleString()
+                const value: userinfo = { registerAt: registerString, id, name, email, address, phonenumber, role }
                 pre_result.push(value)
             })
             Ok(res, pre_result)

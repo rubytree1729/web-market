@@ -14,7 +14,7 @@ export default function QnA() {
                 <div className="body">
                     <Board></Board>
                     <br />
-                    <Link href={"/qna/writepost"}>
+                    <Link href={"/qna/writepost"} passHref>
                         <button>글쓰기</button>
                     </Link>
                 </div>

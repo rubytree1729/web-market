@@ -72,7 +72,7 @@ export default function App() {
                         <span className="validation">비밀번호가 일치 하지 않습니다.</span>}
                 </div>
                 <div className={passwordChangeStyle.btn_group}>
-                    <Link href="/mypage">
+                    <Link href="/mypage" passHref>
                         <button>뒤로가기</button >
                     </Link>
                     <button type="submit">비밀번호 변경</button>

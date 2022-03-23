@@ -83,7 +83,7 @@ export default function WritePost() {
                         </tbody>
                     </table>
                     <div>
-                        <Link href="/qna">
+                        <Link href="/qna" passHref>
                             <button >뒤로가기</button>
                         </Link>
                         <button type="submit">문의하기</button>
