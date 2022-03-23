@@ -1,0 +1,23 @@
+.container {
+    width: auto;
+
+}
+.content {
+    margin: 0 auto;
+    text-align: center;
+    width: 350px;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center
+
+}
+.formset{
+    width: 100%;
+    background-color: beige;
+}
+
+.input{
+    width: 300px;
+}
