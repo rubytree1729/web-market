@@ -1,0 +1,49 @@
+.before
+{
+    display: inline-block;
+    width: 1px;
+    height: 11px;
+    margin: 5px 5px 0 4px;
+    background-color: #d7d7d7;
+    vertical-align: top;
+    content: '';
+}
+
+.footer
+{
+    display: flex;
+    flex: 1;
+    padding: 2rem 0;
+    border-top: 1px solid #eaeaea;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.info
+{
+    width: 80%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.marketing
+{
+    text-align: center;
+}
+
+.address
+{
+    width: 80%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo
+{
+    border: 1px solid black;
+}
