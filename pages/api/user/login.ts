@@ -25,6 +25,7 @@ const handler = logHandler()
             let { id, password, fingerprint, persistent } = req.body
             const ip = (req.headers["x-real-ip"] || "0.0.0.0").toString()
             password = encryptPassword(password)
+            console.log(id, password)
             const result = await User.findOne({ id, password })
             if (result) {
                 const { role } = result

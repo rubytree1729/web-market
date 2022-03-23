@@ -33,7 +33,7 @@ export async function createJWT(aud: string, role: string, jti: string, expirati
     const privateKey = await jose.importPKCS8(envExist(process.env.PKCS8, "pkcs8", true), "ES256")
     console.log(expirationtime)
     const jwt = await new jose.SignJWT({ role })
-        .setProtectedHeader({ alg: 'ES384' })
+        .setProtectedHeader({ alg: 'ES256' })
         .setIssuedAt()
         .setIssuer('web-market')
         .setAudience(aud)
@@ -45,8 +45,8 @@ export async function createJWT(aud: string, role: string, jti: string, expirati
 }
 
 export async function verifyJWT(jwt: string) {
-    const publicKey = await jose.importSPKI(envExist(process.env.SPKI, "spki", true), "ES384")
-    const { payload: { aud, role, jti } } = await jose.jwtVerify(jwt, publicKey, { algorithms: ["ES384"], issuer: 'web-market' })
+    const publicKey = await jose.importSPKI(envExist(process.env.SPKI, "spki", true), "ES256")
+    const { payload: { aud, role, jti } } = await jose.jwtVerify(jwt, publicKey, { algorithms: ["ES256"], issuer: 'web-market' })
     if (typeof aud !== "string") {
         throw isStringError("aud")
     }
