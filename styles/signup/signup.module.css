@@ -4,20 +4,67 @@
 }
 .content {
     margin: 0 auto;
+    margin-top: 30px;
     text-align: center;
     width: 350px;
     display: flex;
     align-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center
-
+    justify-content: center;
+    text-align: left;
 }
-.formset{
+.signup{
+    font-size:20px;
+    text-align: center;
+}
+.validation{
+    font-size: 12px;
+}
+.idform{
     width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: beige;
 }
-
 .input{
-    width: 300px;
+    width: 100%;
+    height: 50px;
+    padding: 0 9px 0 9px;
+}
+.passwordform{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: beige;
+}
+.nameform{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: beige;
+}
+.genderform{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: beige;
+}
+.emailform{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: beige;
+}
+.phoneform{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: beige;
+}
+.addressform{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: beige;
 }

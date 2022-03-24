@@ -323,69 +323,59 @@ export default function SignUp() {
     <form>
       <div className={signupStyle.container}>
         <div className={signupStyle.content}>
-          <div className={signupStyle.formset}>
+          <div className={signupStyle.signup}>
+            회원가입</div>
+          <div className={signupStyle.idform}>
             <label>
               아이디
-              <br />
-              <input className={signupStyle.input} type="text" defaultValue={Id} onChange={IdInputHandler} placeholder="아이디를 입력해주세요" />
-              <p className="validation">{WrongId}</p>
-              <button className="checkId" onClick={idCheckFunction}>아이디확인</button>
             </label>
+            <input className={signupStyle.input} type="text" defaultValue={Id} onChange={IdInputHandler} placeholder="아이디를 입력해주세요" />
+            <button className="checkId" onClick={idCheckFunction}>아이디확인</button>
+            <p className={signupStyle.validation}>{WrongId}</p>
           </div>
-          <br />
-          <div className={signupStyle.formset}>
+          <div className={signupStyle.passwordform}>
             <label>
               패스워드
-              <br />
-              <input className={signupStyle.input} type="password" defaultValue={Password} onChange={PasswordInputHandler} placeholder='비밀번호를 입력해주세요' />
             </label>
-            <p className="validation">{WrongPassword}</p>
-
+            <input className={signupStyle.input} type="password" defaultValue={Password} onChange={PasswordInputHandler} placeholder='비밀번호를 입력해주세요' />
+            <p className={signupStyle.validation}>{WrongPassword}</p>
             <label>
               패스워드 확인
-              <br />
-              <input className={signupStyle.input} type="password" defaultValue={PasswordCheck} onChange={PasswordCheckInputHandler} placeholder='비밀번호를 다시 입력해주세요' />
             </label>
-            <p className="validation">{WrongPasswordCheck}</p>
+            <input className={signupStyle.input} type="password" defaultValue={PasswordCheck} onChange={PasswordCheckInputHandler} placeholder='비밀번호를 다시 입력해주세요' />
+            <p className={signupStyle.validation}>{WrongPasswordCheck}</p>
           </div>
-          <br />
-          <div className={signupStyle.formset}>
+          <div className={signupStyle.nameform}>
             <label>
               이름
-              <br />
-              <input className={signupStyle.input} type="text" defaultValue={Name} onChange={NameInputHandler} placeholder="이름을 입력해주세요" />
             </label>
-            <p className="validation">{WrongName}</p>
+            <input className={signupStyle.input} type="text" defaultValue={Name} onChange={NameInputHandler} placeholder="이름을 입력해주세요" />
+            <p className={signupStyle.validation}>{WrongName}</p>
           </div>
-          <br />
-          <div className={signupStyle.formset}>
+          <div className={signupStyle.genderform}>
             성별
-            <br />
             <label>
               남성
-              <input type="radio" defaultValue="male" checked={Gender === "male"} onChange={GenderInputHandler} />
             </label>
+            <input type="radio" defaultValue="male" checked={Gender === "male"} onChange={GenderInputHandler} />
             <label>
               여성
-              <input type="radio" defaultValue="female" checked={Gender === "female"} onChange={GenderInputHandler} />
             </label>
+            <input type="radio" defaultValue="female" checked={Gender === "female"} onChange={GenderInputHandler} />
           </div>
-          <br />
-          <div className={signupStyle.formset}>
+          <div className={signupStyle.emailform}>
             <label>
               이메일
-              <br />
-              <input className={signupStyle.input} type="email" defaultValue={Email} onChange={EmailInputHandler} placeholder='이메일을 입력해주세요' />
             </label>
-            <p className="validation">{WrongEmail}</p>
+            <input className={signupStyle.input} type="email" defaultValue={Email} onChange={EmailInputHandler} placeholder='이메일을 입력해주세요' />
+            <p className={signupStyle.validation}>{WrongEmail}</p>
           </div>
-          <div className={signupStyle.formset}>
+          <div className={signupStyle.phoneform}>
             <label>
               전화번호
-              <br />
-              <input className={signupStyle.input} type="text" defaultValue={PhoneNumber} onChange={PhoneNumberInputHandler} placeholder='전화번호를 입력해주세요' />
             </label>
-            <div className="validation">{WrongPhoneNumber}</div>
+            <input className={signupStyle.input} type="text" defaultValue={PhoneNumber} onChange={PhoneNumberInputHandler} placeholder='전화번호를 입력해주세요' />
+            <div className={signupStyle.validation}>{WrongPhoneNumber}</div>
             <button onClick={certificationPhoneNumber}>인증번호 받기</button>
             {isOpen ?
               <div>
@@ -397,15 +387,13 @@ export default function SignUp() {
                 <button onClick={validationAuthnumber}>인증번호 확인</button>
               </div> : ""}
           </div>
-          <br />
-          <div className={signupStyle.formset}>
+          <div className={signupStyle.addressform}>
             <AddressInput
               setAddressFunction={setAddressFunction}
               setZonecodeFunction={setZonecodeFunction}
             />
             <input type="text" id="addressDetail" defaultValue={AddressDetail} onChange={addressDetailInputHandler} placeholder="상세주소" />
           </div>
-          <br />
           <button type="submit" onClick={accountRegister}>가입</button>
         </div>
       </div>
