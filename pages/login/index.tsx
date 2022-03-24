@@ -32,7 +32,8 @@ const Home: NextPage = (props) => {
       const loginQuery: loginQuery = { id, password, fingerprint, persistent }
       const res = (await customAxios.post("/api/user/login", loginQuery))
       if (res.status == 200) {
-        alert("로그인 성공")
+        localStorage.
+          alert("로그인 성공")
         Router.push("/")
       } else {
         alert("로그인 실패")

@@ -5,6 +5,7 @@ import { userHandler } from '../../../utils/server/commonHandler';
 const handler = userHandler()
     .post(
         async (req, res) => {
-            Ok(res, "success")
+            const result = req.cookies.role
+            Ok(res, result)
         })
 export default handler

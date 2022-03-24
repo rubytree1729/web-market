@@ -7,6 +7,7 @@ import HeaderCompo from '../component/index/headerCompo'
 import FooterCompo from '../component/index/footerCompo'
 import customAxios from '../utils/customAxios'
 import useSWR from 'swr'
+import LoginAuth from '../component/auth/LoginAuth'
 
 
 const Home: NextPage = () => {

@@ -32,16 +32,16 @@ const handler = logHandler()
                 const refresh_jti = uuid4()
                 const consistDate = persistent ? 14 : 1
                 const expirationtime = consistDate.toString() + "d"
-                let expiredAt = new Date()
-                expiredAt.setDate(expiredAt.getDate() + consistDate)
-                const loginToken: loginToken = { userid: id, jti: refresh_jti, fingerprint, ip, createdAt: new Date(), expiredAt }
+                let expireAt = new Date()
+                expireAt.setDate(expireAt.getDate() + consistDate)
+                const loginToken: loginToken = { userid: id, jti: refresh_jti, fingerprint, ip, createdAt: new Date(), expireAt }
                 const access_token = await createJWT(id, role, access_jti, "30m")
                 const refresh_token = await createJWT(id, role, refresh_jti, expirationtime)
                 const cookies = [`access_token=${access_token};Max-Age=${30 * 60};Path=/;HttpOnly;Secure;SameSite=Strict`,
                 `refresh_token=${refresh_token};Max-Age=${consistDate * 24 * 60 * 60};Path=/;HttpOnly;Secure;SameSite=Strict`]
                 res.setHeader('Set-Cookie', cookies)
                 await new LoginToken(loginToken).save()
-                Ok(res, "success")
+                Ok(res, role)
             } else {
                 Err(res, "not a valid id or password")
             }
