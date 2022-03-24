@@ -8,15 +8,16 @@ import { useState } from 'react'
 
 
 const category = () => {
-    const fetcher = (url: string) => customAxios(url).then(res => res.data)
+    const fetcher = (url: string) => customAxios(url).then((res: { data: any }) => res.data)
     const [categoryName, setCategoryName] = useState("")
     const { data, error } = useSWR(`/api/product/search?category=${categoryName}`, fetcher)
-    console.log(data)
 
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
 
+
     return (
+
         <div>
             <header>
                 <HeaderCompo></HeaderCompo>
@@ -27,7 +28,7 @@ const category = () => {
                         <div className={styles.category}>
                             <div className={styles.categoryTag}>
                                 <div className={styles.categoryList}>카테고리칸</div>
-                                <div className={styles.categoryFilter}>카테고리 필타 칸</div>
+                                <div className={styles.categoryFilter}></div>
                             </div>
                             <div className={styles.smallCategoryTag}>
                                 <div className={styles.smallCategory}>소분류칸</div>
