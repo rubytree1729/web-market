@@ -11,7 +11,7 @@ import LoginAuth from '../component/auth/LoginAuth'
 
 
 const Home: NextPage = () => {
-  const fetcher = (url: string) => customAxios.get(url).then(res => res.data)
+  const fetcher = (url: string) => customAxios.get(url).then((res: any) => res.data)
   const { data, error } = useSWR("/api/product/search?display=18&byCategory=true", fetcher)
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>

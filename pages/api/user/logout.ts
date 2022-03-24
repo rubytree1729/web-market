@@ -16,7 +16,7 @@ const handler = logHandler()
                 const { jti } = await verifyJWT(refresh_token)
                 await LoginToken.deleteOne({ jti })
             }
-            Ok(res, "success")
+            res.redirect("/")
         }
     )
 
