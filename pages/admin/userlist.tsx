@@ -2,20 +2,23 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import HeaderCompo from '../../component/index/headerCompo'
 import FooterCompo from '../../component/index/footerCompo'
-import customAxios from '../../utils/customAxios'
-import useSWR from 'swr'
 import UserTable from '../../component/admin/UserTable'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
+import useCustomSWR from '../../utils/client/useCustumSWR'
 
 
 const Userlist: NextPage = () => {
-    const fetcher = (url: string) => customAxios.get(url).then(res => res.data)
-    const { data, error } = useSWR("/api/admin/userlist", fetcher)
-    if (error) {
-        alert("로그인이 필요합니다")
-        Router.push("/login")
+    const router = useRouter()
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/admin/userlist")
+    if (isLoading) return <div>로딩중...</div>
+    if (isServerError) {
+        alert("서버 에러가 발생하였습니다")
+        router.push("/")
     }
-    if (!data) return <div>loading...</div>
+    if (isApiError) {
+        alert("권한이 없습니다")
+        router.push("/")
+    }
     return (
         <div>
             <Head>
@@ -24,7 +27,7 @@ const Userlist: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <HeaderCompo></HeaderCompo>
-            <UserTable>{data.result}</UserTable>
+            <UserTable>{data}</UserTable>
             <FooterCompo></FooterCompo>
         </div>
     )

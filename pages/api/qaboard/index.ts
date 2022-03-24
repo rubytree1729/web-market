@@ -7,7 +7,7 @@ import { validateRequest } from "../../../utils/server/middleware";
 
 
 const handler = userHandler()
-    .get( // 유저 아이디로 검색해서 게시판 정보 돌려줌
+    .get( //기능: 유저 qna info 불러오기, 입력: 없음, 출력:유저의 qna info
         validateRequest([]),
         async (req, res) => {
             const { userid } = req.cookies
@@ -15,13 +15,12 @@ const handler = userHandler()
             return Ok(res, result)
         }
     )
-    .post(     //userid, qacategory, title, content 값을 받아서 db에 저장
+    .post(//기능: 유저 qna 저장, 입력:userid, qacategory, title, content, 출력:저장 결과
         validateRequest([
             body("qacategory").isIn(["교환", "환불", "배송", "상품문의", "주문취소", "주문/결제", "이벤트"]),
             body("title").exists(),
             body("content").exists()]),
         async (req, res) => {
-            // need auth
             const { userid } = req.cookies
             const { qacategory, title, content } = req.body
             const saveValue: qaBoard = { userid, qacategory, title, content, answer: false, date: new Date() }
@@ -29,14 +28,13 @@ const handler = userHandler()
             return Ok(res, result)
         }
     )
-    .put(  //qaid, qacategory, title, content, userid 값을 받아서 db에 수정
+    .put(  //기능: 유저 qna 수정, 입력:qaid, qacategory, title, content, userid, 출력:수정 결과
         validateRequest([
             body("qaid").isNumeric(),
             body("qacategory").isIn(["교환", "환불", "배송", "상품문의", "주문취소", "주문/결제", "이벤트"]),
             body("title").exists(),
             body("content").exists()]),
         async (req, res) => {
-            // need auth
             const { userid } = req.cookies
             const { qaid, qacategory, title, content } = req.body
             const target: qaBoard | null = await QABoard.findOne({ userid, qaid })
@@ -47,7 +45,7 @@ const handler = userHandler()
             return Ok(res, result)
         }
     )
-    .delete( // 유저 아이디로 검색해서 게시판 삭제함
+    .delete( //기능: 유저 qna 삭제, 입력:qaid, 출력:삭제 결과
         validateRequest([
             query("qaid").isNumeric()]),
         async (req, res) => {

@@ -1,21 +1,25 @@
-import type { GetServerSideProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.css'
 import HeaderCompo from '../../component/index/headerCompo'
 import FooterCompo from '../../component/index/footerCompo'
+import { useRouter } from 'next/router'
+import useCustomSWR from '../../utils/client/useCustumSWR'
 
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//     const res = await Axios.get("/api/product/search?display=18&byCategory=true", { baseURL: envExist(process.env.NEXT_PUBLIC_BASE_URL, "next public base url") })
-//     const data = await res.data
-
-//     return {
-
-//         props: { ...data.result }
-//     }
-// }
 
 const Admin: NextPage = (props) => {
+    const router = useRouter()
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/admin/auth")
+    if (isLoading) return <div>로딩중...</div>
+    if (isServerError) {
+        alert("서버 에러가 발생하였습니다")
+        router.push("/")
+    }
+    if (isApiError) {
+        alert("권한이 없습니다")
+        router.push("/")
+    }
     return (
         <div>
             <Head>
