@@ -3,9 +3,8 @@ import { userHandler } from '../../../utils/server/commonHandler';
 
 
 const handler = userHandler()
-    .post(
+    .all(
         async (req, res) => {
-            const result = req.cookies.role
-            Ok(res, result)
+            Ok(res, req.cookies.role)
         })
 export default handler

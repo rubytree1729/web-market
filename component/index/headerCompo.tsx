@@ -14,7 +14,9 @@ function HeaderCompo() {
             <div>
                 <div className={styles.header}>
                     <div className={styles.mainBar}>
-                        <div className={styles.mainlogo}>사이트명</div>
+                        <Link href="/" passHref>
+                            <div className={styles.mainlogo}>사이트명</div>
+                        </Link>
                         <Link href="/login" passHref>
                             <div className={styles.loginBut}>로그인</div>
                         </Link>
@@ -34,8 +36,9 @@ function HeaderCompo() {
         <div>
             <div className={styles.header}>
                 <div className={styles.mainBar}>
-
-                    <div className={styles.mainlogo}>사이트명</div>
+                    <Link href="/" passHref>
+                        <div className={styles.mainlogo}>사이트명</div>
+                    </Link>
                     <Link href="/api/user/logout" passHref>
                         <div className={styles.loginBut}>로그아웃</div>
                     </Link>
