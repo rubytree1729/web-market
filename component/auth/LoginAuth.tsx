@@ -20,6 +20,7 @@ const LoginAuth: NextPage = (props: any) => {
     return isLogin ?
         (<>
             {props.children}
+
         </>)
         :
         (<>

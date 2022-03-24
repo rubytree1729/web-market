@@ -1,21 +1,18 @@
-import { useEffect, useState } from "react"
-import customAxios from "../../utils/customAxios"
-import Post from "./Post"
+import useSWR from "swr"
+import axios from "axios"
+import ReadPost from "./readpost"
+import useCustomSWR from "../../utils/client/useCustumSWR"
 
 export default function Board() {
-    const [posts, setPost] = useState({ post: "" })
-    async function getQnaPosts() {
-        const res = await customAxios.get("/api/qaboard")
-        const data = res.data
-        console.log(data)
-        return setPost({ post: data })
-    }
     let postlist: any = []
-    //posts 잘라서 postlist에 넣어서 map해서 화면에 띄우기
 
-    useEffect(() => {
-        getQnaPosts
-    }, [])
+    const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
+    if (isError) return <div>failed to load</div>
+    if (isLoading) return <div>loading...</div>
+
+    for (let post of data) {
+        postlist.push(post)
+    }
     return (
         <form >
             <div className="container">
@@ -28,17 +25,16 @@ export default function Board() {
                             <thead>
                                 <tr>
                                     <th>번호</th>
-                                    <th>답변여부</th>
                                     <th>구분</th>
-                                    <th>내용</th>
+                                    <th>제목</th>
                                     <th>작성자</th>
                                     <th>등록일자</th>
+                                    <th>답변여부</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {postlist && postlist.map((post: string) => {
-                                    <Post {...post} />
-                                })}
+                                {postlist && postlist.map((post: any) =>
+                                    <ReadPost key={post.qaid}{...post} />)}
                             </tbody>
                         </table>
                     </div>
