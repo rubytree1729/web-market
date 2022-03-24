@@ -1,8 +1,9 @@
-import { useState } from "react"
-import Post from "./writepost"
+import { useEffect, useState } from "react"
 import Board from "./board"
 import Link from "next/link"
 import LoginAuth from "../../component/auth/LoginAuth"
+import useSWR from "swr"
+
 
 export default function QnA() {
     return (
@@ -14,7 +15,7 @@ export default function QnA() {
                 <div className="body">
                     <Board></Board>
                     <br />
-                    <Link href={"/qna/writepost"} passHref>
+                    <Link href={"/qna/createpost"} passHref>
                         <button>글쓰기</button>
                     </Link>
                 </div>
