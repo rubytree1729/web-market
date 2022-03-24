@@ -9,7 +9,7 @@ export default function useCustomSWR(url: string, config?: AxiosRequestConfig) {
         error = data.error
     }
     return {
-        data,
+        data: data.result,
         isLoading: !error && !data,
         isError: error
     }
