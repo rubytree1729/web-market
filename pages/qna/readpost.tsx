@@ -3,7 +3,17 @@ import UpdatePost from "./updatepost"
 import postrowStyle from "../../styles/post/postrow.module.css"
 import { useState } from "react"
 import postrow from "../../styles/post/postrow.module.css"
-
+type post = {
+    title: string,
+    ordernumber: string,
+    content: string
+    qacategory: string,
+    date: number,
+    qaid: number,
+    _id: number,
+    answer: boolean,
+    userid: number
+}
 export default function ReadPost(post: any) {
     const [isOpen, setIsOpen] = useState(false)
     const [isAnswer, setisAnswer] = useState(false)

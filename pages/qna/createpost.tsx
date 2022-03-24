@@ -2,15 +2,17 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import customAxios from "../../utils/customAxios"
 import { useRouter } from "next/router"
 import Link from "next/link"
-
 type post = {
     title: string,
     ordernumber: string,
     content: string
     qacategory: string,
-    date: number
+    date: number,
+    qaid: number,
+    _id: number,
+    answer: boolean,
+    userid: number
 }
-
 export default function CreatePost() {
     const router = useRouter()
     const { register, handleSubmit, formState: { errors }, watch } = useForm<post>({
