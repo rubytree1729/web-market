@@ -22,7 +22,7 @@ const handler = logHandler()
             const clientAuthNubmer = req.body.authnumber
             const serverAuthNumber = req.cookies.authnumber
             equals(encryptAuthNumber(clientAuthNubmer), serverAuthNumber, "authnumber")
-            const result = await new User({ id, password: encryptPassword(password), name, email, gender, phonenumber, fulladdress }).save()
+            const result = await new User({ id, password: encryptPassword(password), name, email, gender, phonenumber, fulladdress, registerAt: new Date() }).save()
             const cookies = [`authnumber=;Max-Age=-1;Path=/;HttpOnly;Secure;SameSite=Strict`]
             res.setHeader('Set-Cookie', cookies)
             Ok(res, result)

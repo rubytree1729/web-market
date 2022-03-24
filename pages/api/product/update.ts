@@ -1,7 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { Err } from '../../../utils/server/commonError'
+import { Ok } from '../../../utils/server/commonError';
+import { userHandler } from '../../../utils/server/commonHandler';
 
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-    return Err(res, "not implemented yet")
-}
+const handler = userHandler()
+    .post(
+        async (req, res) => {
+            Ok(res, "success")
+        })
+export default handler

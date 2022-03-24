@@ -11,5 +11,8 @@ export async function getFingerprint() {
 export async function clientAuth() {
     const fingerprint = await getFingerprint()
     const res = await customAxios.post("/api/user/auth", { fingerprint })
-    return res.status === 200
+    if (res.status === 200) {
+        return res.data
+    }
+    return
 }

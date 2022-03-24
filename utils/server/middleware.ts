@@ -22,7 +22,7 @@ export async function serverAuth(req: NextApiRequest, res: NextApiResponse, next
     const { access_token, refresh_token } = req.cookies
     try {
         const { aud, role, jti } = await verifyJWT(access_token)
-        req.cookies = { ...req.cookies, aud, role, jti }
+        req.cookies = { ...req.cookies, userid: aud, role, jti }
     }
     catch {
         const { aud, role, jti } = await verifyJWT(refresh_token)
@@ -34,7 +34,7 @@ export async function serverAuth(req: NextApiRequest, res: NextApiResponse, next
         const jwt = await createJWT(aud, role, newjti, "30m")
         const cookies = [`access_token=${jwt};Max-Age=${30 * 60};Path=/;HttpOnly;Secure;SameSite=Strict`]
         res.setHeader('Set-Cookie', cookies)
-        req.cookies = { ...req.cookies, aud, role, jti: newjti }
+        req.cookies = { ...req.cookies, userid: aud, role, jti: newjti }
     }
     next()
 }

@@ -6,15 +6,19 @@ export interface loginToken {
     ip: string,
     fingerprint: string,
     createdAt?: Date,
-    expiredAt: Date
+    expireAt: Date
 }
 const loginTokenSchema = new Schema<loginToken>({
     userid: { type: String, required: true },
     jti: { type: String, required: true, unique: true, index: true },
     ip: { type: String, required: true }, // add validate
     fingerprint: { type: String, required: true },
-    createdAt: { type: Date, expires: "30d", default: new Date() },
-    expiredAt: { type: Date, required: true }
+    createdAt: { type: Date, default: new Date() },
+    expireAt: { type: Date, required: true }
 })
+
+if (!mongoose.models['loginToken']) {
+    loginTokenSchema.index({ "expireAt": 1 }, { expireAfterSeconds: 0 });
+}
 const LoginToken = mongoose.models['loginToken'] ? model<loginToken>('loginToken') : model<loginToken>('loginToken', loginTokenSchema, 'loginToken')
 export default LoginToken

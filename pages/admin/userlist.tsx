@@ -5,12 +5,16 @@ import FooterCompo from '../../component/index/footerCompo'
 import customAxios from '../../utils/customAxios'
 import useSWR from 'swr'
 import UserTable from '../../component/admin/UserTable'
+import Router from 'next/router'
 
 
 const Userlist: NextPage = () => {
-    const fetcher = async (url: string) => customAxios(url).then(res => res.data)
+    const fetcher = (url: string) => customAxios.get(url).then(res => res.data)
     const { data, error } = useSWR("/api/admin/userlist", fetcher)
-    if (error) return <div>failed to load</div>
+    if (error) {
+        alert("로그인이 필요합니다")
+        Router.push("/login")
+    }
     if (!data) return <div>loading...</div>
     return (
         <div>

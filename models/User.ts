@@ -32,7 +32,7 @@ const userSchema = new Schema<user>({
         address: { type: String, required: true },
         addressdetail: { type: String, required: true }
     },
-    registerAt: { type: Date, required: true }
+    registerAt: { type: Date, default: new Date() }
 })
 const User = mongoose.models['user'] ? model<user>('user') : model<user>('user', userSchema, 'user')
 export default User
