@@ -6,10 +6,12 @@ export default function useCustomSWR(url: string, config?: AxiosRequestConfig) {
     const fetcher = (url: string) => customAxios(url, config).then(res => res.data)
     const { data, error } = useSWR(url, fetcher)
     const finaldata = data ? data.result : data
-    const finalerror = (data && data.error) ? data.error : error
+    const normalerror = data?.error
     return {
         data: finaldata,
         isLoading: (error === undefined) && (data === undefined),
-        isError: finalerror
+        isApiError: normalerror,
+        isServerError: error,
+        isError: normalerror || error
     }
 }

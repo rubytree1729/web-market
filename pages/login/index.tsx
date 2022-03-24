@@ -3,20 +3,21 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
 import { getFingerprint, clientAuth } from '../../utils/client/fingerprint'
-import customAxios from '../../utils/customAxios'
 import Link from 'next/link'
 import loginStyle from '../../styles/login/login.module.css'
 import { loginQuery } from '../api/user/login'
+import useCustomSWR from '../../utils/client/useCustumSWR'
+import customAxios from '../../utils/customAxios'
 
 const Home: NextPage = (props) => {
-  const [isLogin, setIsLogin] = useState(true)
   const [id, setId] = useState("")
   const [password, setPassword] = useState("")
   const [persistent, setPersistent] = useState(false)
 
+  //id 입력감지 후 id 값 변경
   const IdInputHandler = (event: any) => {
     setId(event.currentTarget.value)
-  }//id 입력감지 후 id 값 변경
+  }
 
   const PasswordInputHandler = (event: any) => {
     setPassword(event.currentTarget.value)
@@ -30,68 +31,62 @@ const Home: NextPage = (props) => {
     try {
       const fingerprint = await getFingerprint()
       const loginQuery: loginQuery = { id, password, fingerprint, persistent }
-      const res = (await customAxios.post("/api/user/login", loginQuery))
+      const res = await customAxios.post("/api/user/login", loginQuery)
       if (res.status == 200) {
-        localStorage.
-          alert("로그인 성공")
+        alert("로그인 성공")
         Router.push("/")
       } else {
-        alert("로그인 실패")
+        alert("아이디 혹은 비밀번호가 틀렸습니다")
       }
     } catch (error) {
       console.log(error)
-      alert("로그인 실패")
+      alert("서버 에러가 발생하였습니다")
     }
   }
-  useEffect(() => {
-    clientAuth()
-      .then(value => {
-        if (value) {
-          alert("이미 로그인 되어 있습니다")
-          Router.push("/")
-        } else {
-          setIsLogin(false)
-        }
-      })
-  }, [])
-  return isLogin ? (<div>
-    로그인 체크중입니다...
-  </div>)
-    : (
-      <div className={loginStyle.container}>
-        <div className={loginStyle.content}>
-          <form>
-            <div className={loginStyle.login_wrap}>
-              <h2 className={loginStyle.login}>로그인</h2>
-              <div className={loginStyle.id_pw_wrap}>
-                <label>
-                  {/* ID */}
-                  <input type="text" value={id} onChange={IdInputHandler} placeholder="아이디" />
-                </label>
-                <label>
-                  {/* PW */}
-                  <input type="password" value={password} onChange={PasswordInputHandler} placeholder='비밀번호' />
-                </label>
-              </div>
-              <div className={loginStyle.keep_login}>
-                <label >
-                  <span>로그인 유지</span>
-                  <input type="checkbox" onChange={persistentInputHandler} />
-                </label>
-              </div>
-              <div className={loginStyle.login_btn}>
-                <button onClick={login}>로그인</button>
-              </div>
-              <div className={loginStyle.signup_btn}>
-                <Link href="/signup" passHref>
-                  <span>회원가입</span>
-                </Link>
-              </div>
-            </div>
-          </form>
+  const router = useRouter()
+  const { data, isLoading, isServerError } = useCustomSWR("/api/user/auth")
+  if (isLoading) return <div>로딩중...</div>
+  if (isServerError) {
+    alert("서버 에러가 발생하였습니다")
+    router.push("/")
+  }
+  if (data) {
+    alert("이미 로그인되어 있습니다")
+    router.push("/")
+  }
+  return (<div className={loginStyle.container}>
+    <div className={loginStyle.content}>
+      <form>
+        <div className={loginStyle.login_wrap}>
+          <h2 className={loginStyle.login}>로그인</h2>
+          <div className={loginStyle.id_pw_wrap}>
+            <label>
+              {/* ID */}
+              <input type="text" value={id} onChange={IdInputHandler} placeholder="아이디" />
+            </label>
+            <label>
+              {/* PW */}
+              <input type="password" value={password} onChange={PasswordInputHandler} placeholder='비밀번호' />
+            </label>
+          </div>
+          <div className={loginStyle.keep_login}>
+            <label >
+              <span>로그인 유지</span>
+              <input type="checkbox" onChange={persistentInputHandler} />
+            </label>
+          </div>
+          <div className={loginStyle.login_btn}>
+            <button onClick={login}>로그인</button>
+          </div>
+          <div className={loginStyle.signup_btn}>
+            <Link href="/signup" passHref>
+              <span>회원가입</span>
+            </Link>
+          </div>
         </div>
-      </div>
-    )
+      </form>
+    </div>
+  </div>)
 }
 
 export default Home

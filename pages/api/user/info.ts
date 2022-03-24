@@ -3,7 +3,7 @@ import { userHandler } from '../../../utils/server/commonHandler';
 
 
 const handler = userHandler()
-    .post(
+    .get(
         async (req, res) => {
             Ok(res, "success")
         })

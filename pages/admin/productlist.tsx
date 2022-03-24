@@ -5,6 +5,7 @@ import HeaderCompo from '../../component/index/headerCompo'
 import FooterCompo from '../../component/index/footerCompo'
 import useSWR from 'swr'
 import customAxios from '../../utils/customAxios'
+import useCustomSWR from '../../utils/client/useCustumSWR'
 
 
 // export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -18,8 +19,7 @@ import customAxios from '../../utils/customAxios'
 // }
 
 const Productlist: NextPage = (props) => {
-    const fetcher = async (url: string) => customAxios(url).then(res => res.data)
-    const { data, error } = useSWR("/api/admin/product")
+    const { data, isLoading, isError } = useCustomSWR("/api/admin/product")
     return (
         <div>
             <Head>
