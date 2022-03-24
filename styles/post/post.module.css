@@ -1,0 +1,21 @@
+.container{
+    width: 100%;
+    margin: 0 auto;
+}
+.body{
+    width: 100%;
+}
+.table{
+    width: 500px;
+    height: 500px;
+}
+
+/* .t_body{
+    width: 800px;
+}
+.thead{
+    width: 700px;
+}
+.tr{
+    width: 100%;
+} */
