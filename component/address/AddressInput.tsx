@@ -14,23 +14,38 @@ export default function AddressInput(props: any) {
     setIsOpenPost(!isOpenPost)
   }
 
+  const addressDetailInputHandler = (event: any) => {
+    setAddressDetail(event.currentTarget.value)
+    console.log(event.currentTarget.value)
+    if (addressDetail === "") {
+      setwrongAddressDetail("상세주소를 입력해주세요.")
+      setvalidationaddress(false)
+    } else {
+      setwrongAddressDetail("")
+    }
+
+  }
+
   const getAddress = (value: any) => {
     props.setAddressFunction(value)
     setAddress(value)
+
   }
+
   const getZonecode = (value: any) => {
     props.setZonecodeFunction(value)
     setZonecode(value)
 
   }
 
+
   return (
     <div className="address">
       주소
-      <br />
       <input type="text" id="zonecode" defaultValue={zonecode} placeholder="우편번호" />
       <button type="button" onClick={opendaumPost} defaultValue="우편번호 찾기">🔍︎주소검색</button><br />
       <input type="text" id="address" defaultValue={address} placeholder="주소" /><br />
+      <input type="text" id="addressDetail" defaultValue={addressDetail} onChange={addressDetailInputHandler} placeholder="상세주소" />
       <div className="validation">{wrongaddressDetail}</div>
 
       {isOpenPost ?

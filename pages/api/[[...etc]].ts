@@ -1,5 +1,7 @@
-import { logHandler } from "../../utils/server/commonHandler"
+import nc from "next-connect"
+import commonHandler from "../../utils/commonHandler"
 
 
-const handler = logHandler()
+const handler = nc(commonHandler)
+
 export default handler

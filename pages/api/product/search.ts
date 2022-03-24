@@ -1,8 +1,8 @@
 import Product, { product } from "../../../models/Product"
-import { Ok } from '../../../utils/server/commonError'
-import { logHandler } from '../../../utils/server/commonHandler'
-import { validateRequest } from "../../../utils/server/middleware"
-
+import dbCheckConnect from '../../../utils/dbCheckConnect'
+import { Err, Ok } from '../../../utils/commonError'
+import commonHandler, { validate, validateRequest } from '../../../utils/commonHandler'
+import nc from "next-connect"
 
 async function sendByCategory(maxResults: number) {
     const categoryQuery = [{ "$group": { "_id": "category1", "categories": { "$addToSet": "$category1" } } }]
@@ -14,12 +14,11 @@ async function sendByCategory(maxResults: number) {
     }
     return totalResult
 }
-
-
-const handler = logHandler()
+const handler = nc(commonHandler)
     .get(
-        validateRequest([]),
+        validateRequest(),
         async (req, res) => {
+            dbCheckConnect()
             const { sort, display, byCategory, id: id } = req.query
             const maxResults = Math.min(100, parseInt(display ? display.toString() : "10"))
             if (byCategory === "true") {
@@ -35,7 +34,6 @@ const handler = logHandler()
                 Ok(res, result)
             }
         }
-
     )
 
 export default handler

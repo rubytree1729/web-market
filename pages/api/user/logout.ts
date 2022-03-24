@@ -1,21 +1,15 @@
 
-import { Ok } from "../../../utils/server/commonError";
+import commonHandler from '../../../utils/commonHandler';
+import { Err, Ok } from "../../../utils/commonError";
 import { NextApiRequest, NextApiResponse } from "next";
-import { userHandler } from "../../../utils/server/commonHandler";
-import LoginToken from "../../../models/LoginToken";
-import { verifyJWT } from "../../../utils/encrypt";
+import nc from "next-connect"
 
-const handler = userHandler()
+const handler = nc(commonHandler)
     .get(
         async (req: NextApiRequest, res: NextApiResponse) => {
-            const cookies = [`access_token=;Max-Age=-1;Path=/;HttpOnly;Secure;SameSite=Strict`,
-                `refresh_token=;Max-Age=-1;Path=/;HttpOnly;Secure;SameSite=Strict`]
+            const cookies = [`access_token=;Max-Age=-1;Path=/;HttpOnly;Secure;SameSite=Strict`
+                , `refresh_token=;Max-Age=-1;Path=/;HttpOnly;Secure;SameSite=Strict`]
             res.setHeader('Set-Cookie', cookies)
-            const { refresh_token } = req.cookies
-            if (refresh_token) {
-                const { jti } = await verifyJWT(refresh_token)
-                await LoginToken.deleteOne({ jti })
-            }
             Ok(res, "success")
         }
     )

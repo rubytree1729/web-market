@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Err } from '../../../utils/server/commonError'
+import { Err } from '../../../utils/commonError'
 
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {

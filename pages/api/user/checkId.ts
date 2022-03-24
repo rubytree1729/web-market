@@ -1,17 +1,18 @@
-import { body } from "express-validator";
+import { body, check, header } from "express-validator";
 import User from "../../../models/User";
-import { Err, Ok } from "../../../utils/server/commonError";
-import { logHandler } from "../../../utils/server/commonHandler";
-import { validateRequest } from "../../../utils/server/middleware";
+import { Err, Ok } from "../../../utils/commonError";
+import commonHandler, { validateRequest } from "../../../utils/commonHandler";
+import dbCheckConnect from "../../../utils/dbCheckConnect";
+import nc from "next-connect"
 
 
-const handler = logHandler()
+const handler = nc(commonHandler)
     .post(
-        validateRequest([
-            body("id").exists()]),
+        body("id").exists(),
+        validateRequest(),
         async (req, res) => {
-            const { id } = req.body
-            const result = await User.findOne({ id })
+            dbCheckConnect()
+            const result = await User.findOne({ id: req.body.id })
             if (!result) {
                 Ok(res, true)
             } else {

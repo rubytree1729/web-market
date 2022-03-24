@@ -1,0 +1,143 @@
+.before
+{
+    top: 4px;
+    left: 1px;
+    width: 6px;
+    height: 6px;
+    background-position: -320px -450px;
+    content: '';
+}
+
+.container 
+{
+    width: 100%;
+    margin: auto;
+    padding: 2rem 0;
+    background-color: rgb(245, 241, 241);
+}
+
+.orderLayout
+{
+    width: 60%;
+    margin: auto;
+}
+
+.orderTag
+{
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.orderContent
+{
+    padding: 15px;
+    height: 60px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.orderContentInfo
+{
+    padding: 15px;
+    height: 100px;
+    text-align: center;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.customerLayout
+{
+    width: 60%;
+    margin: auto;
+    border: 1px solid black;
+    display: flex;
+}
+
+.address
+{
+    width: 70%;
+    margin: 20px;
+    margin-left: 10px;
+    margin-right: -10px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.customerInfo
+{
+    width: 30%;
+    margin: 20px;
+    margin-right: 10px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.paymentMethod
+{
+    width: 60%;
+    margin: auto;
+    border: 1px solid black;
+    display: flex;
+}
+
+.method
+{
+    width: 70%;
+    margin: 20px;
+    margin-left: 10px;
+    margin-right: -10px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.info
+{
+    width: 30%;
+    margin: 20px;
+    margin-right: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    display: block;
+}
+
+.priceSum
+{
+    display: flex;
+    font-size: 15px;
+}
+
+.p
+{
+    width: 50%;
+}
+
+.sum
+{
+    width: 50%;
+    text-align: end;
+}
+
+.p2
+{
+    font-size: 12px;
+    width: 50%;
+}
+
+.sum2
+{
+    font-size: 12px;
+    width: 50%;
+    text-align: end;
+}
+
+.btn
+{
+    width: 60%;
+    margin: auto;
+}
+
+.paymentBtn
+{
+    width: 100%;
+    padding: 20px;
+}

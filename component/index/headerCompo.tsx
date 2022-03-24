@@ -1,5 +1,5 @@
-import styles from '../../styles/headerCompo.module.css'
 import Link from 'next/link'
+import styles from '../../styles/headerCompo.module.css'
 
 function HeaderCompo() {
     return (
@@ -16,7 +16,6 @@ function HeaderCompo() {
                     <div className={styles.search}>검색</div>
                     <div className={styles.itemBox}>장바구니</div>
                 </div>
-
             </div>
             <div className={styles.outLine}></div>
         </div>

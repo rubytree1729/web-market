@@ -20,18 +20,14 @@ type naverShopping = {
 
 export async function insertDataByCategory() {
     const category = ["식품", "패션의류", "디지털/가전", "출산/육아", "생활/건강", "가구/인테리어", "도서", "화장품/미용", "여가/생활편의"]
-    try {
-        for (let i of category) {
-            const result: naverShopping[] = (await getNaverApi(i))["items"]
-            for (let data of result) {
-                const { title, image, lprice, mallName, productId, brand, maker, category1, category2, category3, category4 } = data
-                const product_data: product = { id: parseInt(productId), name: title, price: parseInt(lprice), category1, category2, category3, category4, imageUrl: image, mallName, brand, maker }
-                await new Product(product_data).save()
-
-
-            }
+    for (let i of category) {
+        const result: naverShopping[] = (await getNaverApi(i))["items"]
+        for (let data of result) {
+            const { title, image, lprice, mallName, productId, brand, maker, category1 } = data
+            const product_data: product = { id: parseInt(productId), name: title, price: parseInt(lprice), category: category1, imageUrl: image, mallName, brand, maker }
+            await new Product(product_data).save()
         }
-    } catch (error) { console.log(error) }
+    }
 }
 
 export default async function getNaverApi(keyword: string) {

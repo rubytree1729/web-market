@@ -14,8 +14,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-.validation{
-  color: red;
-  white-space: nowrap
-}

@@ -1,19 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import User, { user } from "../../../models/User"
+import dbCheckConnect from '../../../utils/dbCheckConnect';
 import { body, cookie } from 'express-validator';
-import { equals, Err, Ok } from '../../../utils/server/commonError';
+import { equals, Err, Ok } from '../../../utils/commonError';
+import commonHandler, { validateRequest } from '../../../utils/commonHandler';
 import { encryptAuthNumber, encryptPassword } from '../../../utils/encrypt';
-import { validateRequest } from '../../../utils/server/middleware';
-import { logHandler } from '../../../utils/server/commonHandler';
+import nc from "next-connect"
 
-const handler = logHandler()
+const handler = nc(commonHandler)
     .post(
-        validateRequest([
-            body("id").exists(),
-            body("password").exists(),
-            body("authnumber").exists(),
-            cookie("authnumber").exists()]),
+        body("id").exists(),
+        body("password").exists(),
+        body("authnumber").exists(),
+        cookie("authnumber").exists(),
+        validateRequest(),
         async (req: NextApiRequest, res: NextApiResponse) => {
+            dbCheckConnect()
             let { id, password, name, email, gender, phonenumber, fulladdress }: user = req.body
             const duplicate = await User.findOne({ id })
             if (duplicate) {
