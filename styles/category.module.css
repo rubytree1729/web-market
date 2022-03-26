@@ -1,0 +1,105 @@
+.categoryBig
+{
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.container 
+{
+    width: 100%;
+    margin: auto;
+    padding: 2rem 0;
+    background-color: rgb(245, 241, 241);
+}
+
+.totalContainer
+{
+    width: 70%;
+    margin: auto;
+}
+
+.category
+{
+    border: 1px solid black;
+    height: 400px;
+}
+
+.categoryTag
+{
+    display: flex;
+    height: 35%;
+}
+
+.categoryList
+{
+    width: 20%;
+    border: 1px solid black;
+}
+
+.categoryFilter
+{
+    width: 80%;
+    border: 1px solid black;
+}
+
+.smallCategoryTag
+{
+    display: flex;
+    height: 55%;
+}
+
+.smallCategory
+{
+    width: 20%;
+    border: 1px solid black;
+}
+
+.smallCategoryFilter
+{
+    width: 80%;
+    border: 1px solid black;
+}
+
+.priceRankTag
+{
+    display: flex;
+    height: 10%;
+}
+
+.priceRank
+{
+    width: 20%;
+    border: 1px solid black;
+}
+
+.priceRankFilter
+{
+    width: 80%;
+    border: 1px solid black;
+}
+
+.price
+{
+    display: flex;
+}
+
+.itemList
+{
+    width: 70%;
+}
+
+.priceList
+{
+    border: 1px solid black;
+}
+
+.Ranking
+{
+    width: 30%;
+}
+
+.RankingList
+{
+    border: 1px solid black;
+    height: 700px;
+}
