@@ -1,3 +1,9 @@
+.categoryBig
+{
+    text-align: center;
+    flex-wrap: wrap;
+}
+
 .container 
 {
     width: 100%;
