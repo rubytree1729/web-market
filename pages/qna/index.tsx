@@ -1,31 +1,39 @@
 import { useEffect, useState } from "react"
 import Board from "./board"
 import Link from "next/link"
-import LoginAuth from "../../component/auth/LoginAuth"
 import useSWR from "swr"
+import { useRouter } from "next/router"
+import useCustomSWR from "../../utils/client/useCustumSWR"
 
 
 export default function QnA() {
+    const router = useRouter()
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
+    if (isLoading) return <div>로딩중...</div>
+    if (isServerError) {
+        alert("서버 에러가 발생하였습니다")
+        router.push("/")
+    }
+    if (isApiError) {
+        alert("로그인이 필요합니다")
+        router.push("/login")
+    }
     return (
-        <LoginAuth>
-            <div className="container">
-                <div className="header">
+        <div className="container">
+            <div className="header">
 
-                </div>
-                <div className="body">
-                    <Board></Board>
-                    <br />
-                    <Link href={"/qna/createpost"} passHref>
-                        <button>글쓰기</button>
-                    </Link>
-                </div>
-                <div className="footer">
-
-                </div>
             </div>
-        </LoginAuth>
+            <div className="body">
+                <Board></Board>
+                <br />
+                <Link href={"/qna/createpost"} passHref>
+                    <button>글쓰기</button>
+                </Link>
+            </div>
+            <div className="footer">
 
-
+            </div>
+        </div>
     )
 
 }

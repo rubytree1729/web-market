@@ -2,7 +2,6 @@ import DeletePost from "./deletepost"
 import UpdatePost from "./updatepost"
 import postrowStyle from "../../styles/post/postrow.module.css"
 import { useState } from "react"
-import postrow from "../../styles/post/postrow.module.css"
 
 export default function ReadPost(post: any) {
     const [isOpen, setIsOpen] = useState(false)
@@ -32,7 +31,7 @@ export default function ReadPost(post: any) {
                 <td>{post.qacategory}</td>
                 <td>{post.title}</td>
                 <td>{post.userid}</td>
-                <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td>
+                {/* <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td> */}
                 <td>{answer}</td>
                 <td>
                     <UpdatePost {...post} />

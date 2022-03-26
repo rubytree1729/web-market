@@ -1,23 +1,30 @@
-import Link from "next/link";
 import { useRouter } from 'next/router'
+import useCustomSWR from "../../utils/client/useCustumSWR";
 import UserInfo from "./userinfo";
-import LoginAuth from "../../component/auth/LoginAuth";
 
 export default function MyPage() {
-    const router = useRouter();
+    const router = useRouter()
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
+    if (isLoading) return <div>로딩중...</div>
+    if (isServerError) {
+        alert("서버 에러가 발생하였습니다")
+        router.push("/")
+    }
+    if (isApiError) {
+        alert("로그인이 필요합니다")
+        router.push("/login")
+    }
     return (
-        <LoginAuth>
-            <div>
-                <div className="header">
+        <div>
+            <div className="header">
 
-                </div>
-                <div className="body">
-                    <UserInfo />
-                </div>
-                <div className="footer">
-
-                </div>
             </div>
-        </LoginAuth>
+            <div className="body">
+                <UserInfo />
+            </div>
+            <div className="footer">
+
+            </div>
+        </div>
     )
 }

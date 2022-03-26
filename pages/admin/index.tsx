@@ -1,12 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import 'bootstrap/dist/css/bootstrap.css'
 import HeaderCompo from '../../component/index/headerCompo'
 import FooterCompo from '../../component/index/footerCompo'
 import { useRouter } from 'next/router'
 import useCustomSWR from '../../utils/client/useCustumSWR'
-import { Main } from 'next/document'
-
 
 
 const Admin: NextPage = (props) => {
