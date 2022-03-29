@@ -1,7 +1,11 @@
-import { useForm, SubmitHandler } from "react-hook-form"
-import customAxios from "../../utils/customAxios"
-import { useRouter } from "next/router"
 import Link from "next/link"
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { SubmitHandler, useForm } from "react-hook-form"
+import useCustomSWR from "../../../utils/client/useCustumSWR"
+import customAxios from "../../../utils/customAxios"
+
+
 type post = {
     title: string,
     ordernumber: string,
@@ -13,20 +17,38 @@ type post = {
     answer: boolean,
     userid: number
 }
-export default function CreatePost() {
-    const router = useRouter()
+export default function UpdatePost() {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<post>({
         mode: "onSubmit"
     })
-    const onSubmit: SubmitHandler<post> = async data => {
+    const router = useRouter()
+    let post: any = {}
+    const { id } = router.query
+
+    const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
+    if (isError) return <div>failed to load</div>
+    if (isLoading) return <div>loading...</div>
+    for (let d of data) {
+        if (d.qaid == id) {
+            post = d
+        }
+    }
+
+
+    const onSubmit: SubmitHandler<post> = async (data: post) => {
+        if (id === undefined) {
+            return
+        }
+        data.qaid = parseInt(id.toString())
+
         alert(JSON.stringify(data, null, 2))
         try {
-            const res = await customAxios.post("/api/qaboard", data)
+            const res = await customAxios.put("/api/qaboard", data)
             if (res.status == 200) {
                 router.push('/qna')
-                alert('문의가 접수 되었습니다.')
+                alert('문의가 수정 되었습니다.')
             } else {
-                alert('접수가 실패했습니다.')
+                alert('수정이 실패했습니다.')
             }
 
         } catch (err) {
@@ -35,9 +57,11 @@ export default function CreatePost() {
         }
 
     }
-    console.log(watch())
-    //모달로
-    console.log(register)
+    // console.log(watch())
+
+
+
+
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
             <div className="container">
@@ -48,7 +72,7 @@ export default function CreatePost() {
                                 <th>문의유형</th>
                                 <td>
                                     <div className="select">
-                                        <select {...register("qacategory", { required: true })}>
+                                        <select defaultValue={post.qacategory}  {...register("qacategory", { required: true })}>
                                             <option value="">문의유형 선택</option>
                                             <option value="교환">교환</option>
                                             <option value="환불">환불</option>
@@ -73,14 +97,14 @@ export default function CreatePost() {
                             <tr>
                                 <th>제목</th>
                                 <td>
-                                    <input {...register("title", { required: true })} placeholder="제목을 입력해주세요." />
+                                    <input defaultValue={post.title} {...register("title", { required: true })} placeholder="제목을 입력해주세요." />
                                     {errors.title && alert("제목을 입력해주세요")}
                                 </td>
                             </tr>
                             <tr>
                                 <th>문의내용</th>
                                 <td>
-                                    <textarea {...register("content", { required: true })} cols={50} rows={10} placeholder="내용을 입력해주세요." />
+                                    <textarea defaultValue={post.content} {...register("content", { required: true })} cols={50} rows={10} placeholder="내용을 입력해주세요." />
                                     {errors.content && alert("내용을 입력해주세요.")}
 
                                 </td>
@@ -91,7 +115,7 @@ export default function CreatePost() {
                         <Link href="/qna" passHref>
                             <button >뒤로가기</button>
                         </Link>
-                        <button type="submit">문의하기</button>
+                        <button type="submit">수정하기</button>
                     </div>
                 </div>
             </div>

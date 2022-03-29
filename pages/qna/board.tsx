@@ -18,7 +18,6 @@ export default function Board() {
     const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
-
     for (let post of data) {
         postlist.push(post)
     }

@@ -1,8 +1,8 @@
-import DeletePost from "./deletepost"
-import UpdatePost from "./updatepost"
 import postrowStyle from "../../styles/post/postrow.module.css"
 import { useState } from "react"
 import postrow from "../../styles/post/postrow.module.css"
+import customAxios from "../../utils/customAxios"
+import Link from "next/link"
 type post = {
     title: string,
     ordernumber: string,
@@ -27,11 +27,25 @@ export default function ReadPost(post: any) {
 
     function clickContent() {
         if (post.answer) {
-            console.log(isAnswer)
             setIsOpen(!isOpen)
             setisAnswer(!isAnswer)
         } else {
             setIsOpen(!isOpen)
+        }
+    }
+    async function deleteApi(event: any) {
+        event.preventDefault()
+        try {
+            const res = await customAxios.delete("/api/qaboard", post.qaid)
+            if (res.status == 200) {
+                alert('글이 삭제되었습니다.')
+            } else {
+                alert('글이 존재하지 않습니다.')
+            }
+
+        } catch (err) {
+            console.log(err)
+            alert('삭제가 실패했습니다..')
         }
     }
 
@@ -45,30 +59,36 @@ export default function ReadPost(post: any) {
                 <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td>
                 <td>{answer}</td>
                 <td>
-                    <UpdatePost {...post} />
-                    <DeletePost {...post} />
+                    <Link href={`/qna/updatepost/${post.qaid}`}>
+                        <button>수정하기</button>
+                    </Link>
+                    <button onClick={deleteApi}>삭제</button>
                 </td>
             </tr>
-            {isOpen ? (
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>{post.content}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            ) : <></>}
-            {isAnswer ? (
-                <tr>
-                    <td></td>
-                    <td>답변</td>
-                    <td>답변내용</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            ) : <></>}
+            {
+                isOpen ? (
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>{post.content}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                ) : <></>
+            }
+            {
+                isAnswer ? (
+                    <tr>
+                        <td></td>
+                        <td>답변</td>
+                        <td>답변내용</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                ) : <></>
+            }
         </>
     )
 }
