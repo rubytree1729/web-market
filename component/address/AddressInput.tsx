@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import DaumPost from "./DaumPost";
+import addressStyle from "../../styles/address/address.module.css"
 
 export default function AddressInput(props: any) {
   const [zonecode, setZonecode] = useState(''); // 우편번호
@@ -25,13 +26,16 @@ export default function AddressInput(props: any) {
   }
 
   return (
-    <div className="address">
-      주소
-      <br />
-      <input type="text" id="zonecode" defaultValue={zonecode} placeholder="우편번호" />
-      <button type="button" onClick={opendaumPost} defaultValue="우편번호 찾기">🔍︎주소검색</button><br />
-      <input type="text" id="address" defaultValue={address} placeholder="주소" /><br />
-      <div className="validation">{wrongaddressDetail}</div>
+    <div className={addressStyle.addressform}>
+      <label>
+        주소
+      </label>
+      <div className={addressStyle.addressinput}>
+        <input className={addressStyle.input} type="text" id="zonecode" defaultValue={zonecode} placeholder="우편번호" />
+        <button type="button" onClick={opendaumPost} defaultValue="우편번호 찾기">주소검색</button><br />
+      </div>
+      <input className={addressStyle.input} type="text" id="address" defaultValue={address} placeholder="주소" />
+
 
       {isOpenPost ?
         <div>
