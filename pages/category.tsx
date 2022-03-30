@@ -1,33 +1,37 @@
 import styles from '../styles/category.module.css'
 import FooterCompo from '../component/index/footerCompo'
 import HeaderCompo from '../component/index/headerCompo'
-import CategoryList from '../component/index/categoryList'
 import customAxios from '../utils/customAxios'
 import useSWR from 'swr'
 import { useState } from 'react'
+import CategoryList from '../component/index/categoryList'
+import useCustomSWR from '../utils/client/useCustumSWR'
 
-function CategoryBig(props:any)
-{
-    return(
-        <div className={styles.categoryBig}>{props.category1}</div>
+
+function CategoryBig(props: any) {
+    return (
+        <div className={styles.categoryBig}>{props.category}</div>
     )
 }
 
 
-const category = () => {
-    const fetcher = (url: string) => customAxios(url).then((res: { data: any }) => res.data)
-    const [categoryName, setCategoryName] = useState("")
-    const { data, error } = useSWR(`/api/product/search?display=9&byCategory=true로`, fetcher)
+const Category = () => {
+    const [selectedCategory, setSelectedCategory] = useState([])
 
-    if (error) return <div>failed to load</div>
-    if (!data) return <div>loading...</div>
+    let category1Data = useCustomSWR("/api/product/category")
+    let category2Data
+    if (selectedCategory) {
+        category2Data = useCustomSWR(`/api/product/category?category1=${selectedCategory[0]}`)
+    }
+    if (category1Data.isLoading || category2Data?.isLoading) {
+        return <div>로딩중</div>
+    }
+    console.log(category1Data.data, category2Data?.data)
 
-    const props: any = {...data.result}
+    function clickCategory1() {
 
-    console.log(props)
-
+    }
     return (
-        
         <div>
             <header>
                 <HeaderCompo></HeaderCompo>
@@ -39,12 +43,14 @@ const category = () => {
                             <div className={styles.categoryTag}>
                                 <div className={styles.categoryList}>카테고리칸</div>
                                 <div className={styles.categoryFilter}>
-                                    {Object.values(props).map(product => <CategoryBig {...product}></CategoryBig>)}
+                                    {category1Data.data.map((category: string) => <div onClick={clickCategory1} className={styles.categoryBig}>{category}</div>)}
                                 </div>
                             </div>
                             <div className={styles.smallCategoryTag}>
                                 <div className={styles.smallCategory}>소분류칸</div>
-                                <div className={styles.smallCategoryFilter}>소분류 필터 칸</div>
+                                <div className={styles.smallCategoryFilter}>
+                                    소분류 필터
+                                </div>
                             </div>
                             <div className={styles.priceRankTag}>
                                 <div className={styles.priceRank}>가격순</div>
@@ -53,22 +59,17 @@ const category = () => {
                         </div>
 
                         <div>
-                            <div>상품 태그</div>
+                            <div className={styles.sort}>
+                                <div>조회수 순</div>
+                                <div>높은 가격순</div>
+                                <div>낮은 가격순</div>
+                            </div>
+
                             <div className={styles.price}>
                                 {/* -------------------------제품리스트---------------------- */}
                                 <div className={styles.itemList}>
                                     <div className={styles.priceList}>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
-                                        <CategoryList></CategoryList>
+                                        {/* {Object.values(props).map((product: any) => <CategoryList key={product.id} {...product}></CategoryList>)} */}
                                     </div>
                                 </div>
                                 {/* --------------------------랭킹?--------------------------- */}
@@ -88,4 +89,4 @@ const category = () => {
     )
 }
 
-export default category
+export default Category
