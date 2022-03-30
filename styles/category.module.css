@@ -1,7 +1,6 @@
 .categoryBig
 {
-    text-align: center;
-    flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 .container 
@@ -27,7 +26,7 @@
 .categoryTag
 {
     display: flex;
-    height: 35%;
+    height: 20%;
 }
 
 .categoryList
@@ -38,6 +37,8 @@
 
 .categoryFilter
 {
+    display: flex;
+    flex-wrap: wrap;
     width: 80%;
     border: 1px solid black;
 }
@@ -75,6 +76,14 @@
 .priceRankFilter
 {
     width: 80%;
+    border: 1px solid black;
+}
+
+.sort
+{   
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
     border: 1px solid black;
 }
 

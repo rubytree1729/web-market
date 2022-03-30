@@ -27,7 +27,7 @@ function Before2(porps: any) {
 }
 
 
-const purchase = (props: any) => {
+const Purchase = (props: any) => {
     const [count, setCount] = useState(0)
     const onIncrease = () => setCount(count + 1)
     const onDecrease = () => setCount(count - 1)
@@ -35,6 +35,7 @@ const purchase = (props: any) => {
     const SumPrice = () => {
         return (
             count * parseInt(props.price)
+
         )
     }
 
@@ -77,7 +78,7 @@ const purchase = (props: any) => {
                                     <div>총 상품금액</div>
                                     <div className={styles.totalPrice2}>
                                         <div>총수량 {count}개</div>
-                                        <div>{<Before2></Before2>}총 금액 {<SumPrice></SumPrice>}원</div>
+                                        <div>{<Before2></Before2>}총 금액 {SumPrice()}원</div>
                                     </div>
                                 </div>
                                 <div className={styles.purchaseButton}>
@@ -113,4 +114,4 @@ const purchase = (props: any) => {
         </>
     )
 }
-export default purchase
+export default Purchase
