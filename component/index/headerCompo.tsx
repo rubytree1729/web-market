@@ -13,48 +13,50 @@ function HeaderCompo() {
         return (
             <div>
                 <div className={styles.header}>
-                    <div className={styles.mainBar}>
+                    <div className={styles.headbar}>
                         <Link href="/" passHref>
-                            <div className={styles.mainlogo}>사이트명</div>
+                            <div className={styles.logo}>사이트명</div>
                         </Link>
-                        <Link href="/login" passHref>
-                            <div className={styles.loginBut}>로그인</div>
-                        </Link>
-
+                        <div className={styles.search}>
+                            <input type="text" />
+                            <button>🍳</button>
+                        </div>
+                        <div className={styles.menu}>
+                            <Link href="/login" passHref>
+                                <div className={styles.loginBtn}>로그인</div>
+                            </Link>
+                            <div className={styles.itemBox}>장바구니</div>
+                        </div>
                     </div>
-                    <div className={styles.searchBar}>
-                        <div className={styles.search}>검색</div>
-                        <div className={styles.itemBox}>장바구니</div>
-                    </div>
-
                 </div>
-                <div className={styles.outLine}></div>
             </div>
         )
     }
     return (
         <div>
             <div className={styles.header}>
-                <div className={styles.mainBar}>
+                <div className={styles.headbar}>
                     <Link href="/" passHref>
-                        <div className={styles.mainlogo}>사이트명</div>
+                        <div className={styles.logo}>사이트명</div>
                     </Link>
-                    <Link href="/api/user/logout" passHref>
-                        <div className={styles.loginBut}>로그아웃</div>
-                    </Link>
+                    <div className={styles.search}>
+                        <input type="text" />
+                        <button>🍳</button>
+                    </div>
+                    <div className={styles.menu}>
+                        <div className={styles.itemBox}>장바구니</div>
+                        <Link href="/api/user/logout" passHref>
+                            <div className={styles.loginbtn}>로그아웃</div>
+                        </Link>
 
-                    <Link href="/mypage" passHref>
-                        <div className={styles.loginBut}>마이페이지</div>
-                    </Link>
+                        <Link href="/mypage" passHref>
+                            <div className={styles.loginbtn}>마이페이지</div>
+                        </Link>
+                    </div>
                 </div>
-                <div className={styles.searchBar}>
-                    <div className={styles.search}>검색</div>
-                    <div className={styles.itemBox}>장바구니</div>
-                </div>
-
             </div>
-            <div className={styles.outLine}></div>
-        </div>
+
+        </div >
     )
 }
 

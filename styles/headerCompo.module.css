@@ -1,69 +1,57 @@
-.header
-{
+.header{
+    position: relative;
+    margin: 0 auto;
     border: 1px solid black;
 }
-
-.mainBar
-{
-    height: 40px;
+.headbar{
+    width: 1280px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
     display: flex;
-    justify-content: flex-end;
+    text-align: center;
+    justify-content: center;
     border-bottom: 1px solid black;
 }
-
-
-.mainlogo
-{   
+.logo{   
+    position: absolute;
+    top: 12px;
+    left: 10px;
     height: 30px;
-    margin-top: 5px;
-    margin-right: auto;
-    margin-left: 10px;
-    flex-wrap: wrap;   
     border: 1px solid black;
 }
-
-.loginBut
-{
-    height: 30px;
-    margin-top: 5px;
-    margin-right: 10px;
-    width: 80px;
-    border: 1px solid black;
-}
-
-.searchBar
-{
-    height: 80px;
+.menu{
+    position: absolute;
+    top: 10px;
+    right: 10px;
     display: flex;
-    justify-content: flex-end;
-}
 
-.search
-{
+}
+.loginbtn{
     height: 50px;
-    width: 40%;
-    margin-right: auto;
-    margin-left: 10px;
-    margin-top: 15px;
+    width: 50px;
     border: 1px solid black;
 }
-
-.itemBox
-{
-    height: 50px;
-    width: 100px;
-    margin-right: 10px;
-    margin-top: 15px;
+.search{
+    position: absolute;
+    top: 10px;
+    left: 464px;
+    height: 40px;
+    width: 250px;
     border: 1px solid black;
-}
-
-.outLine
-{
     display: flex;
-    flex: 1;
-    padding: 1rem 0;
-    border-bottom: 1px solid #eaeaea;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+}
+.search input{
+    height: 100%;
+    width: 100%;
+}
+.search button{
+    height: 40px;
+    width: 40px;
+}
+
+.itemBox{
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
 }
