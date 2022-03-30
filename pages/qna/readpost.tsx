@@ -37,7 +37,7 @@ export default function ReadPost(post: any) {
     async function deleteApi(event: any) {
         event.preventDefault()
         try {
-            const res = await customAxios.delete("/api/qaboard", post.qaid)
+            const res = await customAxios.delete(`/api/qaboard?qaid=${post.qaid}`)
             if (res.status == 200) {
                 alert('글이 삭제되었습니다.')
             } else {
@@ -57,7 +57,7 @@ export default function ReadPost(post: any) {
                 <td>{post.qacategory}</td>
                 <td>{post.title}</td>
                 <td>{post.userid}</td>
-                {/* <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td> */}
+                <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td>
                 <td>{answer}</td>
                 <td>
                     <Link href={`/qna/updatepost/${post.qaid}`}>

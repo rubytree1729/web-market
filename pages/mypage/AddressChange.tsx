@@ -1,49 +1,41 @@
-import axios from "axios"
-import AddressInput from "../../component/address/AddressInput"
-import { useState, useRef } from "react"
-export default function Addresschange() {
-    const [Zonecode, setZonecode] = useState(''); // 우편번호
-    const [Address, setAddress] = useState(''); // 주소
-    const [AddressDetail, setAddressDetail] = useState(''); // 상세주소
-    const [Validationaddress, setvalidationaddress] = useState(false)
+import Link from "next/link";
+import { useRouter } from 'next/router'
+import mypageStyle from "../../styles/mypage/mypage.module.css"
+import HeaderCompo from "../../component/index/headerCompo";
+import SideBar from "../../component/mypage/SideBar";
+import Addresschange from "../../component/mypage/AddressChange";
+import useCustomSWR from "../../utils/client/useCustumSWR";
 
-    async function addressPost() {
-        try {
-            const request = await axios.post("", {
-                "fulladdress": {
-                    "Zonecode": Zonecode,
-                    "Address": Address,
-                    "AddressDetail": AddressDetail
-                }
-            })
-            console.log(request.data)
-            return request.data
-        } catch (err) {
-            console.log(err)
-        }
+export default function MyPage() {
+    const router = useRouter();
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
+    if (isLoading) return <div>로딩중...</div>
+    if (isServerError) {
+        alert("서버 에러가 발생하였습니다")
+        router.push("/")
     }
-
-    const addressValue = useRef(null)
-    const setAddressFunction = (value: any) => {
-        addressValue.current = value
-        setAddress(value)
-        setvalidationaddress(true)
-        console.log(Validationaddress + "add")
-    }
-    const zonecodeValue = useRef(null)
-    const setZonecodeFunction = (value: any) => {
-        zonecodeValue.current = value
-        setZonecode(value)
+    if (isApiError) {
+        alert("로그인이 필요합니다")
+        router.push("/login")
     }
     return (
-        <div className="container">
-            <div>
-                <AddressInput
-                    setAddressFunction={setAddressFunction}
-                    setZonecodeFunction={setZonecodeFunction}
-                />
+
+        <div className={mypageStyle.container}>
+            <div className="header">
+                <HeaderCompo />
             </div>
-            <button onClick={addressPost}>주소변경하기</button>
+            <div className={mypageStyle.body}>
+                <div className="sidebar">
+                    <SideBar prop="addresschange" />
+                </div>
+                <div className={mypageStyle.content}>
+                    <Addresschange />
+                </div>
+
+            </div>
+            <div className="footer">
+
+            </div>
         </div>
     )
 }

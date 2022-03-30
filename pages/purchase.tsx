@@ -77,7 +77,7 @@ const purchase = (props: any) => {
                                     <div>총 상품금액</div>
                                     <div className={styles.totalPrice2}>
                                         <div>총수량 {count}개</div>
-                                        <div>{<Before2></Before2>}총 금액 {<SumPrice></SumPrice>}원</div>
+                                        {/* <div>{<Before2></Before2>}총 금액 {<SumPrice></SumPrice>}원</div> */}
                                     </div>
                                 </div>
                                 <div className={styles.purchaseButton}>

@@ -1,83 +1,41 @@
 import Link from "next/link";
-import React, { useRef } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import passwordChangeStyle from "../../styles/mypage/passwordChange.module.css"
-import customAxios from "../../utils/customAxios";
+import { useRouter } from 'next/router'
 
+import mypageStyle from "../../styles/mypage/mypage.module.css"
+import HeaderCompo from "../../component/index/headerCompo";
+import SideBar from "../../component/mypage/SideBar";
+import PasswordChange from "../../component/mypage/PasswordChange";
+import useCustomSWR from "../../utils/client/useCustumSWR";
 
-interface passwordInput {
-    currentpassword: string
-    newpassword: string
-    passwordConfirm: string
-}
-
-export default function App() {
-    const { register, formState: { errors }, handleSubmit, watch } = useForm<passwordInput>({
-        mode: "onBlur"
-    });
-    const newpassword = useRef("string")
-    newpassword.current = watch("newpassword")
-    const onSubmit: SubmitHandler<passwordInput> = async data => {
-        alert(JSON.stringify(data, null, 2))
-        try {
-            const request = await customAxios.post("", data)
-            if (request.status === 200) {
-                if (request.data.result === true) {
-                    alert("변경되었습니다")
-                } else
-                    alert("이전 비밀번호와 같습니다.")
-                console.log(request.data)
-            }
-            return request.data
-        } catch (err) {
-            alert("잘못된 접근입니다")
-            console.log(err)
-        }
+export default function MyPage() {
+    const router = useRouter();
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
+    if (isLoading) return <div>로딩중...</div>
+    if (isServerError) {
+        alert("서버 에러가 발생하였습니다")
+        router.push("/")
     }
-
+    if (isApiError) {
+        alert("로그인이 필요합니다")
+        router.push("/login")
+    }
     return (
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className={passwordChangeStyle.content}>
-                <div className={passwordChangeStyle.input}>
-                    <span className={passwordChangeStyle.password}>현재 비밀번호</span>
-                    <input className={passwordChangeStyle.n_input} type="password" {...register("currentpassword",
-                        {
-                            required: "현재 비밀번호를 입력해 주세요"
-                        })} />
-                    {errors.currentpassword && <span className="validation">{errors.currentpassword.message}</span>}
-                </div>
-                <div className={passwordChangeStyle.input}>
-                    <span className={passwordChangeStyle.password}>신규 비밀번호</span>
-                    <input className={passwordChangeStyle.n_input} type="password" {...register("newpassword",
-                        ({
-                            required: "신규 비밀번호를 입력해주세요",
-                            pattern: {
-                                value: /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/,
-                                message: "8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요."
-                            }
-                        }))} />
-                    {errors.newpassword && <span className="validation">{errors.newpassword.message}</span>}
-                </div>
-                <div className={passwordChangeStyle.input}>
-                    <span className={passwordChangeStyle.password}>신규 비밀번호 재입력</span>
-                    <input className={passwordChangeStyle.n_input} type="password" {...register("passwordConfirm",
-                        {
-                            required: true,
-                            validate: (value) => value === newpassword.current
-                        })} />
-                    {errors.passwordConfirm && errors.passwordConfirm.type === "required" &&
-                        <span className="validation">신규 비밀번호 재입력을 입력해주세요</span>}
-                    {errors.passwordConfirm && errors.passwordConfirm.type === "validate" &&
-                        <span className="validation">비밀번호가 일치 하지 않습니다.</span>}
-                </div>
-                <div className={passwordChangeStyle.btn_group}>
-                    <Link href="/mypage" passHref>
-                        <button>뒤로가기</button >
-                    </Link>
-                    <button type="submit">비밀번호 변경</button>
-                </div>
+        <div className={mypageStyle.container}>
+            <div className="header">
+                <HeaderCompo />
             </div>
-        </form>
-    );
+            <div className={mypageStyle.body}>
+                <div className="sidebar">
+                    <SideBar prop="passwordchange" />
+                </div>
+                <div className={mypageStyle.content}>
+                    <PasswordChange />
+                </div>
+
+            </div>
+            <div className="footer">
+
+            </div>
+        </div>
+    )
 }
