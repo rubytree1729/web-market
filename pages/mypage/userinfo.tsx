@@ -1,63 +1,43 @@
-import customAxios from "../../utils/customAxios"
 import Link from "next/link"
 import PhoneNumberChange from "../../component/phonenumber/PhonenumberChange"
-import PasswordChange from "./PasswordChange"
+import useCustomSWR from "../../utils/client/useCustumSWR"
+import customAxios from "../../utils/customAxios"
+import userinfoStyle from "../../styles/mypage/userinfo.module.css"
+
 export default function UserInfo() {
-    async function getUserInfo() {
-        try {
-            const res = await customAxios.get("")
-            const data = res.data
-            return { user: data }
-        } catch (err) {
-            console.log(err)
-
-        }
-    }
+    // const { data, isLoading, isError } = useCustomSWR("/api/")
+    // if (isError) return <div>failed to load</div>
+    // if (isLoading) return <div>loading...</div>
     return (
-        <form>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>아이디</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>비밀번호</th>
-                        <td>
-                            {/* <div>
-                                <PasswordChange></PasswordChange>
-                            </div> */}
-                            <Link href="/mypage/PasswordChange" passHref>
-                                <button>비밀번호 변경</button>
-                            </Link>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>이름</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>이메일</th>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <th>휴대전화</th>
-                        <td>
-                            <PhoneNumberChange />
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <th>주소</th>
-                        <td>
-                            <Link href="/mypage/AddressChange" passHref>
-                                <button>주소 변경</button>
-                            </Link>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+        <table>
+            <h2>회원정보</h2>
+            <tbody>
+                <tr>
+                    <th className={userinfoStyle.row}>아이디</th>
+                    {/* <td>{data.id}</td> */}
+                </tr>
+                <tr>
+                    <th className={userinfoStyle.row}>비밀번호</th>
+                    {/* <td>{data.password}</td> */}
+                </tr>
+                <tr>
+                    <th className={userinfoStyle.row}>이름</th>
+                    {/* <td>{data.name}</td> */}
+                </tr>
+                <tr>
+                    <th className={userinfoStyle.row}>이메일</th>
+                    {/* <td>{data.email}</td> */}
+                </tr>
+                <tr>
+                    <th className={userinfoStyle.row}>휴대전화</th>
+                    {/* <td>{data.phonenumber}</td> */}
+                </tr>
+                <tr>
+                    <th className={userinfoStyle.row}>주소</th>
+                    {/* <td>{data.fulladdress}</td> */}
+                </tr>
+            </tbody>
+        </table>
     )
 
 }

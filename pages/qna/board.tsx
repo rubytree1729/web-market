@@ -2,14 +2,22 @@ import useSWR from "swr"
 import axios from "axios"
 import ReadPost from "./readpost"
 import useCustomSWR from "../../utils/client/useCustumSWR"
-
+type post = {
+    title: string,
+    ordernumber: string,
+    content: string
+    qacategory: string,
+    date: number,
+    qaid: number,
+    _id: number,
+    answer: boolean,
+    userid: number
+}
 export default function Board() {
     let postlist: any = []
-
     const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
-
     for (let post of data) {
         postlist.push(post)
     }
@@ -33,7 +41,7 @@ export default function Board() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {postlist && postlist.map((post: any) =>
+                                {postlist && postlist.map((post: post) =>
                                     <ReadPost key={post.qaid}{...post} />)}
                             </tbody>
                         </table>

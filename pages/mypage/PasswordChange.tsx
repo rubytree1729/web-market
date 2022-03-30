@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React, { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import customAxios from "../../utils/customAxios";
 import passwordChangeStyle from "../../styles/mypage/passwordChange.module.css"
+import customAxios from "../../utils/customAxios";
 
 
 interface passwordInput {
