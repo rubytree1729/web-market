@@ -5,30 +5,33 @@ import customAxios from '../utils/customAxios'
 import useSWR from 'swr'
 import { useState } from 'react'
 import CategoryList from '../component/index/categoryList'
+import useCustomSWR from '../utils/client/useCustumSWR'
 
 
 function CategoryBig(props: any) {
     return (
-        <div className={styles.categoryBig}>{props.category1}</div>
+        <div className={styles.categoryBig}>{props.category}</div>
     )
 }
 
 
 const Category = () => {
-    const fetcher = (url: string) => customAxios(url).then((res: { data: any }) => res.data)
-    const [categoryName, setCategoryName] = useState("")
-    const { data, error } = useSWR(`/api/product/search?display=9&byCategory=true`, fetcher)
+    const [selectedCategory, setSelectedCategory] = useState([])
 
-    if (error) return <div>failed to load</div>
-    if (!data) return <div>loading...</div>
+    let category1Data = useCustomSWR("/api/product/category")
+    let category2Data
+    if (selectedCategory) {
+        category2Data = useCustomSWR(`/api/product/category?category1=${selectedCategory[0]}`)
+    }
+    if (category1Data.isLoading || category2Data?.isLoading) {
+        return <div>로딩중</div>
+    }
+    console.log(category1Data.data, category2Data?.data)
 
-    const props: any = { ...data.result }
+    function clickCategory1() {
 
-    console.log(props)
-
+    }
     return (
-
-
         <div>
             <header>
                 <HeaderCompo></HeaderCompo>
@@ -40,7 +43,7 @@ const Category = () => {
                             <div className={styles.categoryTag}>
                                 <div className={styles.categoryList}>카테고리칸</div>
                                 <div className={styles.categoryFilter}>
-                                    {Object.values(props).map((product: any) => <CategoryBig key={product.id} {...product}></CategoryBig>)}
+                                    {category1Data.data.map((category: string) => <div onClick={clickCategory1} className={styles.categoryBig}>{category}</div>)}
                                 </div>
                             </div>
                             <div className={styles.smallCategoryTag}>
@@ -66,7 +69,7 @@ const Category = () => {
                                 {/* -------------------------제품리스트---------------------- */}
                                 <div className={styles.itemList}>
                                     <div className={styles.priceList}>
-                                        {Object.values(props).map((product: any) => <CategoryList key={product.id} {...product}></CategoryList>)}
+                                        {/* {Object.values(props).map((product: any) => <CategoryList key={product.id} {...product}></CategoryList>)} */}
                                     </div>
                                 </div>
                                 {/* --------------------------랭킹?--------------------------- */}
