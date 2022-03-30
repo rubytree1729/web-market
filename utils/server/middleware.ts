@@ -18,13 +18,12 @@ export async function checkDB(req: NextApiRequest, res: NextApiResponse, next: N
     next()
 }
 export async function serverAuth(req: NextApiRequest, res: NextApiResponse, next: NextHandler) {
-    await validate([cookie(["refresh_token"]).exists()])(req, res)
+    await validate([cookie("refresh_token").exists()])(req, res)
     const { access_token, refresh_token } = req.cookies
     try {
         const { aud, role, jti } = await verifyJWT(access_token)
         req.cookies = { ...req.cookies, userid: aud, role, jti }
-    }
-    catch {
+    } catch {
         const { aud, role, jti } = await verifyJWT(refresh_token)
         const result = await LoginToken.findOne({ jti })
         if (!result) {
