@@ -1,0 +1,26 @@
+.container
+{
+    display: flex;
+    width: 100%;
+}
+
+.image
+{
+   border: 1px solid black;
+   width: 20%; 
+   height: 200px;
+}
+
+.itemInfo
+{
+    border: 1px solid black;
+    width: 60%;
+    height: 200px;
+}
+
+.sideInfo
+{
+    border: 1px solid black;
+    width: 20%;
+    height: 200px;
+}

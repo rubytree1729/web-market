@@ -1,20 +1,21 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.css'
-
 import MainBody from '../component/index/mainBody'
 import HeaderCompo from '../component/index/headerCompo'
 import FooterCompo from '../component/index/footerCompo'
-import customAxios from '../utils/customAxios'
-import useSWR from 'swr'
-import LoginAuth from '../component/auth/LoginAuth'
+import useCustomSWR from '../utils/client/useCustumSWR'
 
 
 const Home: NextPage = () => {
-  const fetcher = (url: string) => customAxios.get(url).then((res: any) => res.data)
-  const { data, error } = useSWR("/api/product/search?display=18&byCategory=true", fetcher)
-  if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
+  const { data, isLoading, isServerError } = useCustomSWR("/api/product/search?display=18&byCategory=true")
+  if (isLoading) return <div>로딩중...</div>
+  if (isServerError) {
+    alert("서버 에러가 발생하였습니다")
+  }
+  if (!data) {
+    alert("데이터베이스 에러가 발생하였습니다")
+  }
   return (
     <div>
       <Head>
@@ -28,7 +29,7 @@ const Home: NextPage = () => {
       </header>
 
       <main>
-        <MainBody {...data.result}></MainBody>
+        <MainBody {...data}></MainBody>
       </main>
 
       <footer>

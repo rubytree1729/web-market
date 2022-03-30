@@ -27,7 +27,14 @@ const Userlist: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <HeaderCompo></HeaderCompo>
-            <UserTable>{data}</UserTable>
+            <div className='container'>
+                <UserTable>{data}</UserTable>
+                <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" className="btn btn-outline-success">권한부여</button>
+                    <button type="button" className="btn btn-outline-warning">권한해제</button>
+                    <button type="button" className="btn btn-outline-danger">회원삭제</button>
+                </div>
+            </div>
             <FooterCompo></FooterCompo>
         </div>
     )

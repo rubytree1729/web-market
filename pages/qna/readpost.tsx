@@ -14,6 +14,7 @@ type post = {
     answer: boolean,
     userid: number
 }
+
 export default function ReadPost(post: any) {
     const [isOpen, setIsOpen] = useState(false)
     const [isAnswer, setisAnswer] = useState(false)
@@ -56,7 +57,7 @@ export default function ReadPost(post: any) {
                 <td>{post.qacategory}</td>
                 <td>{post.title}</td>
                 <td>{post.userid}</td>
-                <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td>
+                {/* <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td> */}
                 <td>{answer}</td>
                 <td>
                     <Link href={`/qna/updatepost/${post.qaid}`}>
