@@ -14,7 +14,11 @@ const Admin: NextPage = (props) => {
         alert("서버 에러가 발생하였습니다")
         router.push("/")
     }
-    if (isApiError || data != "admin") {
+    if (isApiError) {
+        alert("로그인이 필요합니다")
+        router.push("/login")
+    }
+    if (data != "admin") {
         alert("권한이 없습니다")
         router.push("/")
     }
@@ -32,7 +36,7 @@ const Admin: NextPage = (props) => {
                         <a className='nav-link active'>유저목록</a>
                     </li>
                     <li className='nav-item'>
-                        <a className='nav-link text-white'>유저목록</a>
+                        <a className='nav-link text-white'>상품목록</a>
                     </li>
                     <li className='nav-item'>
                         <a className='nav-link text-white'>유저목록</a>
