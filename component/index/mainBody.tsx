@@ -1,6 +1,7 @@
 import ItemList from './itemList'
 import styles from '../../styles/mainbody.module.css'
 import Product, { product } from '../../models/Product'
+import Carousel from '../carousel/Carousel'
 
 
 const MainBody = (props: object) => {
@@ -12,6 +13,7 @@ const MainBody = (props: object) => {
 
     return (
         <div className={styles.main}>
+            <Carousel></Carousel>
             <div className={styles.mainList}>
                 <div className={styles.sideBar}>
                     <div className={styles.category}>카테고리</div>

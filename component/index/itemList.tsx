@@ -18,7 +18,6 @@ function Item(props: any) {
 
 
 function ItemList(props: any) {
-    console.log(props)
     return (
 
         <div className={styles.style}>

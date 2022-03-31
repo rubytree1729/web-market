@@ -1,0 +1,37 @@
+.container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 455px;
+}
+
+.carousel_container {
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
+    background-color: blueviolet;
+
+}
+
+.carousel_container image {
+    width: 100%;
+    background-color: bisque;
+
+}
+
+.prev_btn {
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    all: unset;
+    background-color: coral;
+    border: 1px solid coral;
+
+}
+
+.button :hover {
+    transition: all 0.3s ease-in-out;
+    background-color: coral;
+    color: #fff;
+}
