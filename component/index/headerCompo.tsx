@@ -2,7 +2,12 @@ import styles from '../../styles/headerCompo.module.css'
 import Link from 'next/link'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 import Router from 'next/router'
-
+import MenuToggle from '../menutoggle/MenuToggle'
+import glasses from "./icon/free-icon-loupe-709592.png"
+import rightarrow from "./icon/free-icon-right-arrow-271228.png"
+import cart from "./icon/free-icon-shopping-cart-481384.png"
+import usericon from "./icon/free-icon-user-747376.png"
+import Image from 'next/image'
 function HeaderCompo() {
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/info")
     if (isLoading) return <div>로딩중...</div>
@@ -14,6 +19,9 @@ function HeaderCompo() {
             <div>
                 <div className={styles.header}>
                     <div className={styles.headbar}>
+                        <div className={styles.menu}>
+                            <MenuToggle />
+                        </div>
                         <Link href="/" passHref>
                             <div className={styles.logo}>사이트명</div>
                         </Link>
@@ -21,13 +29,16 @@ function HeaderCompo() {
                             <input type="text" />
                             <button>🍳</button>
                         </div>
-                        <div className={styles.menu}>
+                        <div className={styles.mypage}>
                             <Link href="/login" passHref>
                                 <div className={styles.loginBtn}>로그인</div>
                             </Link>
-                            <div className={styles.itemBox}>장바구니</div>
+                            <div className={styles.itemBox}> <Image src={cart} /></div>
+
                         </div>
+
                     </div>
+
                 </div>
             </div>
         )
@@ -36,24 +47,33 @@ function HeaderCompo() {
         <div>
             <div className={styles.header}>
                 <div className={styles.headbar}>
+                    <div className={styles.menu}>
+                        <MenuToggle />
+                    </div>
                     <Link href="/" passHref>
                         <div className={styles.logo}>사이트명</div>
                     </Link>
                     <div className={styles.search}>
                         <input type="text" />
-                        <button>🍳</button>
+                        <button><Image src={glasses} /></button>
                     </div>
-                    <div className={styles.menu}>
-                        <div className={styles.itemBox}>장바구니</div>
+                    <div className={styles.mypage}>
+                        <div className={styles.itemBox}>
+                            <Image src={cart} />
+                        </div>
                         <Link href="/api/user/logout" passHref>
                             <div className={styles.loginbtn}>로그아웃</div>
                         </Link>
 
                         <Link href="/mypage" passHref>
-                            <div className={styles.loginbtn}>마이페이지</div>
+                            <div className={styles.loginbtn}>
+                                <Image src={usericon} />
+                            </div>
                         </Link>
+
                     </div>
                 </div>
+
             </div>
 
         </div >
