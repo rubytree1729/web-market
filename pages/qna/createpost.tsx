@@ -36,7 +36,6 @@ export default function CreatePost() {
 
     }
     console.log(watch())
-    //모달로
     console.log(register)
     return (
         <form onSubmit={handleSubmit(onSubmit)} >

@@ -19,7 +19,7 @@ export default function Board() {
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
     for (let post of data) {
-        postlist.push(post)
+        postlist.unshift(post)
     }
     return (
         <form >

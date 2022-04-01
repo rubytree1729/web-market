@@ -54,6 +54,7 @@ const Home: NextPage = (props) => {
     alert("이미 로그인되어 있습니다")
     router.push("/")
   }
+
   return (<div className={loginStyle.container}>
     <div className={loginStyle.content}>
       <form>
