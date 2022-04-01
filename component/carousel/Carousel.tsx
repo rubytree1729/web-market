@@ -26,25 +26,27 @@ export default function Carousel() {
         setCurrentCarousel(currentCarousel + 1)
     }, [currentCarousel])
 
+
     useEffect(() => {
+        console.log(carouselRef.current)
         carouselRef.current.style.transition = 'all 0.5s ease-in-out';
-        carouselRef.current.style.transform = `translateX(-${currentCarousel}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 에니메이션을 만듭니다.
+        carouselRef.current.style.transform = `translateX(-${currentCarousel * 20}%)`; // 백틱을 사용하여 슬라이드로 이동하는 에니메이션을 만듭니다.
     }, [currentCarousel]);
     return (
-        <div className={carouselStyle.container}>
-            <button onClick={prevCarousel}></button>
-            <div className={carouselStyle.carouse_container}>
-                {images.map((image) => {
-                    return (
-                        <Image
-                            src={image}
-                        />
-                    )
-                })}
-
+        <div className={carouselStyle.container} >
+            <div className={carouselStyle.carousel_container} >
+                <div className={carouselStyle.slideimage} ref={carouselRef} >
+                    {images.map((image) => {
+                        return (
+                            <Image
+                                src={image}
+                            />
+                        )
+                    })}
+                </div>
             </div>
-
-            <button className={carouselStyle.prev_btn} onClick={nextCarousel}></button>
+            <button className={carouselStyle.prev_btn} onClick={prevCarousel}>뒤로버튼</button>
+            <button className={carouselStyle.next_btn} onClick={nextCarousel}>앞으로버튼</button>
 
         </div>
     )
