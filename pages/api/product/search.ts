@@ -17,30 +17,51 @@ async function sendByCategory(maxResults: number) {
 
 
 const handler = logHandler()
+
+    /* 입력: 
+    sort: ["viewcount", "highprice", "lowprice"]
+    display: 보여줄 물품 갯수
+    byCategory: [true, false] 카테고리별로 보여줄지 결정
+    category1: 카테고리1
+    category2: 카테고리2
+    pagenum: 페이지 번호
+    */
     .get(
         validateRequest([]),
         async (req, res) => {
-            let { sort, display, byCategory, id, category1, category2 } = req.query
+            let { sort, display, byCategory, id, category1, category2, pagenum } = req.query
+            const totalQuery: Array<any> = []
+            let sortQuery
+            switch (sort) {
+                case "viewcount":
+                    sortQuery = "-viewcount"
+                    break
+                case "lowprice":
+                    sortQuery = "price"
+                    break
+                default:
+                    sortQuery = "-price"
+            }
             const maxResults = Math.min(100, parseInt(display ? display.toString() : "10"))
+            const parsedPagenum = pagenum ? parseInt(pagenum.toString()) : 1
             if (byCategory === "true") {
                 const totalResult = await sendByCategory(maxResults)
-                Ok(res, totalResult)
+                return Ok(res, totalResult)
             } else {
-                // simplify this!!!
                 const parsedId = id ? parseInt(id.toString()) : id
-                let result
+                let matchQuery
                 if (parsedId) {
-                    result = await Product.aggregate([{ "$match": { id: parsedId } }, { "$sample": { "size": maxResults } }])
+                    matchQuery = { "$match": { id: parsedId } }
                 } else if (category2) {
-                    result = await Product.aggregate([{ "$match": { category2 } }, { "$sample": { "size": maxResults } }])
-                    // console.log("caregory2", result)
+                    matchQuery = { "$match": { category2 } }
                 } else if (category1) {
-                    result = await Product.aggregate([{ "$match": { category1 } }, { "$sample": { "size": maxResults } }])
-                    // console.log("caregory1", result)
+                    matchQuery = { "$match": { category1 } }
                 } else {
-                    result = await Product.aggregate([{ "$sample": { "size": maxResults } }])
+                    matchQuery = { "$match": {} }
                 }
-                Ok(res, result)
+                totalQuery.push(matchQuery)
+                const result = await Product.aggregate(totalQuery).sort(sortQuery).limit(parsedPagenum * maxResults).skip((parsedPagenum - 1) * maxResults)
+                return Ok(res, result)
             }
         }
     )
