@@ -20,22 +20,27 @@ const handler = logHandler()
     .get(
         validateRequest([]),
         async (req, res) => {
-            const { sort, display, byCategory, id: id } = req.query
+            let { sort, display, byCategory, id, category1, category2 } = req.query
             const maxResults = Math.min(100, parseInt(display ? display.toString() : "10"))
             if (byCategory === "true") {
                 const totalResult = await sendByCategory(maxResults)
                 Ok(res, totalResult)
             } else {
+                // simplify this!!!
+                const parsedId = id ? parseInt(id.toString()) : id
                 let result
-                if (id) {
-                    result = await Product.aggregate([{ "$match": { id: parseInt(id as string) } }, { "$sample": { "size": maxResults } }])
+                if (parsedId) {
+                    result = await Product.aggregate([{ "$match": { id: parsedId } }, { "$sample": { "size": maxResults } }])
+                } else if (category1) {
+                    result = await Product.aggregate([{ "$match": { category1 } }, { "$sample": { "size": maxResults } }])
+                } else if (category2) {
+                    result = await Product.aggregate([{ "$match": { category2 } }, { "$sample": { "size": maxResults } }])
                 } else {
                     result = await Product.aggregate([{ "$sample": { "size": maxResults } }])
                 }
                 Ok(res, result)
             }
         }
-
     )
 
 export default handler
