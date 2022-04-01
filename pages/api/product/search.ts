@@ -31,10 +31,12 @@ const handler = logHandler()
                 let result
                 if (parsedId) {
                     result = await Product.aggregate([{ "$match": { id: parsedId } }, { "$sample": { "size": maxResults } }])
-                } else if (category1) {
-                    result = await Product.aggregate([{ "$match": { category1 } }, { "$sample": { "size": maxResults } }])
                 } else if (category2) {
                     result = await Product.aggregate([{ "$match": { category2 } }, { "$sample": { "size": maxResults } }])
+                    // console.log("caregory2", result)
+                } else if (category1) {
+                    result = await Product.aggregate([{ "$match": { category1 } }, { "$sample": { "size": maxResults } }])
+                    // console.log("caregory1", result)
                 } else {
                     result = await Product.aggregate([{ "$sample": { "size": maxResults } }])
                 }

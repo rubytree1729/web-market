@@ -1,36 +1,41 @@
 import styles from '../styles/category.module.css'
 import FooterCompo from '../component/index/footerCompo'
 import HeaderCompo from '../component/index/headerCompo'
-import customAxios from '../utils/customAxios'
-import useSWR from 'swr'
 import { useState } from 'react'
 import CategoryList from '../component/index/categoryList'
 import useCustomSWR from '../utils/client/useCustumSWR'
-
-
-function CategoryBig(props: any) {
-    return (
-        <div className={styles.categoryBig}>{props.category}</div>
-    )
-}
-
+import customAxios from '../utils/customAxios'
 
 const Category = () => {
-    const [selectedCategory, setSelectedCategory] = useState([])
-
-    let category1Data = useCustomSWR("/api/product/category")
-    let category2Data
-    if (selectedCategory) {
-        category2Data = useCustomSWR(`/api/product/category?category1=${selectedCategory[0]}`)
-    }
-    if (category1Data.isLoading || category2Data?.isLoading) {
+    const [category1, setCategory1] = useState("")
+    const [category2, setCategory2] = useState("")
+    const categorySWR = useCustomSWR("/api/product/category")
+    const productSWR = useCustomSWR(`/api/product/search?category1=${category1}&category2=${category2}`)
+    if (categorySWR.isLoading) {
         return <div>로딩중</div>
     }
-    console.log(category1Data.data, category2Data?.data)
+    const categoryData = categorySWR.data
+    const productData = productSWR.data
 
-    function clickCategory1() {
-
+    function clickCategory1(e: any) {
+        setCategory1(e.target.innerText)
+        setCategory2("")
     }
+
+    function clickCategory2(e: any) {
+        setCategory2(e.target.innerText)
+    }
+    const category1Data: Array<string> = []
+    categoryData.forEach((category: any) => category1Data.push(category.category1));
+    category1Data.sort()
+    let category2Data: Array<string> = []
+    category1 && categoryData.forEach((category: any) => {
+        if (category.category1 === category1) {
+            category2Data = category.category2
+        }
+    })
+    category2Data.sort()
+    console.log(categoryData, productData)
     return (
         <div>
             <header>
@@ -43,13 +48,13 @@ const Category = () => {
                             <div className={styles.categoryTag}>
                                 <div className={styles.categoryList}>카테고리칸</div>
                                 <div className={styles.categoryFilter}>
-                                    {category1Data.data.map((category: string) => <div onClick={clickCategory1} className={styles.categoryBig}>{category}</div>)}
+                                    {category1Data && category1Data.map((category: string) => <div onClick={clickCategory1} className={styles.categoryBig}>{category}</div>)}
                                 </div>
                             </div>
                             <div className={styles.smallCategoryTag}>
                                 <div className={styles.smallCategory}>소분류칸</div>
                                 <div className={styles.smallCategoryFilter}>
-                                    소분류 필터
+                                    {category2Data && category2Data.map((category: string) => <div onClick={clickCategory2} className={styles.categoryBig}>{category}</div>)}
                                 </div>
                             </div>
                             <div className={styles.priceRankTag}>
@@ -69,7 +74,7 @@ const Category = () => {
                                 {/* -------------------------제품리스트---------------------- */}
                                 <div className={styles.itemList}>
                                     <div className={styles.priceList}>
-                                        {/* {Object.values(props).map((product: any) => <CategoryList key={product.id} {...product}></CategoryList>)} */}
+                                        {productData && productData.map((product: any) => <CategoryList key={product.id} {...product} />)}
                                     </div>
                                 </div>
                                 {/* --------------------------랭킹?--------------------------- */}

@@ -12,7 +12,8 @@ export interface product {
     description?: string,
     mallName: string,
     maker: string,
-    brand: string
+    brand: string,
+    viewcount: number,
 }
 const productSchema = new Schema<product>({
     id: { type: Number, required: true, unique: true },
@@ -27,6 +28,7 @@ const productSchema = new Schema<product>({
     mallName: { type: String },
     maker: String,
     brand: String,
+    viewcount: { type: Number, default: 0 }
 })
 const Product = mongoose.models['product'] ? model<product>('product') : model<product>('product', productSchema, 'product')
 export default Product
