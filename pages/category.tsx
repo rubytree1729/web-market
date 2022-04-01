@@ -14,8 +14,10 @@ const Category = () => {
     if (categorySWR.isLoading) {
         return <div>로딩중</div>
     }
+    console.log(categorySWR, productSWR)
     const categoryData = categorySWR.data
-    const productData = productSWR.data
+    const productData = productSWR.data && productSWR.data.data
+    const productTotalNum = productSWR.data && productSWR.data.metadata.totalnum
 
     function clickCategory1(e: any) {
         setCategory1(e.target.innerText)
@@ -35,7 +37,12 @@ const Category = () => {
         }
     })
     category2Data.sort()
+
+
+
     console.log(categoryData, productData)
+    console.log(productTotalNum)
+
     return (
         <div>
             <header>
@@ -54,7 +61,7 @@ const Category = () => {
                             <div className={styles.smallCategoryTag}>
                                 <div className={styles.smallCategory}>소분류칸</div>
                                 <div className={styles.smallCategoryFilter}>
-                                    {category2Data && category2Data.map((category: string) => <div onClick={clickCategory2} className={styles.categoryBig}>{category}</div>)}
+                                    {category2Data && category2Data.map((category: string) => <div onClick={clickCategory2} className={styles.categorySmall}>{category}</div>)}
                                 </div>
                             </div>
                             <div className={styles.priceRankTag}>
@@ -65,9 +72,9 @@ const Category = () => {
 
                         <div>
                             <div className={styles.sort}>
-                                <div>조회수 순</div>
-                                <div>높은 가격순</div>
-                                <div>낮은 가격순</div>
+                                <div className={styles.sortFilter}>조회수 순</div>
+                                <div className={styles.sortFilter}>높은 가격순</div>
+                                <div className={styles.sortFilter}>낮은 가격순</div>
                             </div>
 
                             <div className={styles.price}>
