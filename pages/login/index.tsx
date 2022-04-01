@@ -1,7 +1,7 @@
 import type { NextApiResponse, NextPage } from 'next'
 import 'bootstrap/dist/css/bootstrap.css'
 import { useEffect, useState } from 'react'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { getFingerprint, clientAuth } from '../../utils/client/fingerprint'
 import Link from 'next/link'
 import loginStyle from '../../styles/login/login.module.css'
@@ -13,6 +13,7 @@ const Home: NextPage = (props) => {
   const [id, setId] = useState("")
   const [password, setPassword] = useState("")
   const [persistent, setPersistent] = useState(false)
+  const router = useRouter()
 
   //id 입력감지 후 id 값 변경
   const IdInputHandler = (event: any) => {
@@ -34,7 +35,7 @@ const Home: NextPage = (props) => {
       const res = await customAxios.post("/api/user/login", loginQuery)
       if (res.status == 200) {
         alert("로그인 성공")
-        Router.push("/")
+        router.push("/")
       } else {
         alert("아이디 혹은 비밀번호가 틀렸습니다")
       }
@@ -43,7 +44,6 @@ const Home: NextPage = (props) => {
       alert("서버 에러가 발생하였습니다")
     }
   }
-  const router = useRouter()
   const { data, isLoading, isServerError } = useCustomSWR("/api/user/auth")
   if (isLoading) return <div>로딩중...</div>
   if (isServerError) {

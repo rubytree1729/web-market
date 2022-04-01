@@ -2,25 +2,28 @@ import styles from '../styles/purchaseMain.module.css'
 import FooterCompo from '../component/index/footerCompo'
 import HeaderCompo from '../component/index/headerCompo'
 import { useState } from 'react'
-import axios from 'axios'
 import { GetServerSideProps } from 'next'
+import customAxios from '../utils/customAxios'
+import { useRouter } from 'next/router'
+import useCustomSWR from '../utils/client/useCustumSWR'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const res = await axios.get(`https://web-market-lsh.vercel.app/api/product/search?id=${context.query.id}`)
+    const res = await customAxios.get(`/api/product/search?id=${context.query.id}`)
+    const viewcount = await customAxios.patch("/api/product/viewcount", { id: context.query.id })
     const data = await res.data
     return {
-        props: { ...data.result[0] }
+        props: { ...data.result.data[0] }
     }
 }
 
 
-function Before(porps: any) {
+function Before(props: any) {
     return (
         <div className={styles.before}></div>
     )
 }
 
-function Before2(porps: any) {
+function Before2(props: any) {
     return (
         <div className={styles.before2}></div>
     )
@@ -28,17 +31,31 @@ function Before2(porps: any) {
 
 
 const Purchase = (props: any) => {
+    const router = useRouter()
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/info", {}, true)
     const [count, setCount] = useState(0)
     const onIncrease = () => setCount(count + 1)
     const onDecrease = () => setCount(count - 1)
-
-    const SumPrice = () => {
-        return (
-            count * parseInt(props.price)
-
-        )
+    const SumPrice = () => count * parseInt(props.price)
+    const pressLike = async () => {
+        if (isApiError) {
+            alert("로그인이 필요합니다")
+            router.push("/login")
+        } else if (data) {
+            const { likelist } = data
+            if (!likelist.includes(props.id)) {
+                likelist.push(props.id)
+            } else {
+                likelist.splice(likelist.indexOf(props.id), 1)
+            }
+            await customAxios.patch("/api/user/info", { likelist })
+        }
     }
-
+    if (isLoading) return <div>로딩중...</div>
+    if (isServerError) {
+        alert("서버 에러가 발생하였습니다")
+        router.push("/")
+    }
     return (
         <>
             <div>
@@ -84,7 +101,7 @@ const Purchase = (props: any) => {
                                 <div className={styles.purchaseButton}>
                                     <button className={styles.button}>구매버튼</button>
                                     <div>
-                                        <button className={styles.etcMenu}>찜하기</button>
+                                        <button className={styles.etcMenu} onClick={pressLike}>찜하기</button>
                                         <button className={styles.etcMenu}>장바구니</button>
                                     </div>
                                 </div>
