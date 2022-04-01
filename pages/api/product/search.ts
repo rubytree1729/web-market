@@ -60,8 +60,9 @@ const handler = logHandler()
                     matchQuery = { "$match": {} }
                 }
                 totalQuery.push(matchQuery)
+                const totalnum = (await Product.aggregate(totalQuery)).length
                 const result = await Product.aggregate(totalQuery).sort(sortQuery).limit(parsedPagenum * maxResults).skip((parsedPagenum - 1) * maxResults)
-                return Ok(res, result)
+                return Ok(res, { data: result, metadata: { totalnum } })
             }
         }
     )
