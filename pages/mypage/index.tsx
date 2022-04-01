@@ -9,7 +9,7 @@ import UserInfo from '../../component/mypage/UserInfo';
 
 export default function MyPage() {
     const router = useRouter()
-    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth", {}, true)
     if (isLoading) return <div>로딩중...</div>
     if (isServerError) {
         alert("서버 에러가 발생하였습니다")

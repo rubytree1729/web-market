@@ -60,7 +60,7 @@ export default function ReadPost(post: any) {
                 <td>{post.date.substr(0, 10).replace(/-/g, ".")}</td>
                 <td>{answer}</td>
                 <td>
-                    <Link href={`/qna/updatepost/${post.qaid}`}>
+                    <Link href={`/qna/updatepost/${post.qaid}`} passHref>
                         <button>수정하기</button>
                     </Link>
                     <button onClick={deleteApi}>삭제</button>

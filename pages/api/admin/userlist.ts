@@ -1,6 +1,8 @@
+import { body, query } from "express-validator";
 import User, { fulladdress, user } from "../../../models/User";
-import { Ok } from "../../../utils/server/commonError";
+import { Err, Ok } from "../../../utils/server/commonError";
 import { adminHandler } from "../../../utils/server/commonHandler";
+import { validateRequest } from "../../../utils/server/middleware";
 
 interface userinfo {
     id: string,
@@ -26,7 +28,20 @@ const handler = adminHandler()
             })
             Ok(res, pre_result)
         })
-
+    .patch(
+        validateRequest([body("ids").isArray(), body("role").isIn(["user", "admin"])]),
+        async (req, res) => {
+            const { ids, role } = req.body
+            const result = await User.updateMany({ id: { $in: ids } }, { $set: { role } })
+            Ok(res, result)
+        })
+    .delete(
+        validateRequest([query("ids").exists()]),
+        async (req, res) => {
+            const { ids } = req.query
+            const result = await User.deleteMany({ id: { $in: ids } })
+            Ok(res, result)
+        })
 
 
 export default handler
