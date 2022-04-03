@@ -12,26 +12,19 @@
     width: 500%;
     margin: 0 auto;
     display: flex;
-    overflow: hidden;
 }
 
 .next_btn {
-
     height: 40px;
     width: 40px;
-    justify-content: center;
-    align-items: center;
     all: unset;
     background-color: coral;
     cursor: pointer;
 }
 
 .prev_btn {
-
     height: 40px;
     width: 40px;
-    justify-content: center;
-    align-items: center;
     all: unset;
     background-color: coral;
     cursor: pointer;
