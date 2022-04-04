@@ -1,14 +1,13 @@
 import { useState, useRef } from "react"
 import DaumPost from "./DaumPost";
 import addressStyle from "../../styles/address/address.module.css"
+import { NextPage } from "next";
 
-export default function AddressInput(props: any) {
+
+const AddressInput: NextPage<{ setAddressFunction: Function, setZonecodeFunction: Function }> = ({ setAddressFunction, setZonecodeFunction }) => {
   const [zonecode, setZonecode] = useState(''); // 우편번호
   const [address, setAddress] = useState(''); // 주소
-  const [addressDetail, setAddressDetail] = useState(''); // 상세주소
-  const [wrongaddressDetail, setwrongAddressDetail] = useState(''); // 상세주소
   const [isOpenPost, setIsOpenPost] = useState(false);
-  const [validationaddress, setvalidationaddress] = useState(false)
 
   const opendaumPost = (event: any) => {
     event.preventDefault()
@@ -16,11 +15,11 @@ export default function AddressInput(props: any) {
   }
 
   const getAddress = (value: any) => {
-    props.setAddressFunction(value)
+    setAddressFunction(value)
     setAddress(value)
   }
   const getZonecode = (value: any) => {
-    props.setZonecodeFunction(value)
+    setZonecodeFunction(value)
     setZonecode(value)
 
   }
@@ -35,8 +34,6 @@ export default function AddressInput(props: any) {
         <button type="button" onClick={opendaumPost} defaultValue="우편번호 찾기">주소검색</button><br />
       </div>
       <input className={addressStyle.input} type="text" id="address" defaultValue={address} placeholder="주소" />
-
-
       {isOpenPost ?
         <div>
           <DaumPost
@@ -47,6 +44,6 @@ export default function AddressInput(props: any) {
 
     </div>
   )
-
 }
 
+export default AddressInput

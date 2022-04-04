@@ -4,7 +4,7 @@ import useCustomSWR from '../../utils/client/useCustumSWR'
 import Layout from '../../component/Layout'
 
 
-const Admin: NextPage = (props) => {
+const Admin: NextPage = () => {
     const router = useRouter()
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
     if (isLoading) return <div>로딩중...</div>

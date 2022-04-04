@@ -1,7 +1,9 @@
 import useCustomSWR from "../../utils/client/useCustumSWR"
 import userinfoStyle from "../../styles/mypage/userinfo.module.css"
+import { NextPage } from "next"
 
-export default function UserInfo() {
+
+const UserInfo: NextPage = () => {
     const { data, isLoading, isError } = useCustomSWR("/api/user/info")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
@@ -31,5 +33,5 @@ export default function UserInfo() {
             </table>
         </div>
     )
-
 }
+export default UserInfo

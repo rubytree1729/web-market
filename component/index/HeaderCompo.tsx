@@ -6,7 +6,9 @@ import glasses from "./icon/free-icon-loupe-709592.png"
 import cart from "./icon/free-icon-shopping-cart-481384.png"
 import usericon from "./icon/free-icon-user-747376.png"
 import Image from 'next/image'
-function HeaderCompo() {
+import { NextPage } from 'next'
+
+const HeaderCompo: NextPage = () => {
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/info")
     if (isLoading) return <div>로딩중...</div>
     if (isServerError) {
@@ -32,11 +34,8 @@ function HeaderCompo() {
                                 <div className={styles.loginBtn}>로그인</div>
                             </Link>
                             <div className={styles.itemBox}> <Image src={cart} /></div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         )
@@ -62,18 +61,14 @@ function HeaderCompo() {
                         <Link href="/api/user/logout" passHref>
                             <div className={styles.loginbtn}>로그아웃</div>
                         </Link>
-
                         <Link href="/mypage" passHref>
                             <div className={styles.loginbtn}>
                                 <Image src={usericon} />
                             </div>
                         </Link>
-
                     </div>
                 </div>
-
             </div>
-
         </div >
     )
 }

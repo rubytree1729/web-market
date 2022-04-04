@@ -1,45 +1,29 @@
+import { NextPage } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { qaBoard } from "../../../models/QABoard"
 import useCustomSWR from "../../../utils/client/useCustumSWR"
 import customAxios from "../../../utils/customAxios"
 
-
-type post = {
-    title: string,
-    ordernumber: string,
-    content: string
-    qacategory: string,
-    date: number,
-    qaid: number,
-    _id: number,
-    answer: boolean,
-    userid: number
-}
-export default function UpdatePost() {
-    const { register, handleSubmit, formState: { errors }, watch } = useForm<post>({
-        mode: "onSubmit"
-    })
+const UpdatePost: NextPage = () => {
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<qaBoard>({ mode: "onSubmit" })
     const router = useRouter()
-    let post: any = {}
+    let targetPost: qaBoard
     const { id } = router.query
-
     const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
-    for (let d of data) {
-        if (d.qaid == id) {
-            post = d
+    for (let post of data) {
+        if (post.qaid == id) {
+            targetPost = post
         }
     }
-
-
-    const onSubmit: SubmitHandler<post> = async (data: post) => {
+    const onSubmit: SubmitHandler<qaBoard> = async data => {
         if (id === undefined) {
             return
         }
         data.qaid = parseInt(id.toString())
-
         alert(JSON.stringify(data, null, 2))
         try {
             const res = await customAxios.put("/api/qaboard", data)
@@ -58,9 +42,6 @@ export default function UpdatePost() {
     }
     // console.log(watch())
 
-
-
-
     return (
         <form onSubmit={handleSubmit(onSubmit)} >
             <div className="container">
@@ -71,7 +52,7 @@ export default function UpdatePost() {
                                 <th>문의유형</th>
                                 <td>
                                     <div className="select">
-                                        <select defaultValue={post.qacategory}  {...register("qacategory", { required: true })}>
+                                        <select defaultValue={targetPost.qacategory}  {...register("qacategory", { required: true })}>
                                             <option value="">문의유형 선택</option>
                                             <option value="교환">교환</option>
                                             <option value="환불">환불</option>
@@ -96,14 +77,14 @@ export default function UpdatePost() {
                             <tr>
                                 <th>제목</th>
                                 <td>
-                                    <input defaultValue={post.title} {...register("title", { required: true })} placeholder="제목을 입력해주세요." />
+                                    <input defaultValue={targetPost.title} {...register("title", { required: true })} placeholder="제목을 입력해주세요." />
                                     {errors.title && alert("제목을 입력해주세요")}
                                 </td>
                             </tr>
                             <tr>
                                 <th>문의내용</th>
                                 <td>
-                                    <textarea defaultValue={post.content} {...register("content", { required: true })} cols={50} rows={10} placeholder="내용을 입력해주세요." />
+                                    <textarea defaultValue={targetPost.content} {...register("content", { required: true })} cols={50} rows={10} placeholder="내용을 입력해주세요." />
                                     {errors.content && alert("내용을 입력해주세요.")}
 
                                 </td>
@@ -121,3 +102,5 @@ export default function UpdatePost() {
         </form >
     )
 }
+
+export default UpdatePost

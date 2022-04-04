@@ -1,8 +1,10 @@
 import FooterCompo from "./index/FooterCompo";
 import HeaderCompo from "./index/HeaderCompo";
 import layoutStyle from "../styles/layout.module.css"
+import { NextPage } from "next";
 
-export default function Layout({ children }) {
+
+const Layout: NextPage = ({ children }) => {
     return (
         <div className={layoutStyle.container}>
             <header className={layoutStyle.header}>
@@ -16,7 +18,8 @@ export default function Layout({ children }) {
             <footer className={layoutStyle.footer}>
                 <FooterCompo></FooterCompo>
             </footer>
-
         </div>
     )
 }
+
+export default Layout

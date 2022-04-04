@@ -1,7 +1,8 @@
+import { NextPage } from "next"
 import { useState } from "react"
 import menutoggleStyle from "../../styles/menutoggle/menutoggle.module.css"
 
-export default function MenuToggle() {
+const MenuToggle: NextPage = () => {
     const [isToggle, setToggle] = useState(false)
     function togglehandler() {
         setToggle(!isToggle)
@@ -33,8 +34,8 @@ export default function MenuToggle() {
                     <div className={menutoggleStyle.menu}>화장품</div>
                 </div>
             </div>
-
-
         </div >
     )
 }
+
+export default MenuToggle
