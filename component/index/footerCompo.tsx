@@ -1,15 +1,13 @@
 import styles from '../../styles/footerCompo.module.css'
 
-function Before(porps:any)
-{
-    return(
-    <div className={styles.before}></div>
+function Before(porps: any) {
+    return (
+        <div className={styles.before}></div>
     )
 }
 
-function footerCompo()
-{
-    return(
+function FooterCompo() {
+    return (
         <footer className={styles.footer}>
             <div>
                 <div className={styles.info}>
@@ -41,4 +39,4 @@ function footerCompo()
         </footer>
     )
 }
-export default footerCompo
+export default FooterCompo

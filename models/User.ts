@@ -16,7 +16,8 @@ export interface user {
     gender: string,
     phonenumber: string,
     fulladdress: fulladdress,
-    registerAt: Date
+    registerAt: Date,
+    likelist: Array<string>
 }
 
 const userSchema = new Schema<user>({
@@ -32,7 +33,8 @@ const userSchema = new Schema<user>({
         address: { type: String, required: true },
         addressdetail: { type: String, required: true }
     },
-    registerAt: { type: Date, default: new Date() }
+    registerAt: { type: Date, default: new Date() },
+    likelist: { type: [Number], default: [] }
 })
 const User = mongoose.models['user'] ? model<user>('user') : model<user>('user', userSchema, 'user')
 export default User
