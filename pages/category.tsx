@@ -1,19 +1,30 @@
 import styles from '../styles/category.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CategoryList from '../component/index/CategoryList'
 import useCustomSWR from '../utils/client/useCustumSWR'
 import Layout from '../component/Layout'
 import { product } from '../models/Product'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
-const Category = () => {
+const Category: NextPage = () => {
+    const router = useRouter()
+    const initCategory1 = router.query.category1
+    const initCategory2 = router.query.category2
     const [category1, setCategory1] = useState("")
     const [category2, setCategory2] = useState("")
-    const categorySWR = useCustomSWR("/api/product/category")
+
+    useEffect(() => {
+        setCategory1(initCategory1?.toString() || "")
+        setCategory2(initCategory2?.toString() || "")
+    }, [initCategory1, initCategory2])
+    const categorySWR = useCustomSWR("/api/product/category", {}, false, true)
     const productSWR = useCustomSWR(`/api/product/search?category1=${category1}&category2=${category2}`)
     if (categorySWR.isLoading) {
         return <div>로딩중</div>
     }
     console.log(categorySWR, productSWR)
+
     const categoryData = categorySWR.data
     const productData: Array<product> = productSWR.data && productSWR.data.data
     const productTotalNum = productSWR.data && productSWR.data.metadata.totalnum
