@@ -23,7 +23,7 @@ const HeaderCompo: NextPage = () => {
                             <MenuToggle />
                         </div>
                         <Link href="/" passHref>
-                            <div className={styles.logo}>사이트명</div>
+                            <div className={styles.logo}></div>
                         </Link>
                         <div className={styles.search}>
                             <input type="text" />
@@ -48,7 +48,7 @@ const HeaderCompo: NextPage = () => {
                         <MenuToggle />
                     </div>
                     <Link href="/" passHref>
-                        <div className={styles.logo}>사이트명</div>
+                        <div className={styles.logo}></div>
                     </Link>
                     <div className={styles.search}>
                         <input type="text" />
