@@ -22,7 +22,7 @@ function errorToJson(err: Error): any {
     }
 }
 
-function commonHandler() {
+function customHandler() {
     return nextConnect({
         onError: (err: Error, req: NextApiRequest, res: NextApiResponse, next: any) => {
             if (err instanceof Error) {
@@ -38,11 +38,11 @@ function commonHandler() {
 }
 
 export function logHandler() {
-    return commonHandler().use(saveLog)
+    return customHandler().use(saveLog)
 }
 
 export function userHandler() {
-    return commonHandler().use(serverAuth, saveLog)
+    return customHandler().use(serverAuth, saveLog)
 }
 
 export function adminHandler() {
