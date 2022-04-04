@@ -2,9 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import carouselStyle from "../../styles/carousel/Carousel.module.css"
 import { images } from "./images"
 import Image from "next/image"
+import { NextPage } from "next"
 
 
-export default function Carousel() {
+const Carousel: NextPage = () => {
     const [currentCarousel, setCurrentCarousel] = useState(0)
     const [pickers, setpickers] = useState<JSX.Element[]>([])
     const carouselRef = useRef(null)
@@ -36,13 +37,7 @@ export default function Carousel() {
         <div className={carouselStyle.container} >
             <div className={carouselStyle.carousel_container} >
                 <div className={carouselStyle.slideimage} ref={carouselRef} >
-                    {images.map((image) => {
-                        return (
-                            <Image
-                                src={image}
-                            />
-                        )
-                    })}
+                    {images.map((image) => <Image src={image} />)}
                 </div>
             </div>
             <button className={carouselStyle.prev_btn} onClick={prevCarousel}>뒤로버튼</button>
@@ -51,3 +46,5 @@ export default function Carousel() {
         </div>
     )
 }
+
+export default Carousel

@@ -3,7 +3,8 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 
 export interface qaBoard {
-    // qaid: number, AutoIncrement로 추가됨
+    //AutoIncrement로 추가됨
+    qaid?: number
     answer?: boolean,
     qacategory: string,
     title: string,
@@ -12,9 +13,8 @@ export interface qaBoard {
     date: Date
 }
 
-//     get: userid = key
 const qaBoardSchema = new Schema<qaBoard>({
-    // qaid: { type: Number, required: true, unique: true },
+    qaid: { type: Number, unique: true },
     answer: { type: Boolean },
     qacategory: { type: String, required: true, }, //"교환", 환불, 배송, 상품문의, 주문취소, 주문/결제, 이벤트
     title: { type: String, required: true },

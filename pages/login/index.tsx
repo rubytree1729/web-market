@@ -8,7 +8,7 @@ import { loginQuery } from '../api/user/login'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 import customAxios from '../../utils/customAxios'
 
-const Home: NextPage = (props) => {
+const Home: NextPage = () => {
   const [id, setId] = useState("")
   const [password, setPassword] = useState("")
   const [persistent, setPersistent] = useState(false)

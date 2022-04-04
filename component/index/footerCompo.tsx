@@ -1,3 +1,4 @@
+import { NextPage } from 'next'
 import styles from '../../styles/FooterCompo.module.css'
 
 function Before(porps: any) {
@@ -6,7 +7,7 @@ function Before(porps: any) {
     )
 }
 
-function FooterCompo() {
+const FooterCompo: NextPage = () => {
     return (
         <footer className={styles.footer}>
             <div>

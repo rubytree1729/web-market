@@ -2,23 +2,12 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import customAxios from "../../utils/customAxios"
 import { useRouter } from "next/router"
 import Link from "next/link"
-type post = {
-    title: string,
-    ordernumber: string,
-    content: string
-    qacategory: string,
-    date: number,
-    qaid: number,
-    _id: number,
-    answer: boolean,
-    userid: number
-}
+import { qaBoard } from "../../models/QABoard"
+
 export default function CreatePost() {
     const router = useRouter()
-    const { register, handleSubmit, formState: { errors }, watch } = useForm<post>({
-        mode: "onSubmit"
-    })
-    const onSubmit: SubmitHandler<post> = async data => {
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<qaBoard>({ mode: "onSubmit" })
+    const onSubmit: SubmitHandler<qaBoard> = async data => {
         alert(JSON.stringify(data, null, 2))
         try {
             const res = await customAxios.post("/api/qaboard", data)
@@ -28,12 +17,10 @@ export default function CreatePost() {
             } else {
                 alert('접수가 실패했습니다.')
             }
-
         } catch (err) {
             console.log(err)
             alert('접수에 실패했습니다.')
         }
-
     }
     console.log(watch())
     console.log(register)

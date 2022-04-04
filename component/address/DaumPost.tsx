@@ -1,8 +1,9 @@
+import { NextPage } from 'next';
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
 
-const DaumPost = (props: any) => {
+const DaumPost: NextPage<{ setAddressFunction: Function, setZonecodeFunction: Function }> = ({ setAddressFunction, setZonecodeFunction }) => {
   const onCompletePost = (data: any) => {
     let fullAddress = data.address;
     let referencesAddress = '';
@@ -17,9 +18,8 @@ const DaumPost = (props: any) => {
       }
       fullAddress += referencesAddress !== '' ? ` (${referencesAddress})` : '';
     }
-
-    props.setAddressFunction(fullAddress)
-    props.setZonecodeFunction(zonecode)
+    setAddressFunction(fullAddress)
+    setZonecodeFunction(zonecode)
   };
 
   return (
