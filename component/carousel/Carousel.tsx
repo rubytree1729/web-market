@@ -27,57 +27,6 @@ const Carousel: NextPage = () => {
     }, [currentCarousel])
 
 
-    // function useInterval(callback, delay) {
-    //     const savedCallback = useRef();
-    //     useEffect(() => {
-    //         carouselRef.current = callback
-    //     }, [callback])
-    //     useEffect(() => {
-    //         function tick() {
-    //             carouselRef.current()
-    //         }
-    //         if (delay !== null) {
-    //             let id = setInterval(tick, delay)
-    //             return () => clearInterval(id)
-    //         }
-    //     }, [delay])
-    // }
-    //     function Slider() {
-    //         useInterval((, 1000) => {
-    //             setCurrentCarousel(currentCarousel => currentCarousel + 1)
-    //     })
-    // }
-    function setSlides() {
-        let addedLast = []
-        var index = 0
-        while (index < 1) {
-            addedLast.push(images[index % totalCarousel])
-            index++
-        }
-        return [...images, ...addedLast]
-    }
-    function getItemIndex(index) {
-        index -= 1
-        if (index < 0) {
-            index += itemSise
-        } else if (index >= itemSize) {
-            index -= itemSize
-        }
-        return index
-    }
-
-    {
-        images.map((slide, slideIndex) => {
-            const itemIndex = getItemIndex(slideIndex)
-            return (
-                <div key={slideIndex}>
-                    className={`slder-item ${currentCarousel === slideIndex ? 'current-slide' : ''}`}
-                </div>
-            )
-        })
-    }
-
-
     useEffect(() => {
         carouselRef.current.style.transition = 'all 0.5s ease-in-out';
         carouselRef.current.style.transform = `translateX(${(-100 / totalCarousel) * (currentCarousel)}%)`
