@@ -1,7 +1,4 @@
-import Link from "next/link"
-import PhoneNumberChange from "../phonenumber/PhonenumberChange"
 import useCustomSWR from "../../utils/client/useCustumSWR"
-import customAxios from "../../utils/customAxios"
 import userinfoStyle from "../../styles/mypage/userinfo.module.css"
 
 export default function UserInfo() {

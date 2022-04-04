@@ -1,5 +1,5 @@
 import styles from '../styles/payment.module.css'
-import Layout from '../component/layout'
+import Layout from '../component/Layout'
 
 function Before(porps: any) {
     return (
