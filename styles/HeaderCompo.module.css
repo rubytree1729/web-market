@@ -33,13 +33,12 @@
     top: 10px;
     right: 10px;
     display: flex;
-    background-image: url("../public/icon/free-icon-loupe-709592.png");
 
 }
 
 .loginbtn {
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
 
 }
 
@@ -69,7 +68,24 @@
 }
 
 .itemBox {
-    height: 50px;
-    width: 50px;
+    margin: 5px;
+    all: unset;
+    background-image: url("../public/icon/free-icon-shopping-cart-481384.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
 
+}
+
+.mypagebtn {
+    margin: 5px;
+    all: unset;
+    background-image: url("../public/icon/free-icon-user-747376.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
 }
