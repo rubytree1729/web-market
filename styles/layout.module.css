@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: relative;
+    top: 0;
+}
+
+.main {
+    height: auto;
+    min-height: 100%;
+}
+
+
+.footer {
+    position: relative;
+    top: 100%;
+
+}
