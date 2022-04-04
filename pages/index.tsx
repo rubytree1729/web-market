@@ -1,7 +1,18 @@
 import type { NextPage } from 'next'
-import MainBody from '../component/index/mainBody'
 import useCustomSWR from '../utils/client/useCustumSWR'
-import Layout from '../component/layout'
+import Layout from '../component/Layout'
+import Carousel from '../component/carousel/Carousel'
+import ItemList from '../component/index/ItemList'
+import styles from '../styles/index.module.css'
+
+
+function divideBy(data: Array<any>, n: number) {
+  const result = []
+  for (let i = 0; n * (i + 1) < data.length; i++) {
+    result.push(data.slice(n * i, n * (i + 1)))
+  }
+  return result
+}
 
 
 const Home: NextPage = () => {
@@ -13,9 +24,17 @@ const Home: NextPage = () => {
   if (!data) {
     alert("데이터베이스 에러가 발생하였습니다")
   }
+  const dividedData = divideBy(data, 2)
   return (
     <Layout>
-      <MainBody {...data}></MainBody>
+      <div className={styles.main}>
+        <Carousel></Carousel>
+        <div className={styles.mainList}>
+          <div className={styles.itemList}>
+            {dividedData.map(twoproducts => <ItemList data={twoproducts}></ItemList>)}
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }

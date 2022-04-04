@@ -1,7 +1,6 @@
-import { REPL_MODE_STRICT } from 'repl'
-import styles from '../../styles/categoryList.module.css'
+import styles from '../../styles/CategoryList.module.css'
 
-function categoryList(props: any) {
+function CategoryList(props: any) {
     return (
         <div>
             <div className={styles.container}>
@@ -21,4 +20,4 @@ function categoryList(props: any) {
     )
 }
 
-export default categoryList
+export default CategoryList

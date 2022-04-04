@@ -1,10 +1,10 @@
-import styles from '../styles/purchaseMain.module.css'
+import styles from '../styles/purchase.module.css'
 import { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import customAxios from '../utils/customAxios'
 import { useRouter } from 'next/router'
 import useCustomSWR from '../utils/client/useCustumSWR'
-import Layout from '../component/layout'
+import Layout from '../component/Layout'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const res = await customAxios.get(`/api/product/search?id=${context.query.id}`)

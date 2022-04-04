@@ -3,7 +3,7 @@ import mypageStyle from "../../styles/mypage/mypage.module.css"
 import SideBar from "../../component/mypage/Sidebar";
 import Orderhistory from "../../component/mypage/OrderHistory";
 import useCustomSWR from "../../utils/client/useCustumSWR";
-import Layout from "../../component/layout";
+import Layout from "../../component/Layout";
 
 export default function MyPage() {
     const router = useRouter();

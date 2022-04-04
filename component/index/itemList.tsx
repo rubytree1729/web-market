@@ -1,16 +1,18 @@
+import { NextPage } from 'next'
 import Link from 'next/link'
-import styles from '../../styles/itemList.module.css'
+import { product } from '../../models/Product'
+import styles from '../../styles/ItemList.module.css'
 
-function Item(props: any) {
+const Item: NextPage<{ data: product }> = ({ data }) => {
     return (
         <div>
             <div>
-                <Link href={`/purchase?id=${props.id}`} passHref>
+                <Link href={`/purchase?id=${data.id}`} passHref>
                     <div className={styles.lList}>
-                        <img className={styles.imageUrl} src={props.imageUrl}></img>
+                        <img className={styles.imageUrl} src={data.imageUrl}></img>
                         <div className={styles.info}>
-                            <div className={styles.name}>{props.name}</div>
-                            <div className={styles.price}>{props.price}원</div>
+                            <div className={styles.name}>{data.name}</div>
+                            <div className={styles.price}>{data.price}원</div>
                         </div>
                     </div>
                 </Link>
@@ -19,18 +21,14 @@ function Item(props: any) {
     )
 }
 
-
-function ItemList(props: any) {
+const ItemList: NextPage<{ data: Array<product> }> = ({ data }) => {
     return (
-
         <div className={styles.style}>
-
             <div>
-                <div className={styles.category}>{props[0].category1}</div>
+                <div className={styles.category}>{data[0].category1}</div>
             </div>
-
             <div className={styles.item}>
-                {Object.values(props).map(product => <Item {...product}></Item>)}
+                {data.map(product => <Item data={product}></Item>)}
             </div>
         </div>
     )

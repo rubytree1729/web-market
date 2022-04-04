@@ -1,8 +1,8 @@
 import styles from '../styles/category.module.css'
 import { useState } from 'react'
-import CategoryList from '../component/index/categoryList'
+import CategoryList from '../component/index/CategoryList'
 import useCustomSWR from '../utils/client/useCustumSWR'
-import Layout from '../component/layout'
+import Layout from '../component/Layout'
 
 const Category = () => {
     const [category1, setCategory1] = useState("")

@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
 
-
 const DaumPost = (props: any) => {
-
-
-
   const onCompletePost = (data: any) => {
     let fullAddress = data.address;
     let referencesAddress = '';
@@ -24,8 +20,6 @@ const DaumPost = (props: any) => {
 
     props.setAddressFunction(fullAddress)
     props.setZonecodeFunction(zonecode)
-
-
   };
 
   return (
