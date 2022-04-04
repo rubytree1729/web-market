@@ -31,7 +31,7 @@ const Home: NextPage = () => {
         <Carousel></Carousel>
         <div className={styles.mainList}>
           <div className={styles.itemList}>
-            {dividedData.map(twoproducts => <ItemList data={twoproducts}></ItemList>)}
+            {dividedData && dividedData.map(products => <ItemList key={products[0].id} data={products}></ItemList>)}
           </div>
         </div>
       </div>

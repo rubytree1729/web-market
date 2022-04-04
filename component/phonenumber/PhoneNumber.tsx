@@ -2,10 +2,10 @@ import { useState, useRef } from 'react'
 import customAxios from '../../utils/customAxios'
 import AuthTimer from './AuthTimer'
 import phoneNumberStyle from "../../styles/phoneNumber.module.css"
+import { NextPage } from 'next'
 
-function PhoneNumber() {
+const PhoneNumber: NextPage = () => {
     const checkNum = /[0-9]/
-
     const [PhoneNumber, setPhoneNumber] = useState("")
     const [WrongPhoneNumber, setwrongPhoneNumber] = useState("")
     const [Authnumber, setAuthnumber] = useState("")

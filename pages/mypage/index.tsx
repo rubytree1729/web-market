@@ -4,8 +4,9 @@ import useCustomSWR from "../../utils/client/useCustumSWR";
 import SideBar from '../../component/mypage/Sidebar';
 import UserInfo from '../../component/mypage/UserInfo';
 import Layout from '../../component/Layout';
+import { NextPage } from 'next';
 
-export default function MyPage() {
+const Mypage: NextPage = () => {
     const router = useRouter()
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth", {}, true)
     if (isLoading) return <div>로딩중...</div>
@@ -21,7 +22,7 @@ export default function MyPage() {
         <Layout>
             <div className={mypageStyle.body}>
                 <div className="sidebar">
-                    <SideBar prop="userinfo" />
+                    <SideBar toggle="userinfo" />
                 </div>
                 <div className={mypageStyle.content}>
                     <UserInfo />
@@ -30,3 +31,5 @@ export default function MyPage() {
         </Layout>
     )
 }
+
+export default Mypage

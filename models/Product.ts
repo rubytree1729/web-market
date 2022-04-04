@@ -13,7 +13,7 @@ export interface product {
     mallName: string,
     maker: string,
     brand: string,
-    viewcount: number,
+    viewcount?: number,
 }
 const productSchema = new Schema<product>({
     id: { type: Number, required: true, unique: true },
