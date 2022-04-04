@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import HeaderCompo from '../../component/index/headerCompo'
-import FooterCompo from '../../component/index/footerCompo'
+import HeaderCompo from '../../component/index/HeaderCompo'
+import FooterCompo from '../../component/index/FooterCompo'
 import { useRouter } from 'next/router'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 

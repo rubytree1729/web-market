@@ -1,6 +1,5 @@
 import postrowStyle from "../../styles/post/postrow.module.css"
 import { useState } from "react"
-import postrow from "../../styles/post/postrow.module.css"
 import customAxios from "../../utils/customAxios"
 import Link from "next/link"
 type post = {

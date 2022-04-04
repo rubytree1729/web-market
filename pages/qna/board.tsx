@@ -1,5 +1,3 @@
-import useSWR from "swr"
-import axios from "axios"
 import ReadPost from "./readpost"
 import useCustomSWR from "../../utils/client/useCustumSWR"
 type post = {
