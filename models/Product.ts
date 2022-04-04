@@ -25,9 +25,9 @@ const productSchema = new Schema<product>({
     category4: { type: String },
     imageUrl: { type: String },
     description: { type: String, trim: true },
-    mallName: { type: String },
-    maker: String,
-    brand: String,
+    mallName: { type: String, required: true },
+    maker: { type: String, required: true },
+    brand: { type: String, required: true },
     viewcount: { type: Number, default: 0 }
 })
 const Product = mongoose.models['product'] ? model<product>('product') : model<product>('product', productSchema, 'product')
