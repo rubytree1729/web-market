@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import useCustomSWR from "../../../utils/client/useCustumSWR"
 import customAxios from "../../../utils/customAxios"

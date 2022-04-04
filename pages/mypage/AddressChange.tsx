@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { useRouter } from 'next/router'
 import mypageStyle from "../../styles/mypage/mypage.module.css"
-import HeaderCompo from "../../component/index/headerCompo";
-import SideBar from "../../component/mypage/SideBar";
+import HeaderCompo from "../../component/index/HeaderCompo";
+import SideBar from "../../component/mypage/Sidebar";
 import Addresschange from "../../component/mypage/AddressChange";
 import useCustomSWR from "../../utils/client/useCustumSWR";
+import Layout from '../../component/layout';
 
 export default function MyPage() {
     const router = useRouter();
@@ -19,11 +19,7 @@ export default function MyPage() {
         router.push("/login")
     }
     return (
-
-        <div className={mypageStyle.container}>
-            <div className="header">
-                <HeaderCompo />
-            </div>
+        <Layout>
             <div className={mypageStyle.body}>
                 <div className="sidebar">
                     <SideBar prop="addresschange" />
@@ -33,9 +29,6 @@ export default function MyPage() {
                 </div>
 
             </div>
-            <div className="footer">
-
-            </div>
-        </div>
+        </Layout>
     )
 }

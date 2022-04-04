@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react"
 import Board from "./board"
 import Link from "next/link"
-import useSWR from "swr"
 import { useRouter } from "next/router"
 import useCustomSWR from "../../utils/client/useCustumSWR"
 
