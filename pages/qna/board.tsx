@@ -1,29 +1,21 @@
-import ReadPost from "./readpost"
+import { NextPage } from "next"
+import ReadPost from "../../component/qna/ReadPost"
+import { qaBoard } from "../../models/QABoard"
 import useCustomSWR from "../../utils/client/useCustumSWR"
-type post = {
-    title: string,
-    ordernumber: string,
-    content: string
-    qacategory: string,
-    date: number,
-    qaid: number,
-    _id: number,
-    answer: boolean,
-    userid: number
-}
-export default function Board() {
-    let postlist: any = []
+
+const Board: NextPage = () => {
+    let postlist: Array<qaBoard> = []
     const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
     for (let post of data) {
         postlist.unshift(post)
     }
+
     return (
         <form >
             <div className="container">
                 <div className="header">
-
                 </div>
                 <div className="body">
                     <div className="t_body">
@@ -39,19 +31,17 @@ export default function Board() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {postlist && postlist.map((post: post) =>
-                                    <ReadPost key={post.qaid}{...post} />)}
+                                {postlist && postlist.map(post =>
+                                    <ReadPost key={post.qaid} data={post} />)}
                             </tbody>
                         </table>
                     </div>
-
                 </div>
                 <div className="footer">
-
                 </div>
             </div>
         </form>
-
     )
-
 }
+
+export default Board

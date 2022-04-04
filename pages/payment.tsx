@@ -1,5 +1,6 @@
 import styles from '../styles/payment.module.css'
 import Layout from '../component/Layout'
+import { NextPage } from 'next'
 
 function Before(porps: any) {
     return (
@@ -7,7 +8,7 @@ function Before(porps: any) {
     )
 }
 
-const payment = () => {
+const payment: NextPage = () => {
     return (
         <Layout>
             <div className={styles.container}>
@@ -53,7 +54,6 @@ const payment = () => {
                             <div>수령인</div>
                             <input></input>
                         </div>
-
                         <div>
                             <div>연락처</div>
                             <input></input>
@@ -96,11 +96,9 @@ const payment = () => {
                         </div>
                     </div>
                 </div>
-
                 <div className={styles.btn}>
                     <button className={styles.paymentBtn}>결제하기</button>
                 </div>
-
             </div>
         </Layout>
     )

@@ -2,9 +2,9 @@ import Board from "./board"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import useCustomSWR from "../../utils/client/useCustumSWR"
+import { NextPage } from "next"
 
-
-export default function QnA() {
+const QnA: NextPage = () => {
     const router = useRouter()
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
     if (isLoading) return <div>로딩중...</div>
@@ -19,7 +19,6 @@ export default function QnA() {
     return (
         <div className="container">
             <div className="header">
-
             </div>
             <div className="body">
                 <Board></Board>
@@ -29,9 +28,9 @@ export default function QnA() {
                 </Link>
             </div>
             <div className="footer">
-
             </div>
         </div>
     )
-
 }
+
+export default QnA

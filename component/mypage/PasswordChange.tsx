@@ -1,5 +1,6 @@
+import { NextPage } from "next";
 import Link from "next/link";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import passwordChangeStyle from "../../styles/mypage/passwordChange.module.css"
@@ -12,7 +13,7 @@ interface passwordInput {
     passwordConfirm: string
 }
 
-export default function App() {
+const PasswordChange: NextPage = () => {
     const { register, formState: { errors }, handleSubmit, watch } = useForm<passwordInput>({
         mode: "onBlur"
     });
@@ -37,8 +38,6 @@ export default function App() {
     }
 
     return (
-
-
         <form onSubmit={handleSubmit(onSubmit)}>
             <h3>비밀번호 변경</h3>
             <div className={passwordChangeStyle.content}>
@@ -84,3 +83,5 @@ export default function App() {
         </form>
     );
 }
+
+export default PasswordChange

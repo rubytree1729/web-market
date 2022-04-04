@@ -4,9 +4,10 @@ import AuthTimer from "../../component/phonenumber/AuthTimer"
 import { useRouter } from "next/router"
 import customAxios from "../../utils/customAxios"
 import signupStyle from "../../styles/signup/signup.module.css"
+import { NextPage } from "next"
 
 
-export default function SignUp() {
+const SignUp: NextPage = () => {
   const [Id, setId] = useState("")
   const [WrongId, setWrongId] = useState("")
   const [idCheckApi, setidCheckApi] = useState(false)
@@ -409,4 +410,6 @@ export default function SignUp() {
 
   )
 }
+
+export default SignUp
 

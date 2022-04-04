@@ -1,9 +1,11 @@
-import axios from "axios"
+import customAxios from "../../utils/customAxios"
+import { NextPage } from "next"
 
-export default function Orderhistory() {
+
+const Orderhistory: NextPage = () => {
     async function getOrder() {
         try {
-            const request = await axios.get("")
+            const request = await customAxios.get("")
 
             return request.data
 
@@ -12,9 +14,7 @@ export default function Orderhistory() {
         }
     }
 
-
     const dateInquire = () => {
-
     }
     return (
         <div className="content">
@@ -35,3 +35,5 @@ export default function Orderhistory() {
         </div>
     )
 }
+
+export default Orderhistory

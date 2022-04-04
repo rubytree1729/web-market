@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 import mypageStyle from "../../styles/mypage/mypage.module.css"
-import HeaderCompo from "../../component/index/HeaderCompo";
 import SideBar from "../../component/mypage/Sidebar";
-import Addresschange from "../../component/mypage/AddressChange";
+import AddressChange from "../../component/mypage/AddressChange";
 import useCustomSWR from "../../utils/client/useCustumSWR";
 import Layout from '../../component/Layout';
+import { NextPage } from 'next';
 
-export default function MyPage() {
+const Addresschange: NextPage = () => {
     const router = useRouter();
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/auth")
     if (isLoading) return <div>로딩중...</div>
@@ -22,13 +22,15 @@ export default function MyPage() {
         <Layout>
             <div className={mypageStyle.body}>
                 <div className="sidebar">
-                    <SideBar prop="addresschange" />
+                    <SideBar toggle="addresschange" />
                 </div>
                 <div className={mypageStyle.content}>
-                    <Addresschange />
+                    <AddressChange />
                 </div>
 
             </div>
         </Layout>
     )
 }
+
+export default Addresschange

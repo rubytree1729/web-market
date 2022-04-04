@@ -3,8 +3,9 @@ import AddressInput from "../../component/address/AddressInput"
 import { useState, useRef } from "react"
 import addressStyle from "../../styles/address/address.module.css"
 import { useRouter } from "next/router";
+import { NextPage } from "next";
 
-export default function Addresschange() {
+const Addresschange: NextPage = () => {
     const [Zonecode, setZonecode] = useState(''); // 우편번호
     const [Address, setAddress] = useState(''); // 주소
     const [AddressDetail, setAddressDetail] = useState(''); // 상세주소
@@ -69,3 +70,5 @@ export default function Addresschange() {
         </div>
     )
 }
+
+export default Addresschange

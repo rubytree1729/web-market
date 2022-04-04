@@ -3,6 +3,7 @@ import { useState } from 'react'
 import CategoryList from '../component/index/CategoryList'
 import useCustomSWR from '../utils/client/useCustumSWR'
 import Layout from '../component/Layout'
+import { product } from '../models/Product'
 
 const Category = () => {
     const [category1, setCategory1] = useState("")
@@ -14,7 +15,7 @@ const Category = () => {
     }
     console.log(categorySWR, productSWR)
     const categoryData = categorySWR.data
-    const productData = productSWR.data && productSWR.data.data
+    const productData: Array<product> = productSWR.data && productSWR.data.data
     const productTotalNum = productSWR.data && productSWR.data.metadata.totalnum
 
     function clickCategory1(e: any) {
@@ -47,13 +48,13 @@ const Category = () => {
                         <div className={styles.categoryTag}>
                             <div className={styles.categoryList}>카테고리칸</div>
                             <div className={styles.categoryFilter}>
-                                {category1Data && category1Data.map((category: string) => <div onClick={clickCategory1} className={styles.categoryBig}>{category}</div>)}
+                                {category1Data && category1Data.map(category1 => <div key={category1} onClick={clickCategory1} className={styles.categoryBig}>{category1}</div>)}
                             </div>
                         </div>
                         <div className={styles.smallCategoryTag}>
                             <div className={styles.smallCategory}>소분류칸</div>
                             <div className={styles.smallCategoryFilter}>
-                                {category2Data && category2Data.map((category: string) => <div onClick={clickCategory2} className={styles.categorySmall}>{category}</div>)}
+                                {category2Data && category2Data.map(category2 => <div key={category2} onClick={clickCategory2} className={styles.categorySmall}>{category2}</div>)}
                             </div>
                         </div>
                         <div className={styles.priceRankTag}>
@@ -73,7 +74,7 @@ const Category = () => {
                             {/* -------------------------제품리스트---------------------- */}
                             <div className={styles.itemList}>
                                 <div className={styles.priceList}>
-                                    {productData && productData.map((product: any) => <CategoryList key={product.id} {...product} />)}
+                                    {productData && productData.map(product => <CategoryList key={product.id} data={product} />)}
                                 </div>
                             </div>
                             {/* --------------------------랭킹?--------------------------- */}
