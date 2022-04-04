@@ -23,7 +23,7 @@ const Category: NextPage = () => {
     if (categorySWR.isLoading) {
         return <div>로딩중</div>
     }
-    console.log(categorySWR, productSWR)
+    // console.log(categorySWR, productSWR)
 
     const categoryData = categorySWR.data
     const productData: Array<product> = productSWR.data && productSWR.data.data
@@ -48,8 +48,8 @@ const Category: NextPage = () => {
     })
     category2Data.sort()
 
-    console.log(categoryData, productData)
-    console.log(productTotalNum)
+    // console.log(categoryData, productData)
+    // console.log(productTotalNum)
 
     return (
         <Layout>

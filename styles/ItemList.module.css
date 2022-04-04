@@ -24,6 +24,7 @@
     justify-content: space-evenly;
     list-style: none;
     padding: 10px 0 0 10px;
+
 }
 
 .imageUrl {
@@ -41,6 +42,7 @@
 .lList {
     width: 185px;
     margin: 6px 0 0 4px;
+    cursor: pointer;
 }
 
 .name {
