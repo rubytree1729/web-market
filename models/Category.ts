@@ -5,8 +5,8 @@ export interface category {
     category2: Array<string>
 }
 const categorySchema = new Schema<category>({
-    category1: String,
-    category2: [String]
+    category1: { type: String, required: true },
+    category2: { type: [String], required: true }
 })
 
 const Category = mongoose.models['category'] ? model<category>('category') : model<category>('category', categorySchema, 'category')

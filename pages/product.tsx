@@ -1,4 +1,4 @@
-import styles from '../styles/payment.module.css'
+import styles from '../styles/product.module.css'
 import Layout from '../component/Layout'
 import { NextPage } from 'next'
 

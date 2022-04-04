@@ -17,51 +17,56 @@ async function sendByCategory(maxResults: number) {
 
 
 const handler = logHandler()
-
     /* 입력: 
+    id: 상품 번호
+    keyword: 검색어
+    category1: 카테고리1
+    category2: 카테고리2    
+    byCategory: [true, false] 카테고리별로 보여줄지 결정
     sort: ["viewcount", "highprice", "lowprice"]
     display: 보여줄 물품 갯수
-    byCategory: [true, false] 카테고리별로 보여줄지 결정
-    category1: 카테고리1
-    category2: 카테고리2
     pagenum: 페이지 번호
     */
     .get(
         validateRequest([]),
         async (req, res) => {
-            let { sort, display, byCategory, id, category1, category2, pagenum } = req.query
-            const totalQuery: Array<any> = []
-            let sortQuery
-            switch (sort) {
-                case "viewcount":
-                    sortQuery = "-viewcount"
-                    break
-                case "lowprice":
-                    sortQuery = "price"
-                    break
-                default:
-                    sortQuery = "-price"
-            }
+            console.log(req.url, req.method)
+            let { id, keyword, category1, category2, byCategory, sort, display, pagenum } = req.query
             const maxResults = Math.min(100, parseInt(display ? display.toString() : "10"))
-            const parsedPagenum = pagenum ? parseInt(pagenum.toString()) : 1
             if (byCategory === "true") {
                 const totalResult = await sendByCategory(maxResults)
                 return Ok(res, totalResult)
             } else {
-                const parsedId = id ? parseInt(id.toString()) : id
-                let matchQuery
-                if (parsedId) {
-                    matchQuery = { "$match": { id: parsedId } }
-                } else if (category2) {
-                    matchQuery = { "$match": { category2 } }
-                } else if (category1) {
-                    matchQuery = { "$match": { category1 } }
-                } else {
-                    matchQuery = { "$match": {} }
+                const totalQuery: Array<any> = []
+                totalQuery.push(
+                    { "$match": {} },
+                )
+                if (keyword) {
+                    totalQuery.push({ "$match": { name: new RegExp(keyword?.toString(), "i") } })
                 }
-                totalQuery.push(matchQuery)
-                const totalnum = (await Product.aggregate(totalQuery)).length
+                if (id) {
+                    totalQuery.push({ "$match": { id: parseInt(id?.toString()) } })
+                }
+                if (category1) {
+                    totalQuery.push({ "$match": { category1 } })
+                }
+                if (category2) {
+                    totalQuery.push({ "$match": { category2 } })
+                }
+                let sortQuery: string
+                switch (sort) {
+                    case "viewcount":
+                        sortQuery = "-viewcount"
+                        break
+                    case "lowprice":
+                        sortQuery = "price"
+                        break
+                    default:
+                        sortQuery = "-price"
+                }
+                const parsedPagenum = pagenum ? parseInt(pagenum.toString()) : 1
                 const result = await Product.aggregate(totalQuery).sort(sortQuery).limit(parsedPagenum * maxResults).skip((parsedPagenum - 1) * maxResults)
+                const totalnum = (await Product.aggregate(totalQuery)).length
                 return Ok(res, { data: result, metadata: { totalnum } })
             }
         }

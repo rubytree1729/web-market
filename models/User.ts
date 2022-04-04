@@ -10,14 +10,14 @@ export interface fulladdress {
 export interface user {
     id: string,
     password: string,
-    role: string,
+    role?: string,
     name: string,
     email: string,
     gender: string,
     phonenumber: string,
     fulladdress: fulladdress,
-    registerAt: Date,
-    likelist: Array<string>
+    registerAt?: Date,
+    likelist?: Array<string>
 }
 
 const userSchema = new Schema<user>({
