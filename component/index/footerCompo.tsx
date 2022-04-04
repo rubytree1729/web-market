@@ -1,4 +1,4 @@
-import styles from '../../styles/footerCompo.module.css'
+import styles from '../../styles/FooterCompo.module.css'
 
 function Before(porps: any) {
     return (

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 import { useState } from 'react'
 import customAxios from '../../utils/customAxios'
-import Layout from '../../component/layout'
+import Layout from '../../component/Layout'
 
 
 const Userlist: NextPage = () => {
@@ -81,7 +81,7 @@ const Userlist: NextPage = () => {
     return (
         <Layout>
             <div className='container'>
-                <CheckTable column={column} setCheckedList={setCheckedUserList} index={"id"}>{data}</CheckTable>
+                <CheckTable column={column} setCheckedList={setCheckedUserList} index={"id"} data={data}></CheckTable>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button type="button" className="btn btn-outline-success" onClick={grantPermission}>권한부여</button>
                     <button type="button" className="btn btn-outline-warning" onClick={revokePermission}>권한해제</button>

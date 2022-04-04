@@ -4,7 +4,7 @@ import HeaderCompo from "../../component/index/HeaderCompo";
 import SideBar from "../../component/mypage/Sidebar";
 import Addresschange from "../../component/mypage/AddressChange";
 import useCustomSWR from "../../utils/client/useCustumSWR";
-import Layout from '../../component/layout';
+import Layout from '../../component/Layout';
 
 export default function MyPage() {
     const router = useRouter();

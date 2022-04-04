@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
-import 'bootstrap/dist/css/bootstrap.css'
 import useCustomSWR from '../../utils/client/useCustumSWR'
-import Layout from '../../component/layout'
+import Layout from '../../component/Layout'
 
 
 const Productlist: NextPage = (props) => {

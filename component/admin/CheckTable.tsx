@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import React, { EventHandler, MouseEventHandler, useState } from 'react'
 
 
-const CheckTable: NextPage<{ children: Array<any>, column: any, setCheckedList: Function, index: string }> = ({ children, column, setCheckedList, index }) => {
+const CheckTable: NextPage<{ data: Array<any>, column: any, setCheckedList: Function, index: string }> = ({ data, column, setCheckedList, index }) => {
     function changeCheckedList(event: React.MouseEvent<HTMLInputElement, MouseEvent>) {
         const element = event.currentTarget.value
         const isChecked = event.currentTarget.checked
@@ -20,7 +20,7 @@ const CheckTable: NextPage<{ children: Array<any>, column: any, setCheckedList: 
             })
         }
     }
-    console.log(children)
+    console.log(data)
     return (
         <div className='table-responsive'>
             <table className="table align-middle text-center table-striped table-hover table-bordered">
@@ -31,7 +31,7 @@ const CheckTable: NextPage<{ children: Array<any>, column: any, setCheckedList: 
                     </tr>
                 </thead>
                 <tbody>
-                    {children.map((rows: any) =>
+                    {data.map((rows: any) =>
                         <tr>
                             {Object.values(rows).map((row: any) => <td>{row}</td>)}
                             <td>
