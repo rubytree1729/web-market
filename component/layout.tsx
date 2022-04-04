@@ -1,16 +1,19 @@
-import HeaderCompo from "./index/HeaderCompo"
-import FooterCompo from "./index/FooterCompo"
+import FooterCompo from "./index/FooterCompo";
+import HeaderCompo from "./index/HeaderCompo";
+import layoutStyle from "../styles/layout.module.css"
 
 export default function Layout({ children }) {
     return (
-        <div>
-            <header>
+        <div className={layoutStyle.container}>
+            <header className={layoutStyle.header}>
                 <HeaderCompo></HeaderCompo>
             </header>
 
-            <main>{children}</main>
+            <main className={layoutStyle.main}>
+                {children}
+            </main>
 
-            <footer>
+            <footer className={layoutStyle.footer}>
                 <FooterCompo></FooterCompo>
             </footer>
 

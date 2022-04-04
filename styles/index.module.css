@@ -8,18 +8,16 @@
 }
 
 .mainList {
+    width: 1020px;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
 }
 
-
-
 .itemList {
-    width: 1000px;
-    height: 1000px;
     display: flex;
+    height: auto;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    align-content: space-evenly;
     border: 1px solid black;
 }

@@ -16,7 +16,7 @@ function divideBy(data: Array<any>, n: number) {
 
 
 const Home: NextPage = () => {
-  const { data, isLoading, isServerError } = useCustomSWR("/api/product/search?display=18&byCategory=true")
+  const { data, isLoading, isServerError } = useCustomSWR("/api/product/search?display=72&byCategory=true")
   if (isLoading) return <div>로딩중...</div>
   if (isServerError) {
     alert("서버 에러가 발생하였습니다")
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   if (!data) {
     alert("데이터베이스 에러가 발생하였습니다")
   }
-  const dividedData = divideBy(data, 2)
+  const dividedData = divideBy(data, 8)
   return (
     <Layout>
       <div className={styles.main}>

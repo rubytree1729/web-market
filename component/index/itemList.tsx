@@ -11,13 +11,15 @@ const Item: NextPage<{ data: product }> = ({ data }) => {
                     <div className={styles.lList}>
                         <img className={styles.imageUrl} src={data.imageUrl}></img>
                         <div className={styles.info}>
-                            <div className={styles.name}>{data.name}</div>
-                            <div className={styles.price}>{data.price}원</div>
+                            <div className={styles.name}>{data.name.replaceAll(/<\/*b>/gi, "")}</div>
+                            <div className={styles.price}>
+                                <strong>{data.price}</strong>원
+                            </div>
                         </div>
                     </div>
                 </Link>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

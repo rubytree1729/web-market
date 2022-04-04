@@ -1,5 +1,4 @@
-.before
-{
+.before {
     display: inline-block;
     width: 1px;
     height: 11px;
@@ -9,9 +8,9 @@
     content: '';
 }
 
-.footer
-{
-    display: flex;
+.footer {
+    background-color: aliceblue;
+    display: block;
     flex: 1;
     padding: 2rem 0;
     border-top: 1px solid #eaeaea;
@@ -20,8 +19,7 @@
     text-align: center;
 }
 
-.info
-{
+.info {
     width: 80%;
     display: inline-flex;
     flex-wrap: wrap;
@@ -29,13 +27,11 @@
     margin-bottom: 16px;
 }
 
-.marketing
-{
+.marketing {
     text-align: center;
 }
 
-.address
-{
+.address {
     width: 80%;
     display: inline-flex;
     flex-wrap: wrap;
@@ -43,7 +39,6 @@
     margin-bottom: 10px;
 }
 
-.logo
-{
+.logo {
     border: 1px solid black;
 }
