@@ -8,16 +8,27 @@
 }
 
 .mainList {
-    width: 1020px;
+    width: 1280px;
     height: auto;
     display: flex;
     flex-wrap: wrap;
 }
 
 .itemList {
+    margin-top: 15px;
     display: flex;
     height: auto;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    border: 1px solid black;
+    border: 1px solid #fff;
+}
+
+.recommendtitle {
+    width: 1020px;
+    margin-top: 60px;
+}
+
+.recommendtitle h3 {
+    font-size: 30px;
+    font-weight: 900;
 }
