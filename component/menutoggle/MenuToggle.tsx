@@ -47,7 +47,7 @@ const MenuToggle: NextPage = () => {
                             <div className={menutoggleStyle.category2}>
                                 {category.category2 && category.category2.map(category2 => {
                                     const categoryData = { category1: category.category1, category2 }
-                                    return <Category2 data={categoryData} />
+                                    return <Category2 key={category2} data={categoryData} />
                                 })}
                             </div>
                         </>)}
