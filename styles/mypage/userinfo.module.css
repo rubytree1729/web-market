@@ -1,8 +1,15 @@
-.row{
+.content {}
+
+.content h2 {
+    font-size: 24px;
+}
+
+.row {
     text-align: left;
     border: 1px solid black;
     padding: 10px;
 }
-.row td{
+
+.row td {
     border: 1px solid black;
 }

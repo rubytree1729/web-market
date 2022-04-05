@@ -28,7 +28,7 @@ const UpdatePost: NextPage = () => {
         try {
             const res = await customAxios.put("/api/qaboard", data)
             if (res.status == 200) {
-                router.push('/qna')
+                router.push('/mypage/qna')
                 alert('문의가 수정 되었습니다.')
             } else {
                 alert('수정이 실패했습니다.')

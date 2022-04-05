@@ -1,9 +1,9 @@
-import postrowStyle from "../../styles/post/postrow.module.css"
+// import postrowStyle from "../../styles/post/postrow.module.css"
 import { useState } from "react"
-import customAxios from "../../utils/customAxios"
+import customAxios from "../../../utils/customAxios"
 import Link from "next/link"
 import { NextPage } from "next"
-import { qaBoard } from "../../models/QABoard"
+import { qaBoard } from "../../../models/QABoard"
 
 
 const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
@@ -34,7 +34,7 @@ const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
 
     return (
         <>
-            <tr onClick={clickContent} className={postrowStyle.row}>
+            <tr onClick={clickContent} className="">
                 <td>{data.qaid}</td>
                 <td>{data.qacategory}</td>
                 <td>{data.title}</td>
@@ -42,7 +42,7 @@ const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
                 <td>{data.date.toString().replace(/-/g, ".")}</td>
                 <td>{answer}</td>
                 <td>
-                    <Link href={`/qna/updatepost/${data.qaid}`} passHref>
+                    <Link href={`/mypage/updatepost/${data.qaid}`} passHref>
                         <button>수정하기</button>
                     </Link>
                     <button onClick={deleteApi}>삭제</button>

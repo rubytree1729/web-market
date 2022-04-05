@@ -1,0 +1,30 @@
+.content {
+    width: 1100px;
+    height: 190px;
+
+}
+
+.input {
+    display: inline-block;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.password {
+    display: inline-block;
+    min-width: 155px;
+    font-size: small;
+}
+
+.btn_group {
+    margin-top: 13px;
+}
+
+.btn_group button {
+    min-width: 98px;
+    height: 32px;
+    border: none;
+    margin-right: 5px;
+    line-height: 30px;
+    padding-top: 0;
+}
