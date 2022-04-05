@@ -1,5 +1,5 @@
-import { logHandler } from "../../utils/server/commonHandler"
+import { customHandler } from "../../utils/server/commonHandler"
 
 
-const handler = logHandler()
+const handler = customHandler()
 export default handler

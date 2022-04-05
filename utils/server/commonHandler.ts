@@ -3,6 +3,7 @@ import { Err } from "./commonError"
 import { cookie, ValidationChain, validationResult } from "express-validator"
 import nextConnect, { NextHandler } from "next-connect"
 import { checkDB, saveLog, serverAuth, validateRequest } from "./middleware"
+import authController from "./authController"
 
 function errorToJson(err: Error): any {
     let { cause, name, message, stack } = err
@@ -22,7 +23,7 @@ function errorToJson(err: Error): any {
     }
 }
 
-function customHandler() {
+export function customHandler() {
     return nextConnect({
         onError: (err: Error, req: NextApiRequest, res: NextApiResponse, next: any) => {
             if (err instanceof Error) {
@@ -34,19 +35,7 @@ function customHandler() {
         onNoMatch: (req: NextApiRequest, res: NextApiResponse) => {
             Err(res, "page not found")
         },
-    }).use(checkDB)
-}
-
-export function logHandler() {
-    return customHandler().use(saveLog)
-}
-
-export function userHandler() {
-    return customHandler().use(serverAuth, saveLog)
-}
-
-export function adminHandler() {
-    return userHandler().use(validateRequest([cookie("role").equals("admin")]))
+    }).use(checkDB).use(authController)
 }
 
 export function validate(validations: ValidationChain[]) {

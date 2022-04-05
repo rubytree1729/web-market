@@ -7,7 +7,9 @@ import { createJWT, uuid4, verifyJWT } from "../encrypt"
 import LoginToken from "../../models/LoginToken"
 import mongoose from "mongoose"
 import { envExist } from "../validateEnv"
+import User from "../../models/User"
 
+// middleware
 export async function checkDB(req: NextApiRequest, res: NextApiResponse, next: NextHandler) {
     if (mongoose.connection.readyState != mongoose.ConnectionStates.connected) {
         const DB_URI = envExist(process.env.DB_URI, "db uri", true)
@@ -17,7 +19,24 @@ export async function checkDB(req: NextApiRequest, res: NextApiResponse, next: N
     }
     next()
 }
-export async function serverAuth(req: NextApiRequest, res: NextApiResponse, next: NextHandler) {
+
+export function validateRequest(validations: ValidationChain[]) {
+    return async (req: NextApiRequest, res: any, next?: NextHandler) => {
+        await Promise.all(validations.map(validation => validation.run(req)))
+        const result = validationResult(req)
+        // console.log(result)
+        if (result.isEmpty()) {
+            if (next) {
+                next()
+            }
+        } else {
+            Err(res, result.array())
+        }
+    }
+}
+
+// used in middleware
+export async function serverAuth(req: NextApiRequest, res: NextApiResponse) {
     await validate([cookie("refresh_token").exists()])(req, res)
     const { access_token, refresh_token } = req.cookies
     try {
@@ -27,7 +46,7 @@ export async function serverAuth(req: NextApiRequest, res: NextApiResponse, next
         const { aud, role, jti } = await verifyJWT(refresh_token)
         const result = await LoginToken.findOne({ jti })
         if (!result) {
-            return Err(res, "access denied by permission")
+            throw new Error("access denied by permission")
         }
         const newjti = uuid4()
         const jwt = await createJWT(aud, role, newjti, "30m")
@@ -35,10 +54,9 @@ export async function serverAuth(req: NextApiRequest, res: NextApiResponse, next
         res.setHeader('Set-Cookie', cookies)
         req.cookies = { ...req.cookies, userid: aud, role, jti: newjti }
     }
-    next()
 }
 
-export async function saveLog(req: NextApiRequest, res: NextApiResponse, next: NextHandler) {
+export async function saveLog(req: NextApiRequest, res: NextApiResponse) {
     const path = req.url
     const { jti, role } = req.cookies
     const { fingerprint } = req.body
@@ -47,21 +65,9 @@ export async function saveLog(req: NextApiRequest, res: NextApiResponse, next: N
     const serverLog: serverLog = { path, referer, jti, ip, role, fingerprint }
     console.log(serverLog)
     await new ServerLog(serverLog).save()
-    next()
 }
 
-export function validateRequest(validations: ValidationChain[]) {
-    return async (req: NextApiRequest & Request, res: any, next: NextHandler) => {
-        await Promise.all(validations.map(validation => validation.run(req)))
-        const result = validationResult(req)
-        // console.log(result)
-        if (result.isEmpty()) {
-            next()
-        } else {
-            Err(res, result.array())
-        }
-    }
-}
+
 export function validate(validations: ValidationChain[]) {
     return async (req: NextApiRequest, res: NextApiResponse) => {
         await Promise.all(validations.map(validation => validation.run(req)))

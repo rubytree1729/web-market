@@ -1,12 +1,11 @@
 import crypto from 'crypto';
 import axios from 'axios';
-import nc from "next-connect";
-import { Err, Ok } from "../../../utils/server/commonError";
+import { Ok } from "../../../utils/server/commonError";
 import { envExist } from "../../../utils/validateEnv";
 import { body } from 'express-validator';
 import { encryptAuthNumber } from '../../../utils/encrypt';
 import { validateRequest } from '../../../utils/server/middleware';
-import { logHandler } from '../../../utils/server/commonHandler';
+import { customHandler } from '../../../utils/server/commonHandler';
 
 async function naverAuth(PhoneNumber: string) {
     const NCP_accessKey = envExist(process.env.NCP_API_access_key, "NCP_API_access_key", true)
@@ -65,7 +64,7 @@ async function naverAuth(PhoneNumber: string) {
     }
 }
 
-const handler = logHandler()
+const handler = customHandler()
     .post(
         validateRequest([
             body("phonenumber").exists()]),
