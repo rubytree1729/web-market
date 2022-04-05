@@ -19,15 +19,18 @@ const HeaderCompo: NextPage = () => {
             <div>
                 <div className={styles.header}>
                     <div className={styles.headbar}>
-                        <div className={styles.menu}>
+                        <div className={styles.category}>
                             <MenuToggle />
                         </div>
-                        <Link href="/" passHref>
-                            <div className={styles.logo}></div>
-                        </Link>
-                        <div className={styles.search}>
-                            <input type="text" />
-                            <button></button>
+                        <div className={styles.searchcontainer}>
+                            <Link href="/" passHref>
+                                <div className={styles.logo}></div>
+                            </Link>
+
+                            <div className={styles.search}>
+                                <input type="text" />
+                                <button></button>
+                            </div>
                         </div>
                         <div className={styles.mypage}>
                             <Link href="/login" passHref>
@@ -37,22 +40,25 @@ const HeaderCompo: NextPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
     return (
         <div>
             <div className={styles.header}>
                 <div className={styles.headbar}>
-                    <div className={styles.menu}>
+                    <div className={styles.category}>
                         <MenuToggle />
                     </div>
-                    <Link href="/" passHref>
-                        <div className={styles.logo}></div>
-                    </Link>
-                    <div className={styles.search}>
-                        <input type="text" />
-                        <button></button>
+                    <div className={styles.searchcontainer}>
+                        <Link href="/" passHref>
+                            <div className={styles.logo}></div>
+                        </Link>
+
+                        <div className={styles.search}>
+                            <input type="text" />
+                            <button></button>
+                        </div>
                     </div>
                     <div className={styles.mypage}>
                         <div className={styles.itemBox}>

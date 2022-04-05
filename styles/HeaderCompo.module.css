@@ -5,20 +5,25 @@
 }
 
 .headbar {
+    position: relative;
     width: 1280px;
     height: 70px;
     margin: 0 auto;
-    position: relative;
     display: flex;
-    text-align: center;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 600px;
 }
 
 .logo {
-    position: absolute;
     all: unset;
-    margin-top: 15px;
-    margin-right: 620px;
+    margin: 0px auto;
     background-image: url("../public/icon/logo.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -27,70 +32,68 @@
 }
 
 
-.menu {
-    position: absolute;
+.category {
     top: 8px;
-    left: 150px;
-}
-
-.mypage {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-
+    left: 0px;
 }
 
 .loginbtn {
-    height: 60px;
-    width: 60px;
+    width: 70px;
 
 }
 
 .search {
-    position: absolute;
     top: 10px;
     left: 464px;
-    height: 40px;
-    width: 250px;
+    height: 45px;
+    width: 350px;
     display: flex;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 6px 2px 5px 5px;
 }
 
 .search input {
+    border: none;
     height: 100%;
     width: 100%;
+    margin-right: 2px;
 }
 
 .search button {
-    margin: 5px;
+    border: 1px solid black;
     all: unset;
     background-image: url("../public/icon/free-icon-loupe-709592.png");
     background-size: contain;
     background-repeat: no-repeat;
-    height: 35px;
-    width: 35px;
+    height: 28px;
+    width: 28px;
     cursor: pointer;
+    margin: 3px 4px 0 0;
+}
+
+.mypage {
+    top: 10px;
+    right: 0px;
+    display: flex;
+    align-items: center;
+}
+
+.itemBox,
+.mypagebtn {
+    all: unset;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    padding-left: 10px;
 }
 
 .itemBox {
-    margin: 5px;
-    all: unset;
-    background-image: url("../public/icon/free-icon-shopping-cart-481384.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 35px;
-    width: 35px;
-    cursor: pointer;
-
+    background-image: url("../public/icon/free-icon-shopping-cart-empty-side-view-34568.png");
 }
 
 .mypagebtn {
-    margin: 5px;
-    all: unset;
-    background-image: url("../public/icon/free-icon-user-747376.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 35px;
-    width: 35px;
-    cursor: pointer;
+    background-image: url("../public/icon/premium-icon-user-1358034.png");
 }
