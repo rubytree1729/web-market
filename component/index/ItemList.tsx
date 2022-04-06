@@ -7,7 +7,7 @@ const Item: NextPage<{ data: product }> = ({ data }) => {
     return (
         <div>
             <div>
-                <Link href={`/purchase?id=${data.id}`} passHref>
+                <Link href={`/product?id=${data.id}`} passHref>
                     <div className={styles.lList}>
                         <img className={styles.imageUrl} src={data.imageUrl}></img>
                         <div className={styles.info}>

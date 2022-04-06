@@ -21,8 +21,7 @@ const handler = customHandler()
                         const { role, name, email, gender, phonenumber, fulladdress, likelist } = result
                         return Ok(res, { role, name, email, gender, phonenumber, fulladdress, likelist })
                     } else {
-                        const { role } = result
-                        return Ok(res, { role })
+                        return Ok(res, true)
                     }
                 }
             }

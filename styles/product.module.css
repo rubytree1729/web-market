@@ -1,13 +1,3 @@
-.before
-{
-    top: 4px;
-    left: 1px;
-    width: 6px;
-    height: 6px;
-    background-position: -320px -450px;
-    content: '';
-}
-
 .container 
 {
     width: 100%;
@@ -16,128 +6,207 @@
     background-color: rgb(245, 241, 241);
 }
 
-.orderLayout
+.purchaseList
 {
-    width: 60%;
+    width: 60%;   
     margin: auto;
-}
-
-.orderTag
-{
-    border: 1px solid black;
-    margin-bottom: 10px;
-}
-
-.orderContent
-{
-    padding: 15px;
-    height: 60px;
-    text-align: center;
+    height: 700px;
+    display: flex;
     border: 1px solid black;
 }
 
-.orderContentInfo
+.itemImage
 {
-    padding: 15px;
-    height: 100px;
-    text-align: center;
+    margin: 1%;
+    width: 49%;
+    height: 500px;
     border: 1px solid black;
-    background-color: white;
 }
 
-.customerLayout
+.purchasePart
 {
-    width: 60%;
-    margin: auto;
+    margin: 1%;
+    width: 49%;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.itemName
+{
+    margin: 10px;
+    margin-top: 30px;
+    padding: auto;
+    border: 1px solid black;
+    font-size: 25px;
+}
+
+.price
+{
+    margin: 10px;
+    margin-bottom: 50px;
+    padding: auto;
+    border: 1px solid;
+    font-size: 30px;
+    text-align: end;
+}
+
+.start
+{
+    margin: 10px;
     border: 1px solid black;
     display: flex;
+    margin-bottom: 5px;
 }
 
-.address
+.icon
 {
-    width: 70%;
-    margin: 20px;
+    margin: auto;
     margin-left: 10px;
-    margin-right: -10px;
-    padding: 20px;
+    width: 70px;
+    height: 70px;
     border: 1px solid black;
-}
-
-.customerInfo
-{
-    width: 30%;
-    margin: 20px;
-    margin-right: 10px;
-    padding: 20px;
-    border: 1px solid black;
-}
-
-.paymentMethod
-{
-    width: 60%;
-    margin: auto;
-    border: 1px solid black;
-    display: flex;
-}
-
-.method
-{
-    width: 70%;
-    margin: 20px;
-    margin-left: 10px;
-    margin-right: -10px;
-    padding: 20px;
-    border: 1px solid black;
-}
-
-.info
-{
-    width: 30%;
-    margin: 20px;
-    margin-right: 10px;
-    padding: 20px;
-    border: 1px solid black;
-    display: block;
-}
-
-.priceSum
-{
-    display: flex;
-    font-size: 15px;
 }
 
 .p
 {
-    width: 50%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
 }
 
-.sum
+.express
 {
-    width: 50%;
-    text-align: end;
+    margin: 10px;
+    margin-bottom: 30px;
 }
 
-.p2
+.countList
 {
-    font-size: 12px;
-    width: 50%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    margin-bottom: 30px;
 }
 
-.sum2
+.countName
 {
-    font-size: 12px;
-    width: 50%;
-    text-align: end;
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 500;
 }
 
-.btn
+.total
 {
-    width: 60%;
-    margin: auto;
+    margin: 5px;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.paymentBtn
+.countBut
+{
+    margin-right: auto;
+}
+.sumPrice
+{
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.count
+{
+    border: 1px solid black;
+    display: inline-flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 30px;
+    height: 30px;
+    padding-top: 2px;
+    padding-left: 9px;
+}
+
+
+
+.totalPrice
+{
+    margin: 10px;
+    border: 1px solid black;
+    margin-bottom: 30px;
+}
+
+.totalPrice2
+{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.before2
+{
+    display: inline-block;
+    width: 1px;
+    height: 11px;
+    background-color: #d7d7d7;
+    content: '';
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.purchaseButton
+{
+    margin: 10px;
+}
+
+.button
 {
     width: 100%;
-    padding: 20px;
+    height: 50px;
+    background-color: white;
+}
+
+.etcMenu
+{
+    margin-top: 5px;
+    width: 50%;
+    background-color: white;
+    height: 30px;
+}
+
+.itemInfo
+{
+    width: 60%;
+    height: 1500px;
+    margin: auto;
+    display: flex;
+    border: 1px solid black;
+}
+
+.itemTag
+{
+    margin: 10px;
+    width: 100%;
+    height: 60px;
+    border: 1px solid black;
+    font-size: 20px;  
+}
+
+.tagLayout
+{
+    display: flex;
+    height: 58px;
+    background-color: #f3f5f7;
+    font-weight: 600;
+    color: #333;
+    justify-content: space-evenly;
+    padding-top: 15px;
+}
+
+.before
+{
+    display: inline-block;
+    width: 1px;
+    height: 50px;
+    background-color: #d7d7d7;
+    vertical-align: top;
+    content: '';
+    margin-top: -10px;
+    margin-right: 80px;
 }
