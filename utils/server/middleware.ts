@@ -7,7 +7,6 @@ import { createJWT, uuid4, verifyJWT } from "../encrypt"
 import LoginToken from "../../models/LoginToken"
 import mongoose from "mongoose"
 import { envExist } from "../validateEnv"
-import User from "../../models/User"
 
 // middleware
 export async function checkDB(req: NextApiRequest, res: NextApiResponse, next: NextHandler) {

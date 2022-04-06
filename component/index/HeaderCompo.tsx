@@ -3,8 +3,11 @@ import Link from 'next/link'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 import MenuToggle from '../menutoggle/MenuToggle'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import customAxios from '../../utils/customAxios'
 
 const HeaderCompo: NextPage = () => {
+    const router = useRouter()
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user?info=false")
     if (isLoading) return <div>로딩중...</div>
     if (isServerError) {
@@ -38,6 +41,9 @@ const HeaderCompo: NextPage = () => {
             </div >
         )
     }
+    function logout() {
+        customAxios.delete("/api/login")
+    }
     const { role } = data
     if (role === "admin") {
         return (
@@ -69,9 +75,7 @@ const HeaderCompo: NextPage = () => {
                                 <div className={styles.mypagebtn}>
                                 </div>
                             </Link>
-                            <Link href="/api/logout" passHref>
-                                <div className={styles.loginbtn}>로그아웃</div>
-                            </Link>
+                            <div className={styles.loginbtn} onClick={logout}>로그아웃</div>
                         </div>
                     </div>
                 </div>
@@ -103,7 +107,7 @@ const HeaderCompo: NextPage = () => {
                                 </div>
                             </Link>
                             <Link href="/api/logout" passHref>
-                                <div className={styles.loginbtn}>로그아웃</div>
+                                <div className={styles.loginbtn} onClick={logout}>로그아웃</div>
                             </Link>
                         </div>
                     </div>
