@@ -38,8 +38,10 @@ const Carousel: NextPage = () => {
                     {images.map((image) => <Image src={image} />)}
                 </div>
             </div>
-            <button className={carouselStyle.prev_btn} onClick={prevCarousel}>뒤로버튼</button>
-            <button className={carouselStyle.next_btn} onClick={nextCarousel}>앞으로버튼</button>
+            <div className={carouselStyle.btn_group}>
+                <button className={carouselStyle.prev_btn} onClick={prevCarousel}>뒤로버튼</button>
+                <button className={carouselStyle.next_btn} onClick={nextCarousel}>앞으로버튼</button>
+            </div>
 
         </div>
     )

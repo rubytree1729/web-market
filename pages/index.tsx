@@ -28,7 +28,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <div className={styles.main}>
-        {/* <Carousel></Carousel> */}
+        <Carousel></Carousel>
         <div className={styles.mainList}>
           <div className={styles.recommendtitle}>
             <h3>카테고리별 추천 상품!</h3>

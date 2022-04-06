@@ -18,7 +18,7 @@
     height: 40px;
     width: 40px;
     all: unset;
-    background-color: coral;
+    background-color: black;
     cursor: pointer;
 }
 
@@ -26,12 +26,13 @@
     height: 40px;
     width: 40px;
     all: unset;
-    background-color: coral;
+    background-color: black;
     cursor: pointer;
 }
 
-.button :hover {
+/* .button :hover {
     transition: all 0.3s ease-in-out;
     background-color: red;
     color: #fff;
-}
+} */
+.btn_group {}
