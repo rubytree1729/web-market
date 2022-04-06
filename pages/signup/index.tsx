@@ -67,7 +67,7 @@ const SignUp: NextPage = () => {
         }, "authnumber": Authnumber
       }
       try {
-        const res = await customAxios.post('/api/user/register', data)
+        const res = await customAxios.post('/api/user', data)
         if (res.status == 200) {
           //로그인 성공
           router.replace('/')
@@ -85,7 +85,7 @@ const SignUp: NextPage = () => {
     event.preventDefault()
     if (validationId(Id)) {
       try {
-        const res = await customAxios.post('/api/user/checkId', { "id": Id })
+        const res = await customAxios.get(`/api/user?id=${Id}`,)
         if (res.status === 200) {
           alert('사용할 수 있는 아이디 입니다.')
           setidCheckApi(true)

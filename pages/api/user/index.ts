@@ -19,7 +19,7 @@ const handler = customHandler()
                 } else {
                     if (info === "true") {
                         const { role, name, email, gender, phonenumber, fulladdress, likelist } = result
-                        return Ok(res, { role, name, email, gender, phonenumber, fulladdress, likelist })
+                        return Ok(res, { id: userid, role, name, email, gender, phonenumber, fulladdress, likelist })
                     } else {
                         const { role } = result
                         return Ok(res, { role })
