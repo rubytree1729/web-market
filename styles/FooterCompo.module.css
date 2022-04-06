@@ -3,20 +3,21 @@
     width: 1px;
     height: 11px;
     margin: 7px 5px 0 4px;
-    background-color: #d7d7d7;
+    background-color: white;
     vertical-align: top;
     content: '';
 }
 
 .footer {
-    background-color: aliceblue;
+    background-color: white;
     display: block;
     flex: 1;
     padding: 2rem 0;
-    border-top: 1px solid #eaeaea;
+    border-top: 1px solid black;
     justify-content: center;
     align-items: center;
     text-align: center;
+    font: 1px #777;
 }
 
 .info {

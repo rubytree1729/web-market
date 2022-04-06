@@ -1,8 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form"
-import customAxios from "../../utils/customAxios"
+import customAxios from "../../../utils/customAxios"
 import { useRouter } from "next/router"
 import Link from "next/link"
-import { qaBoard } from "../../models/QABoard"
+import { qaBoard } from "../../../models/QABoard"
 
 export default function CreatePost() {
     const router = useRouter()
@@ -12,7 +12,7 @@ export default function CreatePost() {
         try {
             const res = await customAxios.post("/api/qaboard", data)
             if (res.status == 200) {
-                router.push('/qna')
+                router.push('/mypage/qna')
                 alert('문의가 접수 되었습니다.')
             } else {
                 alert('접수가 실패했습니다.')
@@ -74,7 +74,7 @@ export default function CreatePost() {
                         </tbody>
                     </table>
                     <div>
-                        <Link href="/qna" passHref>
+                        <Link href="/mypage/qna" passHref>
                             <button >뒤로가기</button>
                         </Link>
                         <button type="submit">문의하기</button>

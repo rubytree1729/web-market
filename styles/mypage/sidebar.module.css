@@ -1,4 +1,4 @@
-.content{
+.content {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -6,16 +6,20 @@
     border: 1px solid black;
     width: 250px;
 }
-.content h3{
-    font-weight: 900;  
+
+.content h3 {
+    font-weight: bold;
+    font-size: 24px;
     margin-bottom: 20px;
 }
-.span{
+
+.span {
     cursor: pointer;
     font-size: 18px;
     line-height: 40px;
 }
-.spanselect{
+
+.spanselect {
     cursor: pointer;
     font-size: 18px;
     line-height: 40px;
