@@ -4,9 +4,9 @@ import { useRouter } from 'next/router'
 import { getFingerprint } from '../../utils/client/fingerprint'
 import Link from 'next/link'
 import loginStyle from '../../styles/login/login.module.css'
-import { loginQuery } from '../api/user/login'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 import customAxios from '../../utils/customAxios'
+import { loginQuery } from '../api/login'
 
 const Home: NextPage = () => {
   const [id, setId] = useState("")
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
     try {
       const fingerprint = await getFingerprint()
       const loginQuery: loginQuery = { id, password, fingerprint, persistent }
-      const res = await customAxios.post("/api/user/login", loginQuery)
+      const res = await customAxios.post("/api/login", loginQuery)
       if (res.status == 200) {
         alert("로그인 성공")
         router.push("/")
@@ -39,11 +39,10 @@ const Home: NextPage = () => {
         alert("아이디 혹은 비밀번호가 틀렸습니다")
       }
     } catch (error) {
-      console.log(error)
       alert("서버 에러가 발생하였습니다")
     }
   }
-  const { data, isLoading, isServerError } = useCustomSWR("/api/user/auth")
+  const { data, isLoading, isServerError } = useCustomSWR("/api/user?info=false")
   if (isLoading) return <div>로딩중...</div>
   if (isServerError) {
     alert("서버 에러가 발생하였습니다")

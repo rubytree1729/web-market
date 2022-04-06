@@ -19,7 +19,7 @@ const Category: NextPage = () => {
         setCategory2(initCategory2?.toString() || "")
     }, [initCategory1, initCategory2])
     const categorySWR = useCustomSWR("/api/product/category", {}, false, true)
-    const productSWR = useCustomSWR(`/api/product/search?category1=${category1}&category2=${category2}`)
+    const productSWR = useCustomSWR(`/api/product?category1=${category1}&category2=${category2}`)
     if (categorySWR.isLoading) {
         return <div>로딩중</div>
     }

@@ -5,7 +5,7 @@ import useCustomSWR from '../../utils/client/useCustumSWR'
 import { useState } from 'react'
 import customAxios from '../../utils/customAxios'
 import Layout from '../../component/Layout'
-
+import 'bootstrap/dist/css/bootstrap.css'
 
 const Userlist: NextPage = () => {
     const [checkedUserList, setCheckedUserList] = useState([])

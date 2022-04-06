@@ -1,7 +1,6 @@
 import Product from "../../../models/Product";
-import { Err, Ok } from "../../../utils/server/commonError";
-import { logHandler } from "../../../utils/server/commonHandler";
-import Category, { category } from "../../../models/Category";
+import { Ok } from "../../../utils/server/commonError";
+import { customHandler } from "../../../utils/server/commonHandler";
 
 async function getCategory() {
     const categoryQuery = [{ $group: { "_id": "$category1", "category1": { $first: "$category1" }, "category2": { $addToSet: "$category2" } } },
@@ -10,7 +9,7 @@ async function getCategory() {
 }
 
 
-const handler = logHandler()
+const handler = customHandler()
     .get(
         async (req, res) => {
             const result = await getCategory()

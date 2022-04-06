@@ -1,12 +1,12 @@
 import { body, cookie, query } from "express-validator";
 import QABoard, { qaBoard } from "../../../models/QABoard";
 import { Err, Ok } from "../../../utils/server/commonError";
-import { userHandler, validate } from "../../../utils/server/commonHandler";
+import { customHandler, validate } from "../../../utils/server/commonHandler";
 import { validateRequest } from "../../../utils/server/middleware";
 
 
 
-const handler = userHandler()
+const handler = customHandler()
     .get( //기능: 유저 qna info 불러오기, 입력: 없음, 출력:유저의 qna info
         validateRequest([]),
         async (req, res) => {

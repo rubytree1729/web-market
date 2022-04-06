@@ -1,10 +1,10 @@
 import { body } from "express-validator";
 import Product from "../../../models/Product";
 import { Ok } from "../../../utils/server/commonError";
-import { logHandler } from "../../../utils/server/commonHandler";
+import { customHandler } from "../../../utils/server/commonHandler";
 import { validateRequest } from "../../../utils/server/middleware";
 
-const handler = logHandler()
+const handler = customHandler()
     // how to make restful api with different permission?
     .patch(
         validateRequest([body(["id"]).exists()]),

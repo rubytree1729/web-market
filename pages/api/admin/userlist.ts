@@ -1,7 +1,7 @@
 import { body, query } from "express-validator";
 import User, { fulladdress, user } from "../../../models/User";
 import { Err, Ok } from "../../../utils/server/commonError";
-import { adminHandler } from "../../../utils/server/commonHandler";
+import { customHandler } from "../../../utils/server/commonHandler";
 import { validateRequest } from "../../../utils/server/middleware";
 
 interface userinfo {
@@ -14,7 +14,7 @@ interface userinfo {
     registerAt: string
 }
 
-const handler = adminHandler()
+const handler = customHandler()
     .get(
         async (req, res) => {
             // const { sort, display, byCategory, id: id } = req.query
