@@ -1,29 +1,17 @@
 .hamburger {
-    width: 40px;
-    height: 40px;
-    border: 1px solid black;
+    width: 60px;
+    height: 60px;
+    /* border: 1px solid black; */
+    padding: 4px 0 0 0;
+    background-color: black;
+    /* background-color: rgb(6, 108, 248) */
 }
 
 .hamburger div {
-    margin-top: 6px;
-    width: 35px;
+    margin: 10px 0px 4px 8px;
+    width: 45px;
     height: 5px;
-    background-color: black;
-}
-
-.sideBar {
-    display: none;
-}
-
-.sideBarOpen {
-    position: fixed;
-    left: 0;
-    width: 200px;
-    height: 1000px;
-    border: 1px solid black;
     background-color: white;
-    z-index: 100;
-    display: block;
 }
 
 .category {
@@ -31,11 +19,50 @@
     padding-top: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid black;
+
 }
 
+.sideBar {
+    display: none;
+}
+
+.category1 {
+    position: fixed;
+    left: 0;
+    width: 280px;
+    border: 1px solid black;
+    background-color: white;
+    z-index: 1;
+}
+
+
+.category2 {
+    display: none;
+    position: absolute;
+    left: 278px;
+    top: -2px;
+    width: 280px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+
 .menu {
+    z-index: 2;
     text-align: center;
     padding-bottom: 10px;
     padding-top: 10px;
-    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+
+.menu2 {
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.menu:hover+.category2,
+.category2:hover {
+    display: block;
 }

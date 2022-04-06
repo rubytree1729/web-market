@@ -1,13 +1,16 @@
-.container{
+.container {
     margin: 0 auto;
 }
-.header{
+
+.header {
     width: 100%;
 }
-.body{
+
+.body {
     display: flex;
 }
-.content{
+
+.content {
     width: 100%;
     margin-top: 40px;
 }

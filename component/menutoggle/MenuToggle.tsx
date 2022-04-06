@@ -1,9 +1,30 @@
 import { NextPage } from "next"
+import Link from "next/link"
 import { useState } from "react"
 import menutoggleStyle from "../../styles/menutoggle/menutoggle.module.css"
+import useCustomSWR from "../../utils/client/useCustumSWR"
+import { category } from "../../models/Category"
+
+const Category1: NextPage<{ data: string }> = ({ data }) => {
+
+    return (
+        <Link href={`/category?category1=${data}`}>
+            <div className={menutoggleStyle.menu}>{data}</div>
+        </Link>
+    )
+}
+const Category2: NextPage<{ data: { category1: string, category2: string } }> = ({ data: { category1, category2 } }) => {
+    return (
+        <Link href={`/category?category1=${category1}&category2=${category2}`}>
+            <div className={menutoggleStyle.menu2}>{category2}</div>
+        </Link>
+    )
+}
+
 
 const MenuToggle: NextPage = () => {
     const [isToggle, setToggle] = useState(false)
+    const { data } = useCustomSWR("/api/product/category", {}, false, true)
     function togglehandler() {
         setToggle(!isToggle)
     }
@@ -14,26 +35,24 @@ const MenuToggle: NextPage = () => {
                 <div></div>
                 <div></div>
             </div>
-            <div className={isToggle ? menutoggleStyle.sideBarOpen : menutoggleStyle.sideBar}>
-                <div className={menutoggleStyle.category}>카테고리</div>
-                <div>
-                    <div className={menutoggleStyle.menu}>가구</div>
-                    <div className={menutoggleStyle.menu}>가전</div>
-                    <div className={menutoggleStyle.menu}>건강</div>
-                    <div className={menutoggleStyle.menu}>디지털</div>
-                    <div className={menutoggleStyle.menu}>도서</div>
-                    <div className={menutoggleStyle.menu}>미용</div>
-                    <div className={menutoggleStyle.menu}>식품</div>
-                    <div className={menutoggleStyle.menu}>생활</div>
-                    <div className={menutoggleStyle.menu}>생활편의</div>
-                    <div className={menutoggleStyle.menu}>여가</div>
-                    <div className={menutoggleStyle.menu}>육아</div>
-                    <div className={menutoggleStyle.menu}>인테리어</div>
-                    <div className={menutoggleStyle.menu}>출산</div>
-                    <div className={menutoggleStyle.menu}>패션의류</div>
-                    <div className={menutoggleStyle.menu}>화장품</div>
+            <div className={isToggle ? menutoggleStyle.category1 : menutoggleStyle.sideBar}>
+                <div className={menutoggleStyle.category}>
+                    <strong> 카테고리</strong>
+                    <button>x</button>
                 </div>
-            </div>
+                <div>
+                    {data && data.map((category: category) =>
+                        <>
+                            <Category1 key={category.category1} data={category.category1} />
+                            <div className={menutoggleStyle.category2}>
+                                {category.category2 && category.category2.map(category2 => {
+                                    const categoryData = { category1: category.category1, category2 }
+                                    return <Category2 key={category2} data={categoryData} />
+                                })}
+                            </div>
+                        </>)}
+                </div >
+            </div >
         </div >
     )
 }
