@@ -4,7 +4,7 @@ import Layout from '../../component/Layout'
 import 'bootstrap/dist/css/bootstrap.css'
 
 const Productlist: NextPage = () => {
-    const { data, isLoading, isError } = useCustomSWR("/api/admin/product")
+    const { data, isLoading, isError } = useCustomSWR("/api/user/me")
     return (
         <Layout>만드는 중
         </Layout>

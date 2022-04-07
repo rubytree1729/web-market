@@ -1,20 +1,30 @@
-import { body, cookie } from 'express-validator';
+import { body, cookie, query } from 'express-validator';
 import { NextApiRequest, NextApiResponse } from 'next';
 import User, { user } from '../../../models/User';
 import { encryptAuthNumber, encryptPassword } from '../../../utils/encrypt';
 import { equals, Err, Ok } from '../../../utils/server/commonError';
 import { customHandler } from '../../../utils/server/commonHandler';
+import { filterObject, flattenObject } from '../../../utils/server/etc';
 import { validateRequest } from '../../../utils/server/middleware';
 
 
 const handler = customHandler()
-    .get( // 입력: 없음, 출력: 해당 유저의 모든 정보
+    .get(
         async (req, res) => {
+            // const { sort, display, byCategory, id: id } = req.query
+            // result = await Product.aggregate([{ "$match": { id: parseInt(id as string) } }, { "$sample": { "size": maxResults } }])
             let { no, id, required } = req.query
-            const result = await User.find({ id, no })
-            required = required || []
-            result.map(user => Object.fromEntries(Object.entries(user).filter(([key]) => required.includes(key))))
-            return Ok(res, result)
+            const result = await User.find({ no, id }).lean()
+            let filter: string[]
+            if (!required) {
+                filter = []
+            } else if (typeof required === "string") {
+                filter = [required]
+            } else {
+                filter = required
+            }
+            const filteredResult = result.map(targetResult => filterObject(flattenObject(targetResult), filter))
+            Ok(res, filteredResult)
         })
     .post(
         validateRequest([
@@ -36,22 +46,18 @@ const handler = customHandler()
             Ok(res, result)
         }
     )
-    .patch( // 입력: 해당 유저의 수정 정보(fulladdress, password의 경우 oldpassword까지), 출력: 성공 여부
+    .patch(
+        validateRequest([body("ids").isArray(), body("role").isIn(["user", "admin"])]),
         async (req, res) => {
-            const { userid } = req.cookies
-            let { fulladdress, password, oldpassword } = req.body
-            const result = await User.findOne({ id: userid })
-            if (!result) {
-                return Err(res, "userid not exist")
-            }
-            if (oldpassword || password) {
-                if (encryptPassword(oldpassword) !== result.password) {
-                    return Err(res, "password not matched")
-                }
-            }
-            password = password && encryptPassword(password)
-            result.fulladdress = fulladdress
-            result.password = password
-            return Ok(res, await result.save())
+            const { ids, role } = req.body
+            const result = await User.updateMany({ id: { $in: ids } }, { $set: { role } })
+            Ok(res, result)
+        })
+    .delete(
+        validateRequest([query("ids").exists()]),
+        async (req, res) => {
+            const { ids } = req.query
+            const result = await User.deleteMany({ id: { $in: ids } })
+            Ok(res, result)
         })
 export default handler

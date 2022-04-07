@@ -14,12 +14,15 @@ interface authCondition {
 }
 
 const ADMINCONDITION: Array<authCondition> = [
-    { path: "/api/admin/userlist" }
+    // { path: "/api/admin/userlist" },
+    { path: "/api/user$", detail: [{ method: "GET", validate: [query("required").exists()] }, "PATCH", "DELETE"] },
+    { path: "/api/product$", detail: ["POST", "PUT", "DELETE"] },
+    { path: "/api/qaboard$" }
 ]
 const USERCONDITION: Array<authCondition> = [
-    { path: "/api/user$", detail: [{ method: "GET", validate: [query("required").exists()] }, "PATCH"] },
-    { path: "/api/qaboard$" },
-    { path: "/api/product$", detail: ["POST", "PUT", "DELETE"] }
+    { path: "/api/user/me$" },
+    { path: "/api/qaboard/me$" }
+
 ]
 
 async function checkAuth(conditions: authCondition[], req: NextApiRequest) {
@@ -34,10 +37,10 @@ async function checkAuth(conditions: authCondition[], req: NextApiRequest) {
                         }
                     } else {
                         if (detail.validate) {
-                            await Promise.all(detail.validate.map(validation => validation.run(req, { dryRun: true })))
-                            const result = validationResult(req)
-                            if (result.array().length < detail.validate.length) {
-                                return true
+                            for (let validation of detail.validate) {
+                                if ((await validation.run(req, { dryRun: true })).isEmpty()) {
+                                    return true
+                                }
                             }
                         }
                     }

@@ -4,7 +4,7 @@ import { NextPage } from "next"
 
 
 const UserInfo: NextPage = () => {
-    const { data, isLoading, isError } = useCustomSWR("/api/user/info")
+    const { data, isLoading, isError } = useCustomSWR("/api/user/me")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
     console.log(data)
