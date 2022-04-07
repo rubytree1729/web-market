@@ -26,8 +26,8 @@ const handler = customHandler()
                 const totalQuery: any = {
                     name: keyword && new RegExp(keyword.toString(), "i"),
                     id: id && parseInt(id?.toString()),
-                    category1,
-                    category2
+                    category1: category1 || undefined,
+                    category2: category2 || undefined
                 }
                 let sortQuery: string
                 switch (sort) {
