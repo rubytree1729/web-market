@@ -2,6 +2,8 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import { product } from '../../models/Product'
 import styles from '../../styles/ItemList.module.css'
+import useScrollFadeIn from '../UseScrollFadeIn'
+// const animationItem = useScrollFadeIn('up', 1, 0)
 
 const Item: NextPage<{ data: product }> = ({ data }) => {
     return (
@@ -29,6 +31,7 @@ const ItemList: NextPage<{ data: Array<product> }> = ({ data }) => {
             <div>
                 <div className={styles.category}>{data[0].category1}</div>
             </div>
+            {/* <div {...animationItem} className={styles.item}></div> */}
             <div className={styles.item}>
                 {data.map(product => <Item key={product.id} data={product}></Item>)}
             </div>
