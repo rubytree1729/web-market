@@ -39,6 +39,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .imageUrl {
@@ -56,6 +57,7 @@
     height: 290px;
     margin: 15px 0 0 40px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .name {
@@ -65,7 +67,7 @@
     -webkit-box-orient: vertical;
     min-height: 40px;
     line-height: 19px;
-    margin: 6px 0 1px 3px;
+    margin: 10px 0 1px 3px;
 }
 
 .price {
@@ -73,4 +75,8 @@
     height: 20px;
     margin: 15px 0 1px 3px;
     background-color: white;
+}
+
+.lList:hover .imageUrl {
+    transform: scale(1.1);
 }

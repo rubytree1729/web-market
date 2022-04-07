@@ -58,7 +58,7 @@
     -webkit-box-orient: vertical;
     min-height: 40px;
     line-height: 19px;
-    margin: 6px 0 1px 3px;
+    margin: 10px 0 1px 3px;
 }
 
 .price {
@@ -66,4 +66,8 @@
     height: 20px;
     margin: 15px 0 1px 3px;
     background-color: white;
+}
+
+.lList:hover .imageUrl {
+    transform: scale(1.1);
 }
