@@ -3,9 +3,12 @@ import Link from 'next/link'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 import MenuToggle from '../menutoggle/MenuToggle'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import customAxios from '../../utils/customAxios'
 
 const HeaderCompo: NextPage = () => {
-    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user?info=false")
+    const router = useRouter()
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/me")
     if (isLoading) return <div>로딩중...</div>
     if (isServerError) {
         alert("서버 에러가 발생하였습니다")
@@ -36,6 +39,11 @@ const HeaderCompo: NextPage = () => {
                     </div>
                 </div>
             </div >
+        )
+    }
+    function logout() {
+        customAxios.delete("/api/login").then(
+            () => router.reload()
         )
     }
     const { role } = data
@@ -69,9 +77,7 @@ const HeaderCompo: NextPage = () => {
                                 <div className={styles.mypagebtn}>
                                 </div>
                             </Link>
-                            <Link href="/api/logout" passHref>
-                                <div className={styles.loginbtn}>로그아웃</div>
-                            </Link>
+                            <div className={styles.loginbtn} onClick={logout}>로그아웃</div>
                         </div>
                     </div>
                 </div>
@@ -103,7 +109,7 @@ const HeaderCompo: NextPage = () => {
                                 </div>
                             </Link>
                             <Link href="/api/logout" passHref>
-                                <div className={styles.loginbtn}>로그아웃</div>
+                                <div className={styles.loginbtn} onClick={logout}>로그아웃</div>
                             </Link>
                         </div>
                     </div>

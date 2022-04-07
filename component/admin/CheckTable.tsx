@@ -33,7 +33,8 @@ const CheckTable: NextPage<{ data: Array<any>, column: any, setCheckedList: Func
                 <tbody>
                     {data.map((rows: any) =>
                         <tr>
-                            {Object.values(rows).map((row: any) => <td>{row}</td>)}
+                            {Object.values(column).map((col: string) => <td>{rows[col]}</td>)}
+                            {/* {Object.values(rows).map((row: any) => <td>{row}</td>)} */}
                             <td>
                                 <input className="form-check-input" type="checkbox" onClick={changeCheckedList} value={rows[index]} />
                             </td>

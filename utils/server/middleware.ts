@@ -7,14 +7,13 @@ import { createJWT, uuid4, verifyJWT } from "../encrypt"
 import LoginToken from "../../models/LoginToken"
 import mongoose from "mongoose"
 import { envExist } from "../validateEnv"
-import User from "../../models/User"
 
 // middleware
 export async function checkDB(req: NextApiRequest, res: NextApiResponse, next: NextHandler) {
     if (mongoose.connection.readyState != mongoose.ConnectionStates.connected) {
         const DB_URI = envExist(process.env.DB_URI, "db uri", true)
         const DB_NAME = envExist(process.env.DB_NAME, "db name")
-        await mongoose.connect(DB_URI, { dbName: DB_NAME, authSource: "admin", connectTimeoutMS: 5000 })
+        await mongoose.connect(DB_URI, { dbName: DB_NAME, authSource: "admin", connectTimeoutMS: 5000, ignoreUndefined: true })
         console.log("***db connected***")
     }
     next()
@@ -38,6 +37,10 @@ export function validateRequest(validations: ValidationChain[]) {
 // used in middleware
 export async function serverAuth(req: NextApiRequest, res: NextApiResponse) {
     await validate([cookie("refresh_token").exists()])(req, res)
+    //initialize cookie
+    req.cookies.userid = undefined
+    req.cookies.role = undefined
+    req.cookies.jti = undefined
     const { access_token, refresh_token } = req.cookies
     try {
         const { aud, role, jti } = await verifyJWT(access_token)

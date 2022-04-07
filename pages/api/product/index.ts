@@ -23,21 +23,11 @@ const handler = customHandler()
                 const totalResult = await sendByCategory(maxResults)
                 Ok(res, totalResult)
             } else {
-                const totalQuery: Array<any> = []
-                totalQuery.push(
-                    { "$match": {} },
-                )
-                if (keyword) {
-                    totalQuery.push({ "$match": { name: new RegExp(keyword?.toString(), "i") } })
-                }
-                if (id) {
-                    totalQuery.push({ "$match": { id: parseInt(id?.toString()) } })
-                }
-                if (category1) {
-                    totalQuery.push({ "$match": { category1 } })
-                }
-                if (category2) {
-                    totalQuery.push({ "$match": { category2 } })
+                const totalQuery: any = {
+                    name: keyword && new RegExp(keyword.toString(), "i"),
+                    id: id && parseInt(id?.toString()),
+                    category1,
+                    category2
                 }
                 let sortQuery: string
                 switch (sort) {
@@ -51,8 +41,8 @@ const handler = customHandler()
                         sortQuery = "-price"
                 }
                 const parsedPagenum = pagenum ? parseInt(pagenum.toString()) : 1
-                const result = await Product.aggregate(totalQuery).sort(sortQuery).limit(parsedPagenum * maxResults).skip((parsedPagenum - 1) * maxResults)
-                const totalnum = (await Product.aggregate(totalQuery)).length
+                const result = await Product.find(totalQuery).sort(sortQuery).limit(parsedPagenum * maxResults).skip((parsedPagenum - 1) * maxResults)
+                const totalnum = (await Product.find(totalQuery)).length
                 Ok(res, { data: result, metadata: { totalnum } })
             }
         }

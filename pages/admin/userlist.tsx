@@ -10,7 +10,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 const Userlist: NextPage = () => {
     const [checkedUserList, setCheckedUserList] = useState([])
     const router = useRouter()
-    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/admin/userlist")
+    const column = { 가입날짜: "registerAt", 아이디: "id", 이름: "name", 이메일: "email", 주소: "fulladdress.address", 휴대폰번호: "phonenumber", 권한: "role" }
+    const dataparams = new URLSearchParams();
+    Object.values(column).forEach(value => dataparams.append("required", value))
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user", { params: dataparams })
     if (isLoading) return <div>로딩중...</div>
     if (isServerError) {
         alert("서버 에러가 발생하였습니다")
@@ -24,7 +27,7 @@ const Userlist: NextPage = () => {
         const confirmResult = confirm("정말 권한을 부여하시겠습니까?")
         if (confirmResult) {
             try {
-                const res = await customAxios.patch("/api/admin/userlist", { ids: checkedUserList, role: "admin" })
+                const res = await customAxios.patch("/api/user", { ids: checkedUserList, role: "admin" })
                 if (res.status === 200) {
                     alert("권한 부여에 성공하였습니다.")
                 } else {
@@ -42,7 +45,7 @@ const Userlist: NextPage = () => {
         const confirmResult = confirm("정말 권한을 해제하시겠습니까?")
         if (confirmResult) {
             try {
-                const res = await customAxios.patch("/api/admin/userlist", { ids: checkedUserList, role: "user" })
+                const res = await customAxios.patch("/api/user", { ids: checkedUserList, role: "user" })
                 if (res.status === 200) {
                     alert("권한 해제에 성공하였습니다.")
                 } else {
@@ -63,7 +66,7 @@ const Userlist: NextPage = () => {
             try {
                 const params = new URLSearchParams();
                 checkedUserList.forEach(value => params.append("ids", value))
-                const res = await customAxios.delete("/api/admin/userlist", { params })
+                const res = await customAxios.delete("/api/user", { params })
                 if (res.status === 200) {
                     alert("유저 삭제에 성공하였습니다.")
                 } else {
@@ -77,7 +80,6 @@ const Userlist: NextPage = () => {
             router.reload()
         }
     }
-    const column = { 가입날짜: "registerAt", 아이디: "id", 이름: "name", 이메일: "email", 주소: "address", 휴대폰번호: "phonenumber", 권한: "role" }
     return (
         <Layout>
             <div className='container'>

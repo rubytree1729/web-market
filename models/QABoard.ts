@@ -3,8 +3,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 
 export interface qaBoard {
-    //AutoIncrement로 추가됨
-    qaid?: number
+    qaid?: number //AutoIncrement로 추가됨
     answer?: boolean,
     qacategory: string,
     title: string,

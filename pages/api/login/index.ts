@@ -57,7 +57,8 @@ const handler = customHandler()
                 const { jti } = await verifyJWT(refresh_token)
                 await LoginToken.deleteOne({ jti })
             }
-            res.redirect("/")
+            Ok(res, "logout success")
+            // res.redirect("/")
         }
     )
 
