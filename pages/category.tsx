@@ -85,7 +85,7 @@ const Category: NextPage = () => {
                             {/* -------------------------제품리스트---------------------- */}
                             <div className={styles.itemList}>
                                 <div className={styles.priceList}>
-                                    {productData && productData.map(product => <CategoryList key={product.id} data={product} />)}
+                                    {productData && productData.map(product => <CategoryList key={product.no} data={product} />)}
                                 </div>
                             </div>
                             {/* --------------------------랭킹?--------------------------- */}

@@ -7,7 +7,7 @@ const Item: NextPage<{ data: product }> = ({ data }) => {
     return (
         <div>
             <div>
-                <Link href={`/product?id=${data.id}`} passHref>
+                <Link href={`/product?no=${data.no}`} passHref>
                     <div className={styles.lList}>
                         <img className={styles.imageUrl} src={data.imageUrl}></img>
                         <div className={styles.info}>
@@ -30,7 +30,7 @@ const ItemList: NextPage<{ data: Array<product> }> = ({ data }) => {
                 <div className={styles.category}>{data[0].category1}</div>
             </div>
             <div className={styles.item}>
-                {data.map(product => <Item key={product.id} data={product}></Item>)}
+                {data.map(product => <Item key={product.no} data={product}></Item>)}
             </div>
         </div>
     )

@@ -34,7 +34,7 @@ const Home: NextPage = () => {
             <h3>카테고리별 추천 상품!</h3>
           </div>
           <div className={styles.itemList}>
-            {dividedData && dividedData.map(products => <ItemList key={products[0].id} data={products}></ItemList>)}
+            {dividedData && dividedData.map(products => <ItemList key={products[0].no} data={products}></ItemList>)}
           </div>
         </div>
       </div>

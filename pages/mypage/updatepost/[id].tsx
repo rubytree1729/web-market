@@ -33,5 +33,4 @@ const Createpost: NextPage = () => {
         </Layout >
     )
 }
-
 export default Createpost
