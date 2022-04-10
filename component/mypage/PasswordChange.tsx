@@ -39,7 +39,6 @@ const PasswordChange: NextPage = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <div className={passwordChangeStyle.content}>
                 <h3>비밀번호 변경</h3>
                 <div className={passwordChangeStyle.input}>

@@ -1,26 +1,46 @@
-.content{
+.content {
     width: 400px;
 }
-.addressform{
+
+.addressform {
     width: 100%;
 }
 
-.addressinput{
+.addressinput {
     display: flex;
     width: 100%;
 }
-.addressform label{
+
+.addressform label {
     font-size: 15px;
 }
-.addressinput button{
+
+.addressinput button {
     width: 135px;
     font-size: 13px;
     border: none;
     margin-left: 10px;
 }
-.input{
+
+.input {
     width: 100%;
     height: 50px;
     padding: 0 9px 0 9px;
     border: 1px solid #dadada;
+}
+
+.btn_group button {
+    float: right;
+
+    min-width: 98px;
+    height: 32px;
+    border: none;
+    margin-top: 10px;
+    margin-left: 5px;
+    padding-top: 0;
+
+    font-weight: 700;
+    line-height: 30px;
+
+    cursor: pointer;
 }

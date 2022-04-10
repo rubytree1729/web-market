@@ -25,6 +25,7 @@ const Addresschange: NextPage = () => {
                     <SideBar toggle="addresschange" />
                 </div>
                 <div className={mypageStyle.content}>
+
                     <AddressChange />
                 </div>
 

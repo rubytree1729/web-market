@@ -31,7 +31,7 @@ const ItemList: NextPage<{ data: Array<product> }> = ({ data }) => {
             <div>
                 <div className={styles.category}>{data[0].category1}</div>
             </div>
-            {/* <div {...animationItem} className={styles.item}></div> */}
+            {/* <div {...animationItem} className={styles.item}> */}
             <div className={styles.item}>
                 {data.map(product => <Item key={product.id} data={product}></Item>)}
             </div>

@@ -14,29 +14,34 @@ const UserInfo: NextPage = () => {
             <table>
                 <tbody>
                     <tr>
-                        <th className={userinfoStyle.row}>아이디</th>
+                        <th >아이디</th>
                         <td>{data.id}</td>
                     </tr>
                     <tr>
-                        <th className={userinfoStyle.row}>이름</th>
+                        <th >이름</th>
                         <td>{data.name}</td>
                     </tr>
                     <tr>
-                        <th className={userinfoStyle.row}>이메일</th>
+                        <th >이메일</th>
                         <td>{data.email}</td>
                     </tr>
                     <tr>
-                        <th className={userinfoStyle.row}>휴대전화</th>
+                        <th >휴대전화</th>
                         <td>{data.phonenumber}</td>
                     </tr>
                     <tr>
-                        <th className={userinfoStyle.row}>주소</th>
+                        <th >주소</th>
                         <th>우편번호</th>
-                        <td>{data.fulladdress.zonecode}</td>
                         <th>주소</th>
-                        <td>{data.fulladdress.address}</td>
                         <th>상세주소</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>{data.fulladdress.zonecode}</td>
+                        <td>{data.fulladdress.address}</td>
+
                         <td>{data.fulladdress.addressdetail}</td>
+
                     </tr>
                 </tbody>
             </table>

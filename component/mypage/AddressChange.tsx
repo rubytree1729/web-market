@@ -66,7 +66,9 @@ const Addresschange: NextPage = () => {
                 />
             </div>
             <input className={addressStyle.input} type="text" id="addressDetail" defaultValue={AddressDetail} onChange={addressDetailInputHandler} placeholder="상세주소" />
-            <button onClick={addressPost}>주소변경하기</button>
+            <div className={addressStyle.btn_group}>
+                <button onClick={addressPost}>주소변경하기</button>
+            </div>
         </div>
     )
 }
