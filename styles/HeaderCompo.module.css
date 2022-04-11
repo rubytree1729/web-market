@@ -20,7 +20,7 @@
     all: unset;
     margin: 0px auto;
     background-image: url("../public/icon/logo.png");
-    background-size: contain;
+    background-size: 170px;
     background-repeat: no-repeat;
     width: 170px;
     height: 50px;
@@ -33,7 +33,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 250px;
-    /* margin-right: 60px; */
+    margin-left: 20px;
 }
 
 
@@ -44,16 +44,16 @@
 
 .search {
     height: 45px;
-    width: 420px;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     border: 2px solid;
-    border-image: linear-gradient(to right, #e66465, #9198e5);
+    border-image: linear-gradient(to right, #5fa1ff, #44eb57);
     border-image-slice: 1;
     padding: 2px 7px 2px 7px;
-    margin: 6px 100px 0 0;
+    margin: 6px 130px 0 0;
 }
 
 .search input {

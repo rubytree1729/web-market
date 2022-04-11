@@ -1,14 +1,17 @@
 .content {
-    width: 550px;
+    width: 600px;
     overflow: hidden;
 
+}
+
+.content table {
+    width: 100%;
 }
 
 .tilte {
     width: 1000px;
     padding-bottom: 15px;
     border-bottom: 1px solid black;
-
     font-size: 21px;
     font-weight: 900;
 }
@@ -19,6 +22,7 @@
 }
 
 .content tr {
+    /* width: 100%; */
     border-spacing: 0;
     border: 1px solid #ddd;
     height: 45px;
@@ -34,9 +38,9 @@
 
 .content td {
     vertical-align: center;
-    border-top: none;
+    /* border-top: none;
     border-left: none;
-    border-right: none;
+    border-right: none; */
     padding: 2px 0 2px 0;
 }
 

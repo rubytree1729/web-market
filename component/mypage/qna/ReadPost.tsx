@@ -7,6 +7,7 @@ import { qaBoard } from "../../../models/QABoard"
 import { useRouter } from "next/router"
 
 
+
 const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
@@ -40,12 +41,12 @@ const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
 
     return (
         <>
-            <tr onClick={clickContent} className="">
+            <tr onClick={clickContent}>
                 <td>{data.qaid}</td>
                 <td>{data.qacategory}</td>
                 <td>{data.title}</td>
                 <td>{data.userid}</td>
-                <td>{data.date.toString().replace(/-/g, ".")}</td>
+                <td>{data.date.toString().replace(/-/g, ".").substring(0, 10)}</td>
                 <td>{answer}</td>
                 <td>
                     <Link href={`/mypage/updatepost/${data.qaid}`} passHref>

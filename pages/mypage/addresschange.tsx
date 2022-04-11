@@ -20,15 +20,17 @@ const Addresschange: NextPage = () => {
     }
     return (
         <Layout>
-            <div className={mypageStyle.body}>
-                <div className="sidebar">
-                    <SideBar toggle="addresschange" />
-                </div>
-                <div className={mypageStyle.content}>
+            <div className={mypageStyle.container}>
+                <div className={mypageStyle.body}>
+                    <div className="sidebar">
+                        <SideBar toggle="addresschange" />
+                    </div>
+                    <div className={mypageStyle.content}>
 
-                    <AddressChange />
-                </div>
+                        <AddressChange />
+                    </div>
 
+                </div>
             </div>
         </Layout>
     )
