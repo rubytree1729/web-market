@@ -36,13 +36,11 @@ const Carousel: NextPage = () => {
                     {images.map((image) => <Image src={image} />)}
                 </div>
             </div>
-            <div className={carouselStyle.carouselIndex}>
+            <div className={carouselStyle.btn_group}>
+                <button className={carouselStyle.prev_btn} onClick={prevCarousel}></button>
                 <span>{currentCarousel}</span>
                 <span>/</span>
                 <span>{totalCarousel}</span>
-            </div>
-            <div className={carouselStyle.btn_group}>
-                <button className={carouselStyle.prev_btn} onClick={prevCarousel}></button>
                 <button className={carouselStyle.next_btn} onClick={nextCarousel}></button>
             </div>
 

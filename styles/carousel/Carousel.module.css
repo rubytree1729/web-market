@@ -4,14 +4,12 @@
 }
 
 .carousel_container {
-    /* position: relative; */
-    width: 1280px;
+    width: 1240px;
     overflow: hidden;
-    /* border: 1px solid blue; */
 }
 
 .slideimage {
-    width: 500%;
+    width: 600%;
     margin: 0 auto;
     display: flex;
 }
@@ -19,53 +17,48 @@
 .next_btn,
 .prev_btn {
     all: unset;
-    height: 40px;
-    width: 45px;
-    background-color: rgba(114, 114, 114, 0.5);
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border: 1px solid #dadada;
     cursor: pointer;
     overflow: hidden;
+    border-radius: 3px;
+    margin: 0 10px 0 10px;
 
-
-}
-
-.carouselIndex {
-    position: absolute;
-    top: 240px;
-    right: 130px;
-    background-color: rgba(114, 114, 114, 0.5);
-    border-radius: 25px 25px 25px 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 60px;
-}
-
-.carouselIndex span {
-    font-size: 20px;
-    font-weight: 500;
-    color: #fff;
 }
 
 .btn_group {
     position: absolute;
-    top: 240px;
-    right: 25px;
+    bottom: -30px;
+    right: 47%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+}
+
+.btn_group span {
+    width: 10px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    color: black;
 }
 
 .next_btn {
     background-image: url("../../public/icon/free-icon-right-arrow-271228.png");
     background-repeat: no-repeat;
-    border-radius: 0 25px 25px 0;
-    background-size: 17px;
-    background-position: center left 30%;
+    background-size: 15px;
+    background-position: center center;
+
 }
 
 .prev_btn {
     background-image: url("../../public/icon/free-icon-left-arrow-271228.png");
     background-repeat: no-repeat;
-    border-radius: 25px 0 0 25px;
-    background-size: 17px;
-    background-position: center right 30%;
+    background-size: 15px;
+    background-position: center center;
+
 }
