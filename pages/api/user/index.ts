@@ -50,6 +50,7 @@ const handler = customHandler()
         validateRequest([body("no").isArray(), body("role").isIn(["user", "admin"])]),
         async (req, res) => {
             const { no, role } = req.body
+            console.log("test", no, role)
             const result = await User.updateMany({ no: { $in: no } }, { $set: { role } })
             Ok(res, result)
         })

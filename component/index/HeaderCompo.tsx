@@ -3,19 +3,15 @@ import Link from 'next/link'
 import useCustomSWR from '../../utils/client/useCustumSWR'
 import MenuToggle from '../menutoggle/MenuToggle'
 import { NextPage } from 'next'
-import { useEffect, useState } from 'react'
 import { Default, Moblie } from '../responsive'
 
 const HeaderCompo: NextPage = () => {
-    const [loginState, setLoginState] = useState("login")
-    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user?info=false")
-    let { role } = "null"
+    const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/me")
     if (isLoading) return <div>로딩중...</div>
     if (isServerError) {
         alert("서버 에러가 발생하였습니다")
     }
-    //role admin 못읽음
-    role = data
+    const role = data?.role
     return (
         <>
             <Default>

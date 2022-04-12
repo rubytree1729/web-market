@@ -4,17 +4,17 @@ import customAxios from "../../../utils/customAxios"
 import Link from "next/link"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
-import { inquiry } from "../../../models/Inquiry"
+import { extraInquiry } from "./Board"
 
 
-const ReadPost: NextPage<{ data: inquiry }> = ({ data }) => {
+const ReadPost: NextPage<{ data: extraInquiry }> = ({ data }) => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [isAnswer, setisAnswer] = useState(false)
-    const answer = data.answer ? "답변완료" : "답변예정"
+    const answer = data.reply.length ? "답변완료" : "답변예정"
 
     function clickContent() {
-        if (data.answer) {
+        if (data.reply.length) {
             setisAnswer(!isAnswer)
         }
         setIsOpen(!isOpen)
@@ -39,14 +39,14 @@ const ReadPost: NextPage<{ data: inquiry }> = ({ data }) => {
     return (
         <>
             <tr onClick={clickContent}>
-                <td>{data.qaid}</td>
+                <td>{data.no}</td>
                 <td>{data.qacategory}</td>
                 <td>{data.title}</td>
-                <td>{data.userid}</td>
-                <td>{data.date.toString().replace(/-/g, ".").substring(0, 10)}</td>
+                <td>{data.userno}</td>
+                <td>{data.createdAt.toString().replace(/-/g, ".").substring(0, 10)}</td>
                 <td>{answer}</td>
                 <td>
-                    <Link href={`/mypage/updatepost/${data.qaid}`} passHref>
+                    <Link href={`/mypage/updatepost/${data.no}`} passHref>
                         <button>수정하기</button>
                     </Link>
                     <button onClick={deleteApi}>삭제</button>
