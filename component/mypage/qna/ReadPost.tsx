@@ -3,12 +3,11 @@ import { useState } from "react"
 import customAxios from "../../../utils/customAxios"
 import Link from "next/link"
 import { NextPage } from "next"
-import { qaBoard } from "../../../models/QABoard"
 import { useRouter } from "next/router"
+import { inquiry } from "../../../models/Inquiry"
 
 
-
-const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
+const ReadPost: NextPage<{ data: inquiry }> = ({ data }) => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [isAnswer, setisAnswer] = useState(false)
@@ -23,11 +22,9 @@ const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
     async function deleteApi(event: any) {
         event.preventDefault()
         if (window.confirm("삭제하시겠습니까?")) {
-
             try {
-                const res = await customAxios.delete(`/api/qaboard?qaid=${data.qaid}`)
+                const res = await customAxios.delete(`/api/inquiry?no=${data.no}`)
                 if (res.status == 200) {
-                    router.reload()
                     alert('글이 삭제되었습니다.')
                 } else {
                     alert('글이 존재하지 않습니다.')

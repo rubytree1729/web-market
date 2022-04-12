@@ -2,14 +2,14 @@ import { NextPage } from "next"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { qaBoard } from "../../../models/QABoard"
+import { inquiry } from "../../../models/Inquiry"
 import useCustomSWR from "../../../utils/client/useCustumSWR"
 import customAxios from "../../../utils/customAxios"
 
 const UpdatePost: NextPage = () => {
-    const { register, handleSubmit, formState: { errors }, watch } = useForm<qaBoard>({ mode: "onSubmit" })
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<inquiry>({ mode: "onSubmit" })
     const router = useRouter()
-    let targetPost: qaBoard
+    let targetPost: inquiry
     const { id } = router.query
     const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
     if (isError) return <div>failed to load</div>
@@ -19,7 +19,7 @@ const UpdatePost: NextPage = () => {
             targetPost = post
         }
     }
-    const onSubmit: SubmitHandler<qaBoard> = async data => {
+    const onSubmit: SubmitHandler<inquiry> = async data => {
         if (id === undefined) {
             return
         }

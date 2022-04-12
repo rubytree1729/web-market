@@ -6,7 +6,7 @@ import adminStyle from '../../styles/admin/admin.module.css'
 import Sidebar from '../../component/admin/Sidebar'
 
 const Productlist: NextPage = () => {
-    const { data, isLoading, isError } = useCustomSWR("/api/admin/product")
+    const { data, isLoading, isError } = useCustomSWR("/api/user/me")
     return (
         <Layout>
             <div className={adminStyle.container}>
