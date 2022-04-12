@@ -22,12 +22,14 @@ const Createpost: NextPage = () => {
     }
     return (
         <Layout>
-            <div className={mypageStyle.body}>
-                <div className="sidebar">
-                    <SideBar toggle="qna" />
-                </div>
-                <div className={mypageStyle.content}>
-                    <UpdatePost />
+            <div className={mypageStyle.container}>
+                <div className={mypageStyle.body}>
+                    <div className="sidebar">
+                        <SideBar toggle="qna" />
+                    </div>
+                    <div className={mypageStyle.content}>
+                        <UpdatePost />
+                    </div>
                 </div>
             </div>
         </Layout >

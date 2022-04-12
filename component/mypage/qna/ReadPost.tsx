@@ -3,10 +3,12 @@ import { useState } from "react"
 import customAxios from "../../../utils/customAxios"
 import Link from "next/link"
 import { NextPage } from "next"
+import { useRouter } from "next/router"
 import { inquiry } from "../../../models/Inquiry"
 
 
 const ReadPost: NextPage<{ data: inquiry }> = ({ data }) => {
+    const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
     const [isAnswer, setisAnswer] = useState(false)
     const answer = data.answer ? "답변완료" : "답변예정"
@@ -19,27 +21,29 @@ const ReadPost: NextPage<{ data: inquiry }> = ({ data }) => {
     }
     async function deleteApi(event: any) {
         event.preventDefault()
-        try {
-            const res = await customAxios.delete(`/api/inquiry?no=${data.no}`)
-            if (res.status == 200) {
-                alert('글이 삭제되었습니다.')
-            } else {
-                alert('글이 존재하지 않습니다.')
+        if (window.confirm("삭제하시겠습니까?")) {
+            try {
+                const res = await customAxios.delete(`/api/inquiry?no=${data.no}`)
+                if (res.status == 200) {
+                    alert('글이 삭제되었습니다.')
+                } else {
+                    alert('글이 존재하지 않습니다.')
+                }
+            } catch (err) {
+                console.log(err)
+                alert('삭제가 실패했습니다..')
             }
-        } catch (err) {
-            console.log(err)
-            alert('삭제가 실패했습니다..')
         }
     }
 
     return (
         <>
-            <tr onClick={clickContent} className="">
+            <tr onClick={clickContent}>
                 <td>{data.qaid}</td>
                 <td>{data.qacategory}</td>
                 <td>{data.title}</td>
                 <td>{data.userid}</td>
-                <td>{data.date.toString().replace(/-/g, ".")}</td>
+                <td>{data.date.toString().replace(/-/g, ".").substring(0, 10)}</td>
                 <td>{answer}</td>
                 <td>
                     <Link href={`/mypage/updatepost/${data.qaid}`} passHref>
