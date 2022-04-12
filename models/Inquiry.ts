@@ -3,7 +3,9 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 
 export interface inquiry {
-    no?: number //AutoIncrement로 추가됨
+    no?: number, //AutoIncrement로 추가됨
+    isClosed?: boolean, //
+    isPrivate?: boolean,
     qacategory: string,
     title: string,
     content: string,
@@ -14,6 +16,8 @@ export interface inquiry {
 
 const inquirySchema = new Schema<inquiry>({
     no: { type: Number, unique: true },
+    isClosed: { type: Boolean, default: false },
+    isPrivate: { type: Boolean, default: false },
     qacategory: { type: String, required: true, }, //"교환", 환불, 배송, 상품문의, 주문취소, 주문/결제, 이벤트
     title: { type: String, required: true },
     content: { type: String, required: true },

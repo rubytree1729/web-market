@@ -3,9 +3,13 @@ import { inquiry } from "../../../models/Inquiry"
 import useCustomSWR from "../../../utils/client/useCustumSWR"
 import ReadPost from "./ReadPost"
 
+export interface extraInquiry extends inquiry {
+    reply: inquiry[]
+}
+
 const Board: NextPage = () => {
-    let postlist: Array<inquiry> = []
-    const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
+    let postlist: Array<extraInquiry> = []
+    const { data, isLoading, isError } = useCustomSWR("/api/inquiry/me")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
     for (let post of data) {

@@ -10,23 +10,23 @@ const UpdatePost: NextPage = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<inquiry>({ mode: "onSubmit" })
     const router = useRouter()
     let targetPost: inquiry
-    const { id } = router.query
-    const { data, isLoading, isError } = useCustomSWR("/api/qaboard")
+    const { no } = router.query
+    const { data, isLoading, isError } = useCustomSWR("/api/inquiry")
     if (isError) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
     for (let post of data) {
-        if (post.qaid == id) {
+        if (post.no == no) {
             targetPost = post
         }
     }
     const onSubmit: SubmitHandler<inquiry> = async data => {
-        if (id === undefined) {
+        if (no === undefined) {
             return
         }
-        data.qaid = parseInt(id.toString())
+        data.no = parseInt(no.toString())
         alert(JSON.stringify(data, null, 2))
         try {
-            const res = await customAxios.put("/api/qaboard", data)
+            const res = await customAxios.put("/api/inquiry", data)
             if (res.status == 200) {
                 router.push('/mypage/qna')
                 alert('문의가 수정 되었습니다.')
