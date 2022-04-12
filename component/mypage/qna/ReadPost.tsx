@@ -3,10 +3,10 @@ import { useState } from "react"
 import customAxios from "../../../utils/customAxios"
 import Link from "next/link"
 import { NextPage } from "next"
-import { qaBoard } from "../../../models/QABoard"
+import { inquiry } from "../../../models/Inquiry"
 
 
-const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
+const ReadPost: NextPage<{ data: inquiry }> = ({ data }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isAnswer, setisAnswer] = useState(false)
     const answer = data.answer ? "답변완료" : "답변예정"
@@ -20,7 +20,7 @@ const ReadPost: NextPage<{ data: qaBoard }> = ({ data }) => {
     async function deleteApi(event: any) {
         event.preventDefault()
         try {
-            const res = await customAxios.delete(`/api/qaboard?qaid=${data.qaid}`)
+            const res = await customAxios.delete(`/api/inquiry?no=${data.no}`)
             if (res.status == 200) {
                 alert('글이 삭제되었습니다.')
             } else {

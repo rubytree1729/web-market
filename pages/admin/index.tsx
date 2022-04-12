@@ -36,9 +36,11 @@ const Admin: NextPage = () => {
                             <a className='nav-link text-white'>상품목록</a>
                         </li>
                     </Link>
-                    {/* <li className='nav-item'>
-                        <a className='nav-link text-white'>유저목록</a>
-                    </li> */}
+                    <Link href="/admin/orderlist" passHref>
+                        <li className='nav-item'>
+                            <a className='nav-link text-white'>주문목록</a>
+                        </li>
+                    </Link>
                 </ul>
             </div>
         </Layout>

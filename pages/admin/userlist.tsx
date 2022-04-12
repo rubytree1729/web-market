@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 const Userlist: NextPage = () => {
     const [checkedUserList, setCheckedUserList] = useState([])
     const router = useRouter()
-    const column = { 가입날짜: "registerAt", 아이디: "id", 이름: "name", 이메일: "email", 주소: "fulladdress.address", 휴대폰번호: "phonenumber", 권한: "role" }
+    const column = { "#": "no", 가입날짜: "registerAt", 아이디: "id", 이름: "name", 이메일: "email", 주소: "fulladdress.address", 휴대폰번호: "phonenumber", 권한: "role" }
     const dataparams = new URLSearchParams();
     Object.values(column).forEach(value => dataparams.append("required", value))
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user", { params: dataparams })
@@ -83,7 +83,7 @@ const Userlist: NextPage = () => {
     return (
         <Layout>
             <div className='container'>
-                <CheckTable column={column} setCheckedList={setCheckedUserList} index={"id"} data={data}></CheckTable>
+                <CheckTable column={column} setCheckedList={setCheckedUserList} index={"no"} data={data}></CheckTable>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button type="button" className="btn btn-outline-success" onClick={grantPermission}>권한부여</button>
                     <button type="button" className="btn btn-outline-warning" onClick={revokePermission}>권한해제</button>

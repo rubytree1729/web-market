@@ -7,8 +7,6 @@ import mypageStyle from "../../styles/mypage/mypage.module.css"
 import CreatePost from "../../component/mypage/qna/CreatePost"
 
 
-
-
 const Createpost: NextPage = () => {
     const router = useRouter()
     const { data, isLoading, isApiError, isServerError } = useCustomSWR("/api/user/me")
